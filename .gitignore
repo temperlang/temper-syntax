@@ -1,0 +1,3 @@
+*.map
+.mypy_cache
+-logs
