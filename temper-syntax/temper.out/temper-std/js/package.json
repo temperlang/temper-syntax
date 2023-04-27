@@ -1,0 +1,9 @@
+{
+    "name": "@temperlang/std",
+    "version": "0.0.3",
+    "license": "Apache-2.0",
+    "type": "module",
+    "dependencies": {
+        "@temperlang/core": "0.0.3"
+    }
+}

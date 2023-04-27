@@ -1,3 +1,5 @@
 *.map
 .mypy_cache
 -logs
+*.pyc
+__pycache__

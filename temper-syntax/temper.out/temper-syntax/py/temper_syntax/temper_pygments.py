@@ -1,7 +1,7 @@
 from temper_core import TemperObject as TemperObject0, cast_by_type as cast_by_type4, MapEntry as MapEntry_75, map_constructor as map_constructor_76
 from builtins import tuple as tuple3
 from typing import Any as Any1, Callable as Callable5
-from temper_pygments_lexer.lexer import RuleOption, Rule, Include, Kind, include
+from temper_syntax.pygments import RuleOption, Rule, Include, Kind, include
 class TemperLexer(TemperObject0):
   tokens__8: 'Map__16[str, (tuple[RuleOption, ...])]'
   __slots__ = ('tokens__8',)

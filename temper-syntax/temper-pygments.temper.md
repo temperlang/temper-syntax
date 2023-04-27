@@ -1,6 +1,6 @@
 # Implementation for Temper Pygments Lexer
 
-    let { ... } = import("./lexer");
+    let { ... } = import("./pygments");
 
 ## Temper Lexer Class
 

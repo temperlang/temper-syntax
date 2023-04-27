@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "temper-pygments"
+version = "0.1.0"
+description = ""
+authors = ["Tom <tom@temper.systems>"]
+readme = "README.md"
+packages = [{include = "temper_pygments"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pygments = "^2.15.1"
+temper-core = {path = "../temper-syntax/temper.out/temper-core/py", develop = true}
+temper-syntax = {path = "../temper-syntax/temper.out/temper-syntax/py", develop = true}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

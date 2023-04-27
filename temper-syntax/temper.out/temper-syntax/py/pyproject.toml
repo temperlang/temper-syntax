@@ -1,5 +1,5 @@
 [project]
-name = "temper-pygments-lexer"
+name = "temper-syntax"
 version = "0.0.1"
 description = ""
 readme = ""
@@ -13,7 +13,7 @@ urls = { }
 dependencies = [
     "temper-core == 0.0.3"
 ]
-packages = [{ include = "temper_pygments_lexer" }]
+packages = [{ include = "temper_syntax" }]
 
 [project.scripts]
 
@@ -23,13 +23,13 @@ packages = [{ include = "temper_pygments_lexer" }]
 
 
 [tool.poetry]
-name = "temper-pygments-lexer"
+name = "temper-syntax"
 version = "0.0.1"
 license = ""
 description = ""
 authors = [ ]
-packages = [{ include = "temper_pygments_lexer" }]
-include = ["temper_pygments_lexer/**/*"]
+packages = [{ include = "temper_syntax" }]
+include = ["temper_syntax/**/*"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
