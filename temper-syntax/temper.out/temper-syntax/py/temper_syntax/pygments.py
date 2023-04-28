@@ -26,21 +26,21 @@ class Rule(RuleOption):
   def __init__(this__2, regex__15: 'str', kind__16: 'str', state: 'Union2[str, None]' = ...) -> None:
     state__17: 'Union2[str, None]' = state
     this__2.constructor__14(regex__15, kind__16, state__17)
-  def getregex__27(this__28) -> 'str':
-    return__29: 'str'
-    return__29 = this__28.regex__11
-    return return__29
-  def getkind__31(this__32) -> 'str':
-    return__33: 'str'
-    return__33 = this__32.kind__12
-    return return__33
-  def getstate__35(this__36) -> 'Union2[str, None]':
-    return__37: 'Union2[str, None]'
-    return__37 = this__36.state__13
-    return return__37
-  regex = property(getregex__27, None)
-  kind = property(getkind__31, None)
-  state = property(getstate__35, None)
+  def getregex__30(this__31) -> 'str':
+    return__32: 'str'
+    return__32 = this__31.regex__11
+    return return__32
+  def getkind__34(this__35) -> 'str':
+    return__36: 'str'
+    return__36 = this__35.kind__12
+    return return__36
+  def getstate__38(this__39) -> 'Union2[str, None]':
+    return__40: 'Union2[str, None]'
+    return__40 = this__39.state__13
+    return return__40
+  regex = property(getregex__30, None)
+  kind = property(getkind__34, None)
+  state = property(getstate__38, None)
 class Include(RuleOption):
   state__18: 'str'
   __slots__ = ('state__18',)
@@ -51,25 +51,28 @@ class Include(RuleOption):
     return return__6
   def __init__(this__5, state__20: 'str') -> None:
     this__5.constructor__19(state__20)
-  def getstate__39(this__40) -> 'str':
-    return__41: 'str'
-    return__41 = this__40.state__18
-    return return__41
-  state = property(getstate__39, None)
+  def getstate__42(this__43) -> 'str':
+    return__44: 'str'
+    return__44 = this__43.state__18
+    return return__44
+  state = property(getstate__42, None)
 class Kind(TemperObject0):
   __slots__ = ()
+  name = 'Name'
+  operator = 'Operator'
+  punctuation = 'Punctuation'
   string = 'String'
   string_interpol = 'String.Interpol'
-  def constructor__25(this__8) -> Any1:
+  def constructor__28(this__8) -> Any1:
     return__9: 'None'
     return__9 = None
     return return__9
   def __init__(this__8) -> None:
-    this__8.constructor__25()
+    this__8.constructor__28()
 def include(state__21: 'str') -> 'Include':
   return__7: 'Include'
-  t_73: 'Include' = Include(state__21)
-  return__7 = t_73
+  t_85: 'Include' = Include(state__21)
+  return__7 = t_85
   return return__7
-return__58: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Kind: Type>>', NotImplemented)[1]
-export = return__58
+return__67: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Kind: Type>>', NotImplemented)[1]
+export = return__67

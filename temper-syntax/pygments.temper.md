@@ -32,6 +32,9 @@ The token kinds need to map to pygments token kind objects, which should be easy
 enough to do with strings.
 
     export class Kind {
+      public static Name: builtins.String = "Name";
+      public static Operator: builtins.String = "Operator";
+      public static Punctuation: builtins.String = "Punctuation";
       public static String: builtins.String = "String";
       public static StringInterpol: builtins.String = "String.Interpol";
     }

@@ -69,34 +69,52 @@ export class Include {
 RuleOption.implementedBy(Include);
 export class Kind {
   /** @type {string} */
-  static #String_21 = "String";
+  static #Name_21 = "Name";
   /** @returns {string} */
-  static get String() {
-    return this.#String_21;
+  static get Name() {
+    return this.#Name_21;
   }
   /** @type {string} */
-  static #StringInterpol_22 = "String.Interpol";
+  static #Operator_22 = "Operator";
+  /** @returns {string} */
+  static get Operator() {
+    return this.#Operator_22;
+  }
+  /** @type {string} */
+  static #Punctuation_23 = "Punctuation";
+  /** @returns {string} */
+  static get Punctuation() {
+    return this.#Punctuation_23;
+  }
+  /** @type {string} */
+  static #String_24 = "String";
+  /** @returns {string} */
+  static get String() {
+    return this.#String_24;
+  }
+  /** @type {string} */
+  static #StringInterpol_25 = "String.Interpol";
   /** @returns {string} */
   static get StringInterpol() {
-    return this.#StringInterpol_22;
+    return this.#StringInterpol_25;
   }
   /** */
   constructor() {
-    let return_23;
-    return_23 = void 0;
+    let return_26;
+    return_26 = void 0;
     return;
   }
 };
 /**
- * @param {string} state_24
+ * @param {string} state_27
  * @returns {Include}
  */
-export function include(state_24) {
-  let return_25;
-  let t_26 = new Include(state_24);
-  return_25 = t_26;
-  return return_25;
+export function include(state_27) {
+  let return_28;
+  let t_29 = new Include(state_27);
+  return_28 = t_29;
+  return return_28;
 };
-/** @type {Type_28} */
-const return_27 = "Kind: Type";
-export default return_27;
+/** @type {Type_31} */
+const return_30 = "Kind: Type";
+export default return_30;
