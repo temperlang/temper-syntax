@@ -1,4 +1,4 @@
-# Implementation for Temper Pygments Lexer
+# Temper Pygments Lexer
 
     let { ... } = import("./pygments");
 
@@ -26,17 +26,17 @@ Main thing, though, is the list of rules for definition tokens.
 ### Root
 
         new MapEntry("root", [
-          new Rule("\\s+", Kind.Whitespace),
-          new Rule("\"", Kind.String, "string"),
-          new Rule("[=+]+", Kind.Operator),
-          new Rule("[{}();:.,]", Kind.Punctuation),
-          new Rule("\\w+", Kind.Name),
+          new Rule("\\s+", Whitespace),
+          new Rule("\"", StringKind, "string"),
+          new Rule("[=+]+", Operator),
+          new Rule("[{}();:.,]", Punctuation),
+          new Rule("\\w+", Name),
         ].as<List<RuleOption>>()),
 
 ### Strings
 
         new MapEntry("interpolation", [
-          new Rule("}", Kind.StringInterpol, "#pop"),
+          new Rule("}", StringInterpol, "#pop"),
           include("root"),
         ].as<List<RuleOption>>()),
 
@@ -44,9 +44,9 @@ I'm not sure if order matters here. Seems simpler, but if I don't exclude `${`
 from core string chars, I don't get interp.
 
         new MapEntry("string", [
-          new Rule("\"", Kind.String, "#pop"),
-          new Rule("\\$\\{", Kind.StringInterpol, "interpolation"),
-          new Rule("(?:[^\"$]|\\$[^{])+", Kind.String),
+          new Rule("\"", StringKind, "#pop"),
+          new Rule("\\$\\{", StringInterpol, "interpolation"),
+          new Rule("(?:[^\"$]|\\$[^{])+", StringKind),
         ].as<List<RuleOption>>()),
 
       ]);

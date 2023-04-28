@@ -1,21 +1,22 @@
 from pygments.lexer import RegexLexer
 from pygments.lexers.markup import MarkdownLexer
 from temper_pygments.adapt import adapt_tokens
-from temper_syntax import temper_pygments as tp
+from temper_syntax import temper_pygments as t
+from temper_syntax import tempermd_pygments as tmd
 
 
-_lexer = tp.TemperLexer()
+_temper = t.TemperLexer()
+_tempermd = tmd.TemperMdLexer()
 
 
 class TemperLexer(RegexLexer):
-    aliases = _lexer.aliases
-    filenames = _lexer.filenames
-    name = _lexer.name
-    tokens = adapt_tokens(_lexer.tokens)
-
-
-# print(TemperLexer.tokens)
+    name = _temper.name
+    aliases = _temper.aliases
+    filenames = _temper.filenames
+    tokens = adapt_tokens(_temper.tokens)
 
 
 class TemperMdLexer(MarkdownLexer):
-    pass
+    name = _tempermd.name
+    aliases = _tempermd.aliases
+    filenames = _tempermd.filenames

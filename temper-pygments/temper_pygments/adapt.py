@@ -1,13 +1,23 @@
-from pygments.lexer import include
+from pygments.lexer import bygroups, include, using
 from pygments.token import Token
-from temper_syntax.pygments import Include, Rule
+from temper_syntax.pygments import ByGroups, Kind, Include, Rule, Using
+
+
+def adapt_kind(kind):
+    if isinstance(kind, ByGroups):
+        return bygroups(*[adapt_kind(sub) for sub in kind.kinds])
+    elif isinstance(kind, Kind):
+        return kinds[kind.name]
+    elif isinstance(kind, Using):
+        return using(kind.lexer)
+    raise ValueError(f"unknown kind: {kind}")
 
 
 def adapt_rule(rule):
     if isinstance(rule, Include):
         return include(rule.state)
     elif isinstance(rule, Rule):
-        result = (rule.regex, kinds[rule.kind])
+        result = (rule.regex, adapt_kind(rule.kind))
         if rule.state is not None:
             result = (*result, rule.state)
         return result
