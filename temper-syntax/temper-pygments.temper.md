@@ -27,6 +27,7 @@ Main thing, though, is the list of rules for definition tokens.
 
         new MapEntry("root", [
           new Rule("\\s+", Whitespace),
+          new Rule("let", KeywordDeclaration),
           new Rule("\"", StringKind, "string"),
           new Rule("[=+]+", Operator),
           new Rule("[{}();:.,]", Punctuation),

@@ -16,7 +16,7 @@ class TemperLexerTest(unittest.TestCase):
             )
         )
         expected = [
-            (Token.Name, "let"),
+            (Token.Keyword.Declaration, "let"),
             (Token.Whitespace, " "),
             (Token.Name, "name"),
             (Token.Whitespace, " "),

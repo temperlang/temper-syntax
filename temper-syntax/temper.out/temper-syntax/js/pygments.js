@@ -155,52 +155,57 @@ let t_41 = new Inherit();
 export const inherit = t_41;
 ;
 /** @type {Kind} */
-let t_42 = new Kind("Name");
+let t_42 = new Kind("Keyword.Declaration");
 /** @type {Kind} */
-export const Name = t_42;
+export const KeywordDeclaration = t_42;
 ;
 /** @type {Kind} */
-let t_43 = new Kind("Operator");
+let t_43 = new Kind("Name");
 /** @type {Kind} */
-export const Operator = t_43;
+export const Name = t_43;
 ;
 /** @type {Kind} */
-let t_44 = new Kind("Punctuation");
+let t_44 = new Kind("Operator");
 /** @type {Kind} */
-export const Punctuation = t_44;
+export const Operator = t_44;
 ;
 /** @type {Kind} */
-let t_45 = new Kind("String");
+let t_45 = new Kind("Punctuation");
 /** @type {Kind} */
-export const StringKind = t_45;
+export const Punctuation = t_45;
 ;
 /** @type {Kind} */
-let t_46 = new Kind("String.Interpol");
+let t_46 = new Kind("String");
 /** @type {Kind} */
-export const StringInterpol = t_46;
+export const StringKind = t_46;
 ;
 /** @type {Kind} */
-let t_47 = new Kind("Whitespace");
+let t_47 = new Kind("String.Interpol");
 /** @type {Kind} */
-export const Whitespace = t_47;
+export const StringInterpol = t_47;
+;
+/** @type {Kind} */
+let t_48 = new Kind("Whitespace");
+/** @type {Kind} */
+export const Whitespace = t_48;
 ;
 /** @returns {ByGroups} */
-export function bygroups(...kinds_48) {
-  let return_49;
-  let t_50 = new ByGroups(kinds_48);
-  return_49 = t_50;
-  return return_49;
+export function bygroups(...kinds_49) {
+  let return_50;
+  let t_51 = new ByGroups(kinds_49);
+  return_50 = t_51;
+  return return_50;
 };
 /**
- * @param {string} lexer_51
+ * @param {string} lexer_52
  * @returns {Using}
  */
-export function using(lexer_51) {
-  let return_52;
-  let t_53 = new Using(lexer_51);
-  return_52 = t_53;
-  return return_52;
+export function using(lexer_52) {
+  let return_53;
+  let t_54 = new Using(lexer_52);
+  return_53 = t_54;
+  return return_53;
 };
 /** @type {void} */
-const return_54 = void 0;
-export default return_54;
+const return_55 = void 0;
+export default return_55;

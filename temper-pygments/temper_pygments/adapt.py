@@ -1,4 +1,4 @@
-from pygments.lexer import bygroups, include, inherit, using
+from pygments.lexer import Lexer, bygroups, include, inherit, using
 from pygments.token import Token
 from temper_syntax.pygments import ByGroups, Kind, Include, Inherit, Rule, Using
 
@@ -9,7 +9,7 @@ def adapt_kind(kind):
     elif isinstance(kind, Kind):
         return kinds[kind.name]
     elif isinstance(kind, Using):
-        return using(kind.lexer)
+        return using(lexers[kind.lexer])
     raise ValueError(f"unknown kind: {kind}")
 
 
@@ -35,6 +35,7 @@ def adapt_tokens(tokens):
 
 
 kinds = {
+    "Keyword.Declaration": Token.Keyword.Declaration,
     "Name": Token.Name,
     "Operator": Token.Operator,
     "Punctuation": Token.Punctuation,
@@ -42,3 +43,5 @@ kinds = {
     "String.Interpol": Token.String.Interpol,
     "Whitespace": Token.Whitespace,
 }
+
+lexers: dict[str, Lexer] = {}

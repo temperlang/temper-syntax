@@ -12,13 +12,21 @@ metadata central to the Temper Syntax library is still nice.
 
       public tokens: Map<String, List<RuleOption>> = new Map([
         new MapEntry("root", [
-          new Rule("\\n^ \\{4\\}", Whitespace, "indented"),
+
+Use overly simplified rules for now just to see if we can make things happen.
+
+          new Rule("    ", Whitespace, "indented"),
+          // new Rule("\\n^ \\{4\\}", Whitespace, "indented"),
           inherit,
         ].as<List<RuleOption>>()),
 
         new MapEntry("indented", [
           new Rule(
-            "(.+?\n)^(?: \\{1,3\\}[^ ]|[^ ])",
+
+Again, overly simplified.
+
+            // "(.+?\n)^(?: \\{1,3\\}[^ ]|[^ ]|$)",
+            "(.*)",
             bygroups(using("Temper")),
             "#pop",
           ),

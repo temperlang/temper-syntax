@@ -113,32 +113,34 @@ class Using(TokenKind):
   lexer = property(getlexer__70, None)
 def include(state__30: 'str') -> 'Include':
   return__7: 'Include'
-  t_170: 'Include' = Include(state__30)
-  return__7 = t_170
+  t_176: 'Include' = Include(state__30)
+  return__7 = t_176
   return return__7
-t_178: 'Inherit' = Inherit()
-inherit: 'Inherit' = t_178
-t_179: 'Kind' = Kind('Name')
-Name: 'Kind' = t_179
-t_181: 'Kind' = Kind('Operator')
-Operator: 'Kind' = t_181
-t_183: 'Kind' = Kind('Punctuation')
-Punctuation: 'Kind' = t_183
-t_185: 'Kind' = Kind('String')
-StringKind: 'Kind' = t_185
-t_187: 'Kind' = Kind('String.Interpol')
-StringInterpol: 'Kind' = t_187
-t_189: 'Kind' = Kind('Whitespace')
-Whitespace: 'Kind' = t_189
+t_184: 'Inherit' = Inherit()
+inherit: 'Inherit' = t_184
+t_185: 'Kind' = Kind('Keyword.Declaration')
+KeywordDeclaration: 'Kind' = t_185
+t_187: 'Kind' = Kind('Name')
+Name: 'Kind' = t_187
+t_189: 'Kind' = Kind('Operator')
+Operator: 'Kind' = t_189
+t_191: 'Kind' = Kind('Punctuation')
+Punctuation: 'Kind' = t_191
+t_193: 'Kind' = Kind('String')
+StringKind: 'Kind' = t_193
+t_195: 'Kind' = Kind('String.Interpol')
+StringInterpol: 'Kind' = t_195
+t_197: 'Kind' = Kind('Whitespace')
+Whitespace: 'Kind' = t_197
 def bygroups(*kinds__39: 'TokenKind') -> 'ByGroups':
   return__15: 'ByGroups'
-  t_163: 'ByGroups' = ByGroups(kinds__39)
-  return__15 = t_163
+  t_169: 'ByGroups' = ByGroups(kinds__39)
+  return__15 = t_169
   return return__15
 def using(lexer__44: 'str') -> 'Using':
   return__18: 'Using'
-  t_159: 'Using' = Using(lexer__44)
-  return__18 = t_159
+  t_165: 'Using' = Using(lexer__44)
+  return__18 = t_165
   return return__18
-return__124: 'None' = None
-export = return__124
+return__128: 'None' = None
+export = return__128
