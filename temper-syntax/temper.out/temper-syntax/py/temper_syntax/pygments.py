@@ -51,7 +51,11 @@ class Include(RuleOption):
     return return__6
   def __init__(this__5, state__20: 'str') -> None:
     this__5.constructor__19(state__20)
-  state = property(None, None)
+  def getstate__39(this__40) -> 'str':
+    return__41: 'str'
+    return__41 = this__40.state__18
+    return return__41
+  state = property(getstate__39, None)
 class Kind(TemperObject0):
   __slots__ = ()
   string = 'String'
@@ -64,8 +68,8 @@ class Kind(TemperObject0):
     this__8.constructor__25()
 def include(state__21: 'str') -> 'Include':
   return__7: 'Include'
-  t_66: 'Include' = Include(state__21)
-  return__7 = t_66
+  t_73: 'Include' = Include(state__21)
+  return__7 = t_73
   return return__7
-return__52: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Kind: Type>>', NotImplemented)[1]
-export = return__52
+return__58: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Kind: Type>>', NotImplemented)[1]
+export = return__58

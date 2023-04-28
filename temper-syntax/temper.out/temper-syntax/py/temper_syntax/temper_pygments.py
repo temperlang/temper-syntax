@@ -1,4 +1,4 @@
-from temper_core import TemperObject as TemperObject0, cast_by_type as cast_by_type4, MapEntry as MapEntry_75, map_constructor as map_constructor_76
+from temper_core import TemperObject as TemperObject0, cast_by_type as cast_by_type4, MapEntry as MapEntry_83, map_constructor as map_constructor_84
 from builtins import tuple as tuple3
 from typing import Any as Any1, Callable as Callable5
 from temper_syntax.pygments import RuleOption, Rule, Include, Kind, include
@@ -8,31 +8,33 @@ class TemperLexer(TemperObject0):
   def constructor__9(this__0, tokens: 'Map__16[str, (tuple[RuleOption, ...])]' = ...) -> Any1:
     tokens__10: 'Map__16[str, (tuple[RuleOption, ...])]' = tokens
     return__2: 'None'
-    t_54: 'Rule'
-    t_56: 'Rule'
     t_57: 'Rule'
-    t_58: 'Map__16[str, (tuple[RuleOption, ...])]'
-    t_59: 'MapEntry__22[str, (tuple[RuleOption, ...])]'
-    t_60: 'MapEntry__22[str, (tuple[RuleOption, ...])]'
-    t_61: 'Include'
+    t_59: 'Rule'
+    t_60: 'Rule'
+    t_61: 'Map__16[str, (tuple[RuleOption, ...])]'
     t_62: 'MapEntry__22[str, (tuple[RuleOption, ...])]'
+    t_63: 'Rule'
+    t_64: 'MapEntry__22[str, (tuple[RuleOption, ...])]'
+    t_65: 'Include'
+    t_66: 'MapEntry__22[str, (tuple[RuleOption, ...])]'
     return__2 = None
-    t_30: 'tuple[RuleOption, ...]'
-    t_34: 'tuple[RuleOption, ...]'
-    t_37: 'tuple[RuleOption, ...]'
+    t_31: 'tuple[RuleOption, ...]'
+    t_35: 'tuple[RuleOption, ...]'
+    t_39: 'tuple[RuleOption, ...]'
     if tokens__10 is ...:
-      t_54 = Rule('"', Kind.string, 'string')
-      t_30 = cast_by_type4((t_54,), tuple3)
-      t_62 = MapEntry_75('root', t_30)
-      t_56 = Rule('}', Kind.string_interpol, '#pop')
-      t_61 = include__6('root')
-      t_34 = cast_by_type4((t_56, t_61), tuple3)
-      t_60 = MapEntry_75('interpolation', t_34)
-      t_57 = Rule('\\$\\{', Kind.string_interpol, 'interpolation')
-      t_37 = cast_by_type4((t_57,), tuple3)
-      t_59 = MapEntry_75('string', t_37)
-      t_58 = map_constructor_76((t_62, t_60, t_59))
-      tokens__10 = t_58
+      t_57 = Rule('"', Kind.string, 'string')
+      t_31 = cast_by_type4((t_57,), tuple3)
+      t_66 = MapEntry_83('root', t_31)
+      t_59 = Rule('}', Kind.string_interpol, '#pop')
+      t_65 = include__6('root')
+      t_35 = cast_by_type4((t_59, t_65), tuple3)
+      t_64 = MapEntry_83('interpolation', t_35)
+      t_60 = Rule('"', Kind.string, '#pop')
+      t_63 = Rule('\\$\\{', Kind.string_interpol, 'interpolation')
+      t_39 = cast_by_type4((t_60, t_63), tuple3)
+      t_62 = MapEntry_83('string', t_39)
+      t_61 = map_constructor_84((t_66, t_64, t_62))
+      tokens__10 = t_61
     this__0.tokens__8 = tokens__10
     return return__2
   def __init__(this__0, tokens: 'Map__16[str, (tuple[RuleOption, ...])]' = ...) -> None:
@@ -48,5 +50,5 @@ Rule__4: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temp
 Include__5: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Include: Type>>', NotImplemented)[1]
 include__6: 'Callable5[[str], Include]' = include
 Kind__7: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Kind: Type>>', NotImplemented)[1]
-return__41: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: TemperLexer: Type>>', NotImplemented)[1]
-export = return__41
+return__43: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: TemperLexer: Type>>', NotImplemented)[1]
+export = return__43

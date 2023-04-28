@@ -21,7 +21,7 @@ The most common case is a basic rule.
 You can also include other states into a state.
 
     export class Include extends RuleOption {
-      state: String;
+      public state: String;
     }
 
     export let include(state: String): Include { new Include(state) }

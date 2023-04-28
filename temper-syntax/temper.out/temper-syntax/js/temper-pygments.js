@@ -1,63 +1,65 @@
 import {
-  Include as Include_56, Kind as Kind_47, RuleOption as RuleOption_32, Rule as Rule_46, include as include_55
+  Include as Include_59, Kind as Kind_50, RuleOption as RuleOption_34, Rule as Rule_49, include as include_58
 } from "./pygments.js";
 import {
-  listify as listify_28, mapEntryConstructor as mapEntryConstructor_29, mapConstructor as mapConstructor_30, requireIsArray as requireIsArray__48
+  listify as listify_30, mapEntryConstructor as mapEntryConstructor_31, mapConstructor as mapConstructor_32, requireIsArray as requireIsArray__51
 } from "@temperlang/core";
 export class TemperLexer {
-  /** @type {Map<string, Array<RuleOption_32>>} */
-  #tokens_31;
-  /** @param {Map<string, Array<RuleOption_32>>} tokens_33 */
-  constructor(tokens_33) {
-    let return_34;
-    let t_35;
-    let t_36;
+  /** @type {Map<string, Array<RuleOption_34>>} */
+  #tokens_33;
+  /** @param {Map<string, Array<RuleOption_34>>} tokens_35 */
+  constructor(tokens_35) {
+    let return_36;
     let t_37;
     let t_38;
     let t_39;
     let t_40;
     let t_41;
     let t_42;
-    return_34 = void 0;
     let t_43;
     let t_44;
     let t_45;
-    if (!(tokens_33 !== void 0)) {
-      t_35 = new Rule_46("\u0022", Kind_47.String, "string");
+    return_36 = void 0;
+    let t_46;
+    let t_47;
+    let t_48;
+    if (!(tokens_35 !== void 0)) {
+      t_37 = new Rule_49("\u0022", Kind_50.String, "string");
       {
-        t_43 = requireIsArray__48(listify_28(t_35));
-        t_42 = mapEntryConstructor_29("root", t_43);
-        t_36 = new Rule_46("}", Kind_47.StringInterpol, "#pop");
-        t_41 = include_49("root");
-        t_44 = requireIsArray__48(listify_28(t_36, t_41));
-        t_40 = mapEntryConstructor_29("interpolation", t_44);
-        t_37 = new Rule_46("\\\u0024\\{", Kind_47.StringInterpol, "interpolation");
-        t_45 = requireIsArray__48(listify_28(t_37));
-        t_39 = mapEntryConstructor_29("string", t_45);
-        t_38 = mapConstructor_30(listify_28(t_42, t_40, t_39));
-        tokens_33 = t_38;
+        t_46 = requireIsArray__51(listify_30(t_37));
+        t_45 = mapEntryConstructor_31("root", t_46);
+        t_38 = new Rule_49("}", Kind_50.StringInterpol, "#pop");
+        t_44 = include_52("root");
+        t_47 = requireIsArray__51(listify_30(t_38, t_44));
+        t_43 = mapEntryConstructor_31("interpolation", t_47);
+        t_39 = new Rule_49("\u0022", Kind_50.String, "#pop");
+        t_42 = new Rule_49("\\\u0024\\{", Kind_50.StringInterpol, "interpolation");
+        t_48 = requireIsArray__51(listify_30(t_39, t_42));
+        t_41 = mapEntryConstructor_31("string", t_48);
+        t_40 = mapConstructor_32(listify_30(t_45, t_43, t_41));
+        tokens_35 = t_40;
       }
     }
-    this.#tokens_31 = tokens_33;
+    this.#tokens_33 = tokens_35;
     return;
   }
-  /** @returns {Map<string, Array<RuleOption_32>>} */
+  /** @returns {Map<string, Array<RuleOption_34>>} */
   get tokens() {
-    let return_51;
-    return_51 = this.#tokens_31;
-    return return_51;
+    let return_54;
+    return_54 = this.#tokens_33;
+    return return_54;
   }
 };
-/** @type {Type_26} */
-const RuleOption_52 = "RuleOption: Type";
-/** @type {Type_26} */
-const Rule_53 = "Rule: Type";
-/** @type {Type_26} */
-const Include_54 = "Include: Type";
-/** @type {(state: string) => Include_56} */
-const include_49 = include_55;
-/** @type {Type_26} */
-const Kind_57 = "Kind: Type";
-/** @type {Type_26} */
-const return_58 = "TemperLexer: Type";
-export default return_58;
+/** @type {Type_28} */
+const RuleOption_55 = "RuleOption: Type";
+/** @type {Type_28} */
+const Rule_56 = "Rule: Type";
+/** @type {Type_28} */
+const Include_57 = "Include: Type";
+/** @type {(state: string) => Include_59} */
+const include_52 = include_58;
+/** @type {Type_28} */
+const Kind_60 = "Kind: Type";
+/** @type {Type_28} */
+const return_61 = "TemperLexer: Type";
+export default return_61;

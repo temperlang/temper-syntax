@@ -22,6 +22,7 @@ be subclassed in Python or elsewhere.
         ].as<List<RuleOption>>()),
 
         new MapEntry("string", [
+          new Rule("\"", Kind.String, "#pop"),
           new Rule("\\$\\{", Kind.StringInterpol, "interpolation"),
         ].as<List<RuleOption>>()),
 
