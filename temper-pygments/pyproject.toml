@@ -14,6 +14,7 @@ temper-syntax = {path = "../temper-syntax/temper.out/temper-syntax/py", develop 
 
 [tool.poetry.scripts]
 bundle = 'scripts:bundle'
+test = 'scripts:test'
 
 [tool.poetry.group.dev.dependencies]
 stickytape = "^0.2.1"
