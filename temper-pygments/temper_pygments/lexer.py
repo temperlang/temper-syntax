@@ -20,3 +20,4 @@ class TemperMdLexer(MarkdownLexer):
     name = _tempermd.name
     aliases = _tempermd.aliases
     filenames = _tempermd.filenames
+    tokens = adapt_tokens(_tempermd.tokens)

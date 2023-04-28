@@ -70,6 +70,15 @@ export class Include {
   }
 };
 RuleOption.implementedBy(Include);
+export class Inherit {
+  /** */
+  constructor() {
+    let return_22;
+    return_22 = void 0;
+    return;
+  }
+};
+Rule.implementedBy(Inherit);
 /**
  * @typedef {{}}
  * TokenKind
@@ -78,115 +87,120 @@ export const TokenKind = new InterfaceType_2("TokenKind", [], [], 1);
 ;
 export class Kind {
   /** @type {string} */
-  #name_22;
-  /** @param {string} name_23 */
-  constructor(name_23) {
-    let return_24;
-    return_24 = void 0;
-    this.#name_22 = name_23;
+  #name_23;
+  /** @param {string} name_24 */
+  constructor(name_24) {
+    let return_25;
+    return_25 = void 0;
+    this.#name_23 = name_24;
     return;
   }
   /** @returns {string} */
   get name() {
-    let return_26;
-    return_26 = this.#name_22;
-    return return_26;
+    let return_27;
+    return_27 = this.#name_23;
+    return return_27;
   }
 };
 TokenKind.implementedBy(Kind);
 export class ByGroups {
   /** @type {Array<TokenKind>} */
-  #kinds_27;
-  /** @param {Array<TokenKind>} kinds_28 */
-  constructor(kinds_28) {
-    let return_29;
-    return_29 = void 0;
-    this.#kinds_27 = kinds_28;
+  #kinds_28;
+  /** @param {Array<TokenKind>} kinds_29 */
+  constructor(kinds_29) {
+    let return_30;
+    return_30 = void 0;
+    this.#kinds_28 = kinds_29;
     return;
   }
   /** @returns {Array<TokenKind>} */
   get kinds() {
-    let return_31;
-    return_31 = this.#kinds_27;
-    return return_31;
+    let return_32;
+    return_32 = this.#kinds_28;
+    return return_32;
   }
 };
 TokenKind.implementedBy(ByGroups);
 export class Using {
   /** @type {string} */
-  #lexer_32;
-  /** @param {string} lexer_33 */
-  constructor(lexer_33) {
-    let return_34;
-    return_34 = void 0;
-    this.#lexer_32 = lexer_33;
+  #lexer_33;
+  /** @param {string} lexer_34 */
+  constructor(lexer_34) {
+    let return_35;
+    return_35 = void 0;
+    this.#lexer_33 = lexer_34;
     return;
   }
   /** @returns {string} */
   get lexer() {
-    let return_36;
-    return_36 = this.#lexer_32;
-    return return_36;
+    let return_37;
+    return_37 = this.#lexer_33;
+    return return_37;
   }
 };
 TokenKind.implementedBy(Using);
 /**
- * @param {string} state_37
+ * @param {string} state_38
  * @returns {Include}
  */
-export function include(state_37) {
-  let return_38;
-  let t_39 = new Include(state_37);
-  return_38 = t_39;
-  return return_38;
+export function include(state_38) {
+  let return_39;
+  let t_40 = new Include(state_38);
+  return_39 = t_40;
+  return return_39;
 };
-/** @type {Kind} */
-let t_40 = new Kind("Name");
-/** @type {Kind} */
-export const Name = t_40;
+/** @type {Inherit} */
+let t_41 = new Inherit();
+/** @type {Inherit} */
+export const inherit = t_41;
 ;
 /** @type {Kind} */
-let t_41 = new Kind("Operator");
+let t_42 = new Kind("Name");
 /** @type {Kind} */
-export const Operator = t_41;
+export const Name = t_42;
 ;
 /** @type {Kind} */
-let t_42 = new Kind("Punctuation");
+let t_43 = new Kind("Operator");
 /** @type {Kind} */
-export const Punctuation = t_42;
+export const Operator = t_43;
 ;
 /** @type {Kind} */
-let t_43 = new Kind("String");
+let t_44 = new Kind("Punctuation");
 /** @type {Kind} */
-export const StringKind = t_43;
+export const Punctuation = t_44;
 ;
 /** @type {Kind} */
-let t_44 = new Kind("String.Interpol");
+let t_45 = new Kind("String");
 /** @type {Kind} */
-export const StringInterpol = t_44;
+export const StringKind = t_45;
 ;
 /** @type {Kind} */
-let t_45 = new Kind("Whitespace");
+let t_46 = new Kind("String.Interpol");
 /** @type {Kind} */
-export const Whitespace = t_45;
+export const StringInterpol = t_46;
+;
+/** @type {Kind} */
+let t_47 = new Kind("Whitespace");
+/** @type {Kind} */
+export const Whitespace = t_47;
 ;
 /** @returns {ByGroups} */
-export function bygroups(...kinds_46) {
-  let return_47;
-  let t_48 = new ByGroups(kinds_46);
-  return_47 = t_48;
-  return return_47;
+export function bygroups(...kinds_48) {
+  let return_49;
+  let t_50 = new ByGroups(kinds_48);
+  return_49 = t_50;
+  return return_49;
 };
 /**
- * @param {string} lexer_49
+ * @param {string} lexer_51
  * @returns {Using}
  */
-export function using(lexer_49) {
-  let return_50;
-  let t_51 = new Using(lexer_49);
-  return_50 = t_51;
-  return return_50;
+export function using(lexer_51) {
+  let return_52;
+  let t_53 = new Using(lexer_51);
+  return_52 = t_53;
+  return return_52;
 };
 /** @type {void} */
-const return_52 = void 0;
-export default return_52;
+const return_54 = void 0;
+export default return_54;

@@ -26,10 +26,16 @@ You can also include other states into a state.
 
     export let include(state: String): Include { new Include(state) }
 
+### Inherit
+
+Or inherit from other base class rules.
+
+    export class Inherit extends Rule {}
+    export let inherit = new Inherit();
+
 ## Token Kinds
 
-    export /*sealed*/ interface TokenKind {
-    }
+    export /*sealed*/ interface TokenKind {}
 
 ### Simple Kinds
 
@@ -40,15 +46,15 @@ enough to do with strings.
       public name: builtins.String;
     }
 
+And I'd like to make these static members of `Kind`, but we have a
+[codegen bug][temp-after-static] with that right now.
+
     export let Name: Kind = new Kind("Name");
     export let Operator: Kind = new Kind("Operator");
     export let Punctuation: Kind = new Kind("Punctuation");
     export let StringKind: Kind = new Kind("String");
     export let StringInterpol: Kind = new Kind("String.Interpol");
     export let Whitespace: Kind = new Kind("Whitespace");
-
-And I'd like to make these static members of `Kind`, but we have codegen bugs
-with that right now.
 
 ### Kind By Group
 
@@ -71,4 +77,5 @@ a simple token kind.
 
     export let using(lexer: String): Using { new Using(lexer) }
 
+[temp-after-static]: https://github.com/temper-lang/temper/issues/1628
 [using-multiple-lexers]: https://pygments.org/docs/lexerdevelopment/#using-multiple-lexers

@@ -1,6 +1,6 @@
-from pygments.lexer import bygroups, include, using
+from pygments.lexer import bygroups, include, inherit, using
 from pygments.token import Token
-from temper_syntax.pygments import ByGroups, Kind, Include, Rule, Using
+from temper_syntax.pygments import ByGroups, Kind, Include, Inherit, Rule, Using
 
 
 def adapt_kind(kind):
@@ -16,6 +16,8 @@ def adapt_kind(kind):
 def adapt_rule(rule):
     if isinstance(rule, Include):
         return include(rule.state)
+    elif isinstance(rule, Inherit):
+        return inherit
     elif isinstance(rule, Rule):
         result = (rule.regex, adapt_kind(rule.kind))
         if rule.state is not None:

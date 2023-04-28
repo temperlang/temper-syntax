@@ -13,6 +13,7 @@ metadata central to the Temper Syntax library is still nice.
       public tokens: Map<String, List<RuleOption>> = new Map([
         new MapEntry("root", [
           new Rule("\\n^ \\{4\\}", Whitespace, "indented"),
+          inherit,
         ].as<List<RuleOption>>()),
 
         new MapEntry("indented", [

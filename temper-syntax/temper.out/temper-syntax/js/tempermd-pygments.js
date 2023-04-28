@@ -1,122 +1,126 @@
 import {
-  ByGroups as ByGroups_112, Include as Include_106, Kind as Kind_118, Name as Name_117, Operator as Operator_119, Punctuation as Punctuation_120, RuleOption as RuleOption_61, Rule as Rule_84, StringInterpol as StringInterpol_122, StringKind as StringKind_121, Using as Using_116, Whitespace as Whitespace_123, bygroups as bygroups_111, include as include_105, using as using_115
+  ByGroups as ByGroups_115, Include as Include_108, Inherit as Inherit_122, Kind as Kind_124, Name as Name_123, Operator as Operator_125, Punctuation as Punctuation_126, RuleOption as RuleOption_63, Rule as Rule_86, StringInterpol as StringInterpol_128, StringKind as StringKind_127, Using as Using_119, Whitespace as Whitespace_129, bygroups as bygroups_114, include as include_107, inherit as inherit_121, using as using_118
 } from "./pygments.js";
 import {
-  listify as listify_54, mapEntryConstructor as mapEntryConstructor_55, mapConstructor as mapConstructor_56, requireIsArray as requireIsArray__145
+  listify as listify_56, mapEntryConstructor as mapEntryConstructor_57, mapConstructor as mapConstructor_58, requireIsArray as requireIsArray__151
 } from "@temperlang/core";
 export class TemperMdLexer {
   /** @type {string} */
-  #name_126;
+  #name_132;
   /** @type {Array<string>} */
-  #aliases_127;
+  #aliases_133;
   /** @type {Array<string>} */
-  #filenames_128;
-  /** @type {Map<string, Array<RuleOption_61>>} */
-  #tokens_129;
+  #filenames_134;
+  /** @type {Map<string, Array<RuleOption_63>>} */
+  #tokens_135;
   /**
-   * @param {string} name_130
-   * @param {Array<string>} aliases_131
-   * @param {Array<string>} filenames_132
-   * @param {Map<string, Array<RuleOption_61>>} tokens_133
+   * @param {string} name_136
+   * @param {Array<string>} aliases_137
+   * @param {Array<string>} filenames_138
+   * @param {Map<string, Array<RuleOption_63>>} tokens_139
    */
-  constructor(name_130, aliases_131, filenames_132, tokens_133) {
-    let return_134;
-    let t_135;
-    let t_136;
-    let t_137;
-    let t_138;
-    let t_139;
-    let t_140;
+  constructor(name_136, aliases_137, filenames_138, tokens_139) {
+    let return_140;
     let t_141;
-    return_134 = void 0;
     let t_142;
     let t_143;
-    if (!(name_130 !== void 0)) {
-      name_130 = "TemperMarkdown";
+    let t_144;
+    let t_145;
+    let t_146;
+    let t_147;
+    return_140 = void 0;
+    let t_148;
+    let t_149;
+    if (!(name_136 !== void 0)) {
+      name_136 = "TemperMarkdown";
     }
-    if (!(aliases_131 !== void 0)) {
-      aliases_131 = listify_54("temper.md", "tempermd");
+    if (!(aliases_137 !== void 0)) {
+      aliases_137 = listify_56("temper.md", "tempermd");
     }
-    if (!(filenames_132 !== void 0)) {
-      filenames_132 = listify_54("*.temper.md", "*.tempermd");
+    if (!(filenames_138 !== void 0)) {
+      filenames_138 = listify_56("*.temper.md", "*.tempermd");
     }
-    if (!(tokens_133 !== void 0)) {
-      t_135 = new Rule_84("\\n^ \\{4\\}", Whitespace_144, "indented");
+    if (!(tokens_139 !== void 0)) {
+      t_141 = new Rule_86("\\n^ \\{4\\}", Whitespace_150, "indented");
       {
-        t_142 = requireIsArray__145(listify_54(t_135));
-        t_141 = mapEntryConstructor_55("root", t_142);
-        t_136 = using_146("Temper");
-        t_140 = bygroups_147(t_136);
-        t_139 = new Rule_84("(.+?\n)^(?: \\{1,3\\}[^ ]|[^ ])", t_140, "#pop");
-        t_143 = requireIsArray__145(listify_54(t_139));
-        t_138 = mapEntryConstructor_55("indented", t_143);
-        t_137 = mapConstructor_56(listify_54(t_141, t_138));
-        tokens_133 = t_137;
+        t_148 = requireIsArray__151(listify_56(t_141, inherit_152));
+        t_147 = mapEntryConstructor_57("root", t_148);
+        t_142 = using_153("Temper");
+        t_146 = bygroups_154(t_142);
+        t_145 = new Rule_86("(.+?\n)^(?: \\{1,3\\}[^ ]|[^ ])", t_146, "#pop");
+        t_149 = requireIsArray__151(listify_56(t_145));
+        t_144 = mapEntryConstructor_57("indented", t_149);
+        t_143 = mapConstructor_58(listify_56(t_147, t_144));
+        tokens_139 = t_143;
       }
     }
-    this.#name_126 = name_130;
-    this.#aliases_127 = aliases_131;
-    this.#filenames_128 = filenames_132;
-    this.#tokens_129 = tokens_133;
+    this.#name_132 = name_136;
+    this.#aliases_133 = aliases_137;
+    this.#filenames_134 = filenames_138;
+    this.#tokens_135 = tokens_139;
     return;
   }
   /** @returns {string} */
   get name() {
-    let return_149;
-    return_149 = this.#name_126;
-    return return_149;
+    let return_156;
+    return_156 = this.#name_132;
+    return return_156;
   }
   /** @returns {Array<string>} */
   get aliases() {
-    let return_151;
-    return_151 = this.#aliases_127;
-    return return_151;
+    let return_158;
+    return_158 = this.#aliases_133;
+    return return_158;
   }
   /** @returns {Array<string>} */
   get filenames() {
-    let return_153;
-    return_153 = this.#filenames_128;
-    return return_153;
+    let return_160;
+    return_160 = this.#filenames_134;
+    return return_160;
   }
-  /** @returns {Map<string, Array<RuleOption_61>>} */
+  /** @returns {Map<string, Array<RuleOption_63>>} */
   get tokens() {
-    let return_155;
-    return_155 = this.#tokens_129;
-    return return_155;
+    let return_162;
+    return_162 = this.#tokens_135;
+    return return_162;
   }
 };
-/** @type {Type_102} */
-const RuleOption_156 = "RuleOption: Type";
-/** @type {Type_102} */
-const Rule_157 = "Rule: Type";
-/** @type {Type_102} */
-const Include_158 = "Include: Type";
-/** @type {(state: string) => Include_106} */
-const include_159 = include_105;
-/** @type {Type_102} */
-const TokenKind_160 = "TokenKind: Type";
-/** @type {Type_102} */
-const Kind_161 = "Kind: Type";
-/** @type {Type_102} */
-const ByGroups_162 = "ByGroups: Type";
-/** @type {() => ByGroups_112} */
-const bygroups_147 = bygroups_111;
-/** @type {Type_102} */
-const Using_163 = "Using: Type";
-/** @type {(lexer: string) => Using_116} */
-const using_146 = using_115;
-/** @type {Kind_118} */
-const Name_164 = Name_117;
-/** @type {Kind_118} */
-const Operator_165 = Operator_119;
-/** @type {Kind_118} */
-const Punctuation_166 = Punctuation_120;
-/** @type {Kind_118} */
-const StringKind_167 = StringKind_121;
-/** @type {Kind_118} */
-const StringInterpol_168 = StringInterpol_122;
-/** @type {Kind_118} */
-const Whitespace_144 = Whitespace_123;
-/** @type {Type_102} */
-const return_169 = "TemperMdLexer: Type";
-export default return_169;
+/** @type {Type_104} */
+const RuleOption_163 = "RuleOption: Type";
+/** @type {Type_104} */
+const Rule_164 = "Rule: Type";
+/** @type {Type_104} */
+const Include_165 = "Include: Type";
+/** @type {(state: string) => Include_108} */
+const include_166 = include_107;
+/** @type {Type_104} */
+const Inherit_167 = "Inherit: Type";
+/** @type {Type_104} */
+const TokenKind_168 = "TokenKind: Type";
+/** @type {Type_104} */
+const Kind_169 = "Kind: Type";
+/** @type {Type_104} */
+const ByGroups_170 = "ByGroups: Type";
+/** @type {() => ByGroups_115} */
+const bygroups_154 = bygroups_114;
+/** @type {Type_104} */
+const Using_171 = "Using: Type";
+/** @type {(lexer: string) => Using_119} */
+const using_153 = using_118;
+/** @type {Inherit_122} */
+const inherit_152 = inherit_121;
+/** @type {Kind_124} */
+const Name_172 = Name_123;
+/** @type {Kind_124} */
+const Operator_173 = Operator_125;
+/** @type {Kind_124} */
+const Punctuation_174 = Punctuation_126;
+/** @type {Kind_124} */
+const StringKind_175 = StringKind_127;
+/** @type {Kind_124} */
+const StringInterpol_176 = StringInterpol_128;
+/** @type {Kind_124} */
+const Whitespace_150 = Whitespace_129;
+/** @type {Type_104} */
+const return_177 = "TemperMdLexer: Type";
+export default return_177;
