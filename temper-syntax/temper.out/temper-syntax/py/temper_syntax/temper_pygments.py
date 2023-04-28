@@ -52,7 +52,7 @@ class TemperLexer(TemperObject0):
       t_127 = MapEntry_135('interpolation', t_78)
       t_122 = Rule('"', Kind.string, '#pop')
       t_125 = Rule('\\$\\{', Kind.string_interpol, 'interpolation')
-      t_126 = Rule('[^"]+', Kind.string)
+      t_126 = Rule('(?:[^"$]|\\$[^{])+', Kind.string)
       t_83 = cast_by_type4((t_122, t_125, t_126), tuple3)
       t_124 = MapEntry_135('string', t_83)
       t_123 = map_constructor_136((t_129, t_127, t_124))

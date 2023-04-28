@@ -10,7 +10,7 @@ class LexerTest(unittest.TestCase):
             dedent(
                 """
                 let name = "world";
-                console.log("Hi, ${name}!");
+                console.log("Hello ${name} for $5.");
                 """
             )
         )

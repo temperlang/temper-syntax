@@ -25,9 +25,6 @@ Main thing, though, is the list of rules for definition tokens.
 
 ### Root
 
-I think that the patterns are checked in order within each state, so the order
-matters.
-
         new MapEntry("root", [
           new Rule("\\s+", Kind.Whitespace),
           new Rule("\"", Kind.String, "string"),
@@ -43,10 +40,13 @@ matters.
           include("root"),
         ].as<List<RuleOption>>()),
 
+I'm not sure if order matters here. Seems simpler, but if I don't exclude `${`
+from core string chars, I don't get interp.
+
         new MapEntry("string", [
           new Rule("\"", Kind.String, "#pop"),
           new Rule("\\$\\{", Kind.StringInterpol, "interpolation"),
-          new Rule("[^\"]+", Kind.String),
+          new Rule("(?:[^\"$]|\\$[^{])+", Kind.String),
         ].as<List<RuleOption>>()),
 
       ]);

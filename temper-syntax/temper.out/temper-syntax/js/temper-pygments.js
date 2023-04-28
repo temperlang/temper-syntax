@@ -63,7 +63,7 @@ export class TemperLexer {
         t_54 = mapEntryConstructor_35("interpolation", t_62);
         t_49 = new Rule_64("\u0022", Kind_65.String, "#pop");
         t_52 = new Rule_64("\\\u0024\\{", Kind_65.StringInterpol, "interpolation");
-        t_53 = new Rule_64("[^\u0022]+", Kind_65.String);
+        t_53 = new Rule_64("(?:[^\u0022\u0024]|\\\u0024[^{])+", Kind_65.String);
         t_63 = requireIsArray__66(listify_34(t_49, t_52, t_53));
         t_51 = mapEntryConstructor_35("string", t_63);
         t_50 = mapConstructor_36(listify_34(t_56, t_54, t_51));
