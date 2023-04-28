@@ -12,6 +12,11 @@ pygments = "^2.15.1"
 temper-core = {path = "../temper-syntax/temper.out/temper-core/py", develop = true}
 temper-syntax = {path = "../temper-syntax/temper.out/temper-syntax/py", develop = true}
 
+[tool.poetry.scripts]
+bundle = 'scripts:bundle'
+
+[tool.poetry.group.dev.dependencies]
+stickytape = "^0.2.1"
 
 [build-system]
 requires = ["poetry-core"]
