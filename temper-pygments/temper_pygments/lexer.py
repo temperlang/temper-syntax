@@ -1,4 +1,5 @@
 from pygments.lexer import RegexLexer
+from pygments.lexers.markup import MarkdownLexer
 from temper_pygments.adapt import adapt_tokens
 from temper_syntax import temper_pygments as tp
 
@@ -14,3 +15,7 @@ class TemperLexer(RegexLexer):
 
 
 # print(TemperLexer.tokens)
+
+
+class TemperMdLexer(MarkdownLexer):
+    pass
