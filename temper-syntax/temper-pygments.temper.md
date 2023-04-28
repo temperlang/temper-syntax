@@ -25,8 +25,13 @@ Main thing, though, is the list of rules for definition tokens.
 
 ### Root
 
+I think that the patterns are checked in order within each state, so the order
+matters.
+
         new MapEntry("root", [
+          new Rule("\\s+", Kind.Whitespace),
           new Rule("\"", Kind.String, "string"),
+          new Rule("[=+]+", Kind.Operator),
           new Rule("[{}();:.,]", Kind.Punctuation),
           new Rule("\\w+", Kind.Name),
         ].as<List<RuleOption>>()),

@@ -1,5 +1,5 @@
 from pygments.lexer import include
-from pygments.token import Name, Operator, Punctuation, String
+from pygments.token import Token
 from temper_syntax.pygments import Include, Rule
 
 
@@ -23,9 +23,10 @@ def adapt_tokens(tokens):
 
 
 kinds = {
-    "Name": Name,
-    "Operator": Operator,
-    "Punctuation": Punctuation,
-    "String": String,
-    "String.Interpol": String.Interpol,
+    "Name": Token.Name,
+    "Operator": Token.Operator,
+    "Punctuation": Token.Punctuation,
+    "String": Token.String,
+    "String.Interpol": Token.String.Interpol,
+    "Whitespace": Token.Whitespace,
 }

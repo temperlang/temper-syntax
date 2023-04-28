@@ -37,4 +37,5 @@ enough to do with strings.
       public static Punctuation: builtins.String = "Punctuation";
       public static String: builtins.String = "String";
       public static StringInterpol: builtins.String = "String.Interpol";
+      public static Whitespace: builtins.String = "Whitespace";
     }

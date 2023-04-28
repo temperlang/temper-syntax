@@ -98,23 +98,29 @@ export class Kind {
   static get StringInterpol() {
     return this.#StringInterpol_25;
   }
+  /** @type {string} */
+  static #Whitespace_26 = "Whitespace";
+  /** @returns {string} */
+  static get Whitespace() {
+    return this.#Whitespace_26;
+  }
   /** */
   constructor() {
-    let return_26;
-    return_26 = void 0;
+    let return_27;
+    return_27 = void 0;
     return;
   }
 };
 /**
- * @param {string} state_27
+ * @param {string} state_28
  * @returns {Include}
  */
-export function include(state_27) {
-  let return_28;
-  let t_29 = new Include(state_27);
-  return_28 = t_29;
-  return return_28;
+export function include(state_28) {
+  let return_29;
+  let t_30 = new Include(state_28);
+  return_29 = t_30;
+  return return_29;
 };
-/** @type {Type_31} */
-const return_30 = "Kind: Type";
-export default return_30;
+/** @type {Type_32} */
+const return_31 = "Kind: Type";
+export default return_31;
