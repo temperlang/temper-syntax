@@ -2,6 +2,16 @@
 
     let { ... } = import("./pygments");
 
+## Helper functions
+
+[For now][issue1632], helpers have to be before the usage in the class below.
+
+    let words(...names: List<String>): String {
+      "\\b(?:${names.join("|") { (x);; x }})\\b"
+    }
+
+## Lexer class
+
 We can't easily access backend classes, so we can't subclass
 `pygments.lexer.RegexLexer`, but we can define a separate class that can then
 be subclassed in Python or elsewhere.
@@ -27,7 +37,8 @@ Main thing, though, is the list of rules for definition tokens.
 
         new MapEntry("root", [
           new Rule("\\s+", Whitespace),
-          new Rule("let", KeywordDeclaration),
+          new Rule(words("class", "let", "public"), KeywordDeclaration),
+          new Rule(words("extends", "new"), KeywordDeclaration),
           new Rule("\"", StringKind, "string"),
           new Rule("[=+]+", Operator),
           new Rule("[{}();:.,]", Punctuation),
@@ -58,4 +69,5 @@ from core string chars, I don't get interp.
 
     }
 
+[issue1631]: https://github.com/temper-lang/temper/issues/1631
 [pygments-lexer-docs]: https://pygments.org/docs/lexerdevelopment/

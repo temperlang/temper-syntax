@@ -40,6 +40,7 @@ def adapt_tokens(tokens):
 
 
 kinds = {
+    "Keyword": Token.Keyword,
     "Keyword.Declaration": Token.Keyword.Declaration,
     "Name": Token.Name,
     "Number": Token.Number,

@@ -49,6 +49,7 @@ enough to do with strings.
 And I'd like to make these static members of `Kind`, but we have a
 [codegen bug][temp-after-static] with that right now.
 
+    export let Keyword: Kind = new Kind("Keyword");
     export let KeywordDeclaration: Kind = new Kind("Keyword.Declaration");
     export let Name: Kind = new Kind("Name");
     export let Number: Kind = new Kind("Number");

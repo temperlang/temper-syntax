@@ -155,62 +155,67 @@ let t_41 = new Inherit();
 export const inherit = t_41;
 ;
 /** @type {Kind} */
-let t_42 = new Kind("Keyword.Declaration");
+let t_42 = new Kind("Keyword");
 /** @type {Kind} */
-export const KeywordDeclaration = t_42;
+export const Keyword = t_42;
 ;
 /** @type {Kind} */
-let t_43 = new Kind("Name");
+let t_43 = new Kind("Keyword.Declaration");
 /** @type {Kind} */
-export const Name = t_43;
+export const KeywordDeclaration = t_43;
 ;
 /** @type {Kind} */
-let t_44 = new Kind("Number");
+let t_44 = new Kind("Name");
 /** @type {Kind} */
-export const Number = t_44;
+export const Name = t_44;
 ;
 /** @type {Kind} */
-let t_45 = new Kind("Operator");
+let t_45 = new Kind("Number");
 /** @type {Kind} */
-export const Operator = t_45;
+export const Number = t_45;
 ;
 /** @type {Kind} */
-let t_46 = new Kind("Punctuation");
+let t_46 = new Kind("Operator");
 /** @type {Kind} */
-export const Punctuation = t_46;
+export const Operator = t_46;
 ;
 /** @type {Kind} */
-let t_47 = new Kind("String");
+let t_47 = new Kind("Punctuation");
 /** @type {Kind} */
-export const StringKind = t_47;
+export const Punctuation = t_47;
 ;
 /** @type {Kind} */
-let t_48 = new Kind("String.Interpol");
+let t_48 = new Kind("String");
 /** @type {Kind} */
-export const StringInterpol = t_48;
+export const StringKind = t_48;
 ;
 /** @type {Kind} */
-let t_49 = new Kind("Whitespace");
+let t_49 = new Kind("String.Interpol");
 /** @type {Kind} */
-export const Whitespace = t_49;
+export const StringInterpol = t_49;
+;
+/** @type {Kind} */
+let t_50 = new Kind("Whitespace");
+/** @type {Kind} */
+export const Whitespace = t_50;
 ;
 /** @returns {ByGroups} */
-export function bygroups(...kinds_50) {
-  let return_51;
-  let t_52 = new ByGroups(kinds_50);
-  return_51 = t_52;
-  return return_51;
+export function bygroups(...kinds_51) {
+  let return_52;
+  let t_53 = new ByGroups(kinds_51);
+  return_52 = t_53;
+  return return_52;
 };
 /**
- * @param {string} lexer_53
+ * @param {string} lexer_54
  * @returns {Using}
  */
-export function using(lexer_53) {
-  let return_54;
-  let t_55 = new Using(lexer_53);
-  return_54 = t_55;
-  return return_54;
+export function using(lexer_54) {
+  let return_55;
+  let t_56 = new Using(lexer_54);
+  return_55 = t_56;
+  return return_55;
 };
 /** @type {void} */
-const return_56 = void 0;
-export default return_56;
+const return_57 = void 0;
+export default return_57;
