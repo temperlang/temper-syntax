@@ -165,47 +165,52 @@ let t_43 = new Kind("Name");
 export const Name = t_43;
 ;
 /** @type {Kind} */
-let t_44 = new Kind("Operator");
+let t_44 = new Kind("Number");
 /** @type {Kind} */
-export const Operator = t_44;
+export const Number = t_44;
 ;
 /** @type {Kind} */
-let t_45 = new Kind("Punctuation");
+let t_45 = new Kind("Operator");
 /** @type {Kind} */
-export const Punctuation = t_45;
+export const Operator = t_45;
 ;
 /** @type {Kind} */
-let t_46 = new Kind("String");
+let t_46 = new Kind("Punctuation");
 /** @type {Kind} */
-export const StringKind = t_46;
+export const Punctuation = t_46;
 ;
 /** @type {Kind} */
-let t_47 = new Kind("String.Interpol");
+let t_47 = new Kind("String");
 /** @type {Kind} */
-export const StringInterpol = t_47;
+export const StringKind = t_47;
 ;
 /** @type {Kind} */
-let t_48 = new Kind("Whitespace");
+let t_48 = new Kind("String.Interpol");
 /** @type {Kind} */
-export const Whitespace = t_48;
+export const StringInterpol = t_48;
+;
+/** @type {Kind} */
+let t_49 = new Kind("Whitespace");
+/** @type {Kind} */
+export const Whitespace = t_49;
 ;
 /** @returns {ByGroups} */
-export function bygroups(...kinds_49) {
-  let return_50;
-  let t_51 = new ByGroups(kinds_49);
-  return_50 = t_51;
-  return return_50;
+export function bygroups(...kinds_50) {
+  let return_51;
+  let t_52 = new ByGroups(kinds_50);
+  return_51 = t_52;
+  return return_51;
 };
 /**
- * @param {string} lexer_52
+ * @param {string} lexer_53
  * @returns {Using}
  */
-export function using(lexer_52) {
-  let return_53;
-  let t_54 = new Using(lexer_52);
-  return_53 = t_54;
-  return return_53;
+export function using(lexer_53) {
+  let return_54;
+  let t_55 = new Using(lexer_53);
+  return_54 = t_55;
+  return return_54;
 };
 /** @type {void} */
-const return_55 = void 0;
-export default return_55;
+const return_56 = void 0;
+export default return_56;

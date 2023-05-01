@@ -31,7 +31,11 @@ Main thing, though, is the list of rules for definition tokens.
           new Rule("\"", StringKind, "string"),
           new Rule("[=+]+", Operator),
           new Rule("[{}();:.,]", Punctuation),
-          new Rule("\\w+", Name),
+          new Rule("\\d+\\.?\\d*|\\.\\d+", Number),
+
+Be sloppy with names for now. TODO More complete Unicode support.
+
+          new Rule("[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*", Name),
         ].as<List<RuleOption>>()),
 
 ### Strings

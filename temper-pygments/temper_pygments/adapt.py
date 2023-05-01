@@ -1,3 +1,4 @@
+import pygments.unistring as uni
 from pygments.lexer import Lexer, bygroups, include, inherit, using
 from pygments.token import Token
 from temper_syntax.pygments import ByGroups, Kind, Include, Inherit, Rule, Using
@@ -13,13 +14,17 @@ def adapt_kind(kind):
     raise ValueError(f"unknown kind: {kind}")
 
 
+def adapt_regex(regex: str):
+    return regex.replace("<<Lu>>", uni.Lu).replace("<<Ll>>", uni.Ll)
+
+
 def adapt_rule(rule):
     if isinstance(rule, Include):
         return include(rule.state)
     elif isinstance(rule, Inherit):
         return inherit
     elif isinstance(rule, Rule):
-        result = (rule.regex, adapt_kind(rule.kind))
+        result = (adapt_regex(rule.regex), adapt_kind(rule.kind))
         if rule.state is not None:
             result = (*result, rule.state)
         return result
@@ -37,6 +42,7 @@ def adapt_tokens(tokens):
 kinds = {
     "Keyword.Declaration": Token.Keyword.Declaration,
     "Name": Token.Name,
+    "Number": Token.Number,
     "Operator": Token.Operator,
     "Punctuation": Token.Punctuation,
     "String": Token.String,
