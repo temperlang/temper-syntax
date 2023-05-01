@@ -41,13 +41,13 @@ export class TemperMdLexer {
       filenames_142 = listify_57("*.temper.md", "*.tempermd");
     }
     if (!(tokens_143 !== void 0)) {
-      t_145 = new Rule_88("    ", Whitespace_154, "indented");
+      t_145 = new Rule_88("^\\s*\\n {4}", Whitespace_154, "indented");
       {
         t_152 = requireIsArray__155(listify_57(t_145, inherit_156));
         t_151 = mapEntryConstructor_58("root", t_152);
         t_146 = using_157("Temper");
         t_150 = bygroups_158(t_146);
-        t_149 = new Rule_88("((?s).*?)(?=\\Z|\\n(?: \\{1,3\\}[^ ]|[^ ]|\u0024))", t_150, "#pop");
+        t_149 = new Rule_88("(?s)(.*?)(?=\\Z|\\n(?: \\{1,3\\}[^ ]|[^ ]|\u0024))", t_150, "#pop");
         t_153 = requireIsArray__155(listify_57(t_149));
         t_148 = mapEntryConstructor_58("indented", t_153);
         t_147 = mapConstructor_59(listify_57(t_151, t_148));

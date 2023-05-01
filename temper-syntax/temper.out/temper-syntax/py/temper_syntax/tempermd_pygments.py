@@ -31,12 +31,12 @@ class TemperMdLexer(TemperObject0):
     if filenames__31 is ...:
       filenames__31 = ('*.temper.md', '*.tempermd')
     if tokens__32 is ...:
-      t_110 = Rule('    ', Whitespace__23, 'indented')
+      t_110 = Rule('^\\s*\\n {4}', Whitespace__23, 'indented')
       t_76 = cast_by_type4((t_110, inherit__16), tuple3)
       t_117 = MapEntry_199('root', t_76)
       t_112 = using__15('Temper')
       t_116 = bygroups__13(t_112)
-      t_115 = Rule('((?s).*?)(?=\\Z|\\n(?: \\{1,3\\}[^ ]|[^ ]|$))', t_116, '#pop')
+      t_115 = Rule('(?s)(.*?)(?=\\Z|\\n(?: \\{1,3\\}[^ ]|[^ ]|$))', t_116, '#pop')
       t_81 = cast_by_type4((t_115,), tuple3)
       t_114 = MapEntry_199('indented', t_81)
       t_113 = map_constructor_200((t_117, t_114))
