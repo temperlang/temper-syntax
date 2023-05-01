@@ -36,7 +36,7 @@ class TemperMdLexer(TemperObject0):
       t_117 = MapEntry_199('root', t_76)
       t_112 = using__15('Temper')
       t_116 = bygroups__13(t_112)
-      t_115 = Rule('(.*)', t_116, '#pop')
+      t_115 = Rule('((?s).*?)(?=\\Z|\\n(?: \\{1,3\\}[^ ]|[^ ]|$))', t_116, '#pop')
       t_81 = cast_by_type4((t_115,), tuple3)
       t_114 = MapEntry_199('indented', t_81)
       t_113 = map_constructor_200((t_117, t_114))

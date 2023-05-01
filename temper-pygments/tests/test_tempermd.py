@@ -12,8 +12,17 @@ class TemperMdLexerTest(unittest.TestCase):
                 Here is *text*.
 
                     let n = 5;
+
+                    let m = n + 1;
+                    console.log(m.toString());
+
+                More text.
                 """
             )
         )
         for token in tokens:
             print(token)
+
+
+if __name__ == "__main__":
+    unittest.main()

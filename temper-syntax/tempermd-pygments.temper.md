@@ -23,10 +23,10 @@ Use overly simplified rules for now just to see if we can make things happen.
         new MapEntry("indented", [
           new Rule(
 
-Again, overly simplified.
+This seems to recognize the end of indented sections ok for the moment, limited
+to 4-space indentation from line start for now.
 
-            // "(.+?\n)^(?: \\{1,3\\}[^ ]|[^ ]|$)",
-            "(.*)",
+            "((?s).*?)(?=\\Z|\\n(?: \\{1,3\\}[^ ]|[^ ]|$))",
             bygroups(using("Temper")),
             "#pop",
           ),
