@@ -46,7 +46,9 @@ Main thing, though, is the list of rules for definition tokens.
             KeywordDeclaration,
           ),
           new Rule(
-            words("else", "export", "extends", "if", "is", "match", "new"),
+            words(
+              "do", "else", "export", "extends", "if", "is", "match", "new"
+            ),
             KeywordDeclaration,
           ),
           new Rule("\"", StringKind, "string"),

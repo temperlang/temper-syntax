@@ -48,7 +48,7 @@ class TemperLexer(TemperObject0):
       t_167 = Rule('\\s+', Whitespace__28)
       t_178 = words__6('class', 'interface', 'let', 'public')
       t_187 = Rule(t_178, KeywordDeclaration__20)
-      t_179 = words__6('else', 'export', 'extends', 'if', 'is', 'match', 'new')
+      t_179 = words__6('do', 'else', 'export', 'extends', 'if', 'is', 'match', 'new')
       t_186 = Rule(t_179, KeywordDeclaration__20)
       t_180 = Rule('"', StringKind__26, 'string')
       t_181 = Rule('[=+]+', Operator__24)

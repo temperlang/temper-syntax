@@ -58,7 +58,7 @@ export class TemperLexer {
       t_75 = new Rule_98("\\s+", Whitespace_99);
       t_85 = words_100("class", "interface", "let", "public");
       t_94 = new Rule_98(t_85, KeywordDeclaration_101);
-      t_86 = words_100("else", "export", "extends", "if", "is", "match", "new");
+      t_86 = words_100("do", "else", "export", "extends", "if", "is", "match", "new");
       t_93 = new Rule_98(t_86, KeywordDeclaration_101);
       t_87 = new Rule_98("\u0022", StringKind_102, "string");
       t_88 = new Rule_98("[=+]+", Operator_103);
