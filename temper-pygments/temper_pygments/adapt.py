@@ -43,6 +43,7 @@ kinds = {
     "Keyword": Token.Keyword,
     "Keyword.Declaration": Token.Keyword.Declaration,
     "Name": Token.Name,
+    "Name.Decorator": Token.Name.Decorator,
     "Number": Token.Number,
     "Operator": Token.Operator,
     "Punctuation": Token.Punctuation,

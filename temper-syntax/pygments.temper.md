@@ -52,6 +52,7 @@ And I'd like to make these static members of `Kind`, but we have a
     export let Keyword: Kind = new Kind("Keyword");
     export let KeywordDeclaration: Kind = new Kind("Keyword.Declaration");
     export let Name: Kind = new Kind("Name");
+    export let NameDecorator: Kind = new Kind("Name.Decorator");
     export let Number: Kind = new Kind("Number");
     export let Operator: Kind = new Kind("Operator");
     export let Punctuation: Kind = new Kind("Punctuation");

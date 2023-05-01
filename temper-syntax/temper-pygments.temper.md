@@ -6,6 +6,10 @@
 
 [For now][issue1632], helpers have to be before the usage in the class below.
 
+Be sloppy with names for now. TODO More complete Unicode support.
+
+    let nameRegex = "[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*";
+
     let words(...names: List<String>): String {
       "\\b(?:${names.join("|") { (x);; x }})\\b"
     }
@@ -37,16 +41,20 @@ Main thing, though, is the list of rules for definition tokens.
 
         new MapEntry("root", [
           new Rule("\\s+", Whitespace),
-          new Rule(words("class", "let", "public"), KeywordDeclaration),
-          new Rule(words("extends", "new"), KeywordDeclaration),
+          new Rule(
+            words("class", "interface", "let", "public"),
+            KeywordDeclaration,
+          ),
+          new Rule(
+            words("else", "export", "extends", "if", "is", "match", "new"),
+            KeywordDeclaration,
+          ),
           new Rule("\"", StringKind, "string"),
           new Rule("[=+]+", Operator),
           new Rule("[{}();:.,]", Punctuation),
           new Rule("\\d+\\.?\\d*|\\.\\d+", Number),
-
-Be sloppy with names for now. TODO More complete Unicode support.
-
-          new Rule("[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*", Name),
+          new Rule("@${nameRegex}", NameDecorator),
+          new Rule(nameRegex, Name),
         ].as<List<RuleOption>>()),
 
 ### Strings

@@ -170,52 +170,57 @@ let t_44 = new Kind("Name");
 export const Name = t_44;
 ;
 /** @type {Kind} */
-let t_45 = new Kind("Number");
+let t_45 = new Kind("Name.Decorator");
 /** @type {Kind} */
-export const Number = t_45;
+export const NameDecorator = t_45;
 ;
 /** @type {Kind} */
-let t_46 = new Kind("Operator");
+let t_46 = new Kind("Number");
 /** @type {Kind} */
-export const Operator = t_46;
+export const Number = t_46;
 ;
 /** @type {Kind} */
-let t_47 = new Kind("Punctuation");
+let t_47 = new Kind("Operator");
 /** @type {Kind} */
-export const Punctuation = t_47;
+export const Operator = t_47;
 ;
 /** @type {Kind} */
-let t_48 = new Kind("String");
+let t_48 = new Kind("Punctuation");
 /** @type {Kind} */
-export const StringKind = t_48;
+export const Punctuation = t_48;
 ;
 /** @type {Kind} */
-let t_49 = new Kind("String.Interpol");
+let t_49 = new Kind("String");
 /** @type {Kind} */
-export const StringInterpol = t_49;
+export const StringKind = t_49;
 ;
 /** @type {Kind} */
-let t_50 = new Kind("Whitespace");
+let t_50 = new Kind("String.Interpol");
 /** @type {Kind} */
-export const Whitespace = t_50;
+export const StringInterpol = t_50;
+;
+/** @type {Kind} */
+let t_51 = new Kind("Whitespace");
+/** @type {Kind} */
+export const Whitespace = t_51;
 ;
 /** @returns {ByGroups} */
-export function bygroups(...kinds_51) {
-  let return_52;
-  let t_53 = new ByGroups(kinds_51);
-  return_52 = t_53;
-  return return_52;
+export function bygroups(...kinds_52) {
+  let return_53;
+  let t_54 = new ByGroups(kinds_52);
+  return_53 = t_54;
+  return return_53;
 };
 /**
- * @param {string} lexer_54
+ * @param {string} lexer_55
  * @returns {Using}
  */
-export function using(lexer_54) {
-  let return_55;
-  let t_56 = new Using(lexer_54);
-  return_55 = t_56;
-  return return_55;
+export function using(lexer_55) {
+  let return_56;
+  let t_57 = new Using(lexer_55);
+  return_56 = t_57;
+  return return_56;
 };
 /** @type {void} */
-const return_57 = void 0;
-export default return_57;
+const return_58 = void 0;
+export default return_58;

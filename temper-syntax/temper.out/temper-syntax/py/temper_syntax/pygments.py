@@ -113,38 +113,40 @@ class Using(TokenKind):
   lexer = property(getlexer__70, None)
 def include(state__30: 'str') -> 'Include':
   return__7: 'Include'
-  t_188: 'Include' = Include(state__30)
-  return__7 = t_188
+  t_194: 'Include' = Include(state__30)
+  return__7 = t_194
   return return__7
-t_196: 'Inherit' = Inherit()
-inherit: 'Inherit' = t_196
-t_197: 'Kind' = Kind('Keyword')
-Keyword: 'Kind' = t_197
-t_199: 'Kind' = Kind('Keyword.Declaration')
-KeywordDeclaration: 'Kind' = t_199
-t_201: 'Kind' = Kind('Name')
-Name: 'Kind' = t_201
-t_203: 'Kind' = Kind('Number')
-Number: 'Kind' = t_203
-t_205: 'Kind' = Kind('Operator')
-Operator: 'Kind' = t_205
-t_207: 'Kind' = Kind('Punctuation')
-Punctuation: 'Kind' = t_207
-t_209: 'Kind' = Kind('String')
-StringKind: 'Kind' = t_209
-t_211: 'Kind' = Kind('String.Interpol')
-StringInterpol: 'Kind' = t_211
-t_213: 'Kind' = Kind('Whitespace')
-Whitespace: 'Kind' = t_213
+t_202: 'Inherit' = Inherit()
+inherit: 'Inherit' = t_202
+t_203: 'Kind' = Kind('Keyword')
+Keyword: 'Kind' = t_203
+t_205: 'Kind' = Kind('Keyword.Declaration')
+KeywordDeclaration: 'Kind' = t_205
+t_207: 'Kind' = Kind('Name')
+Name: 'Kind' = t_207
+t_209: 'Kind' = Kind('Name.Decorator')
+NameDecorator: 'Kind' = t_209
+t_211: 'Kind' = Kind('Number')
+Number: 'Kind' = t_211
+t_213: 'Kind' = Kind('Operator')
+Operator: 'Kind' = t_213
+t_215: 'Kind' = Kind('Punctuation')
+Punctuation: 'Kind' = t_215
+t_217: 'Kind' = Kind('String')
+StringKind: 'Kind' = t_217
+t_219: 'Kind' = Kind('String.Interpol')
+StringInterpol: 'Kind' = t_219
+t_221: 'Kind' = Kind('Whitespace')
+Whitespace: 'Kind' = t_221
 def bygroups(*kinds__39: 'TokenKind') -> 'ByGroups':
   return__15: 'ByGroups'
-  t_181: 'ByGroups' = ByGroups(kinds__39)
-  return__15 = t_181
+  t_187: 'ByGroups' = ByGroups(kinds__39)
+  return__15 = t_187
   return return__15
 def using(lexer__44: 'str') -> 'Using':
   return__18: 'Using'
-  t_177: 'Using' = Using(lexer__44)
-  return__18 = t_177
+  t_183: 'Using' = Using(lexer__44)
+  return__18 = t_183
   return return__18
-return__136: 'None' = None
-export = return__136
+return__140: 'None' = None
+export = return__140
