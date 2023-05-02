@@ -4,7 +4,7 @@
 
 ## Helper functions
 
-[For now][issue1632], helpers have to be before the usage in the class below.
+[For now][issue1631], helpers have to be before the usage in the class below.
 
 Be sloppy with names for now. TODO More complete Unicode support.
 
