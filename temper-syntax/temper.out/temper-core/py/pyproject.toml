@@ -7,10 +7,10 @@ authors = ["Temper Authors"]
 packages = [
     { include = "temper_core" },
 ]
-include = ["temper_core/**/*"]
+include = ["temper_core/**/*", "./**/*.so"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.8"
 
 [tool.poetry.dev-dependencies]
 

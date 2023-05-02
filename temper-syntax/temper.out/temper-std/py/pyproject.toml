@@ -3,7 +3,7 @@ name = "temper-std"
 version = "0.0.3"
 description = ""
 readme = ""
-requires-python = "~=3.6"
+requires-python = "~=3.8"
 license = {text = "Apache-2.0"}
 authors = [ ]
 maintainers = [ ]
@@ -13,7 +13,6 @@ urls = { }
 dependencies = [
     "temper-core == 0.0.3"
 ]
-packages = [{ include = "temper_std" }]
 
 [project.scripts]
 
@@ -29,10 +28,10 @@ license = "Apache-2.0"
 description = ""
 authors = [ ]
 packages = [{ include = "temper_std" }]
-include = ["temper_std/**/*"]
+include = ["temper_std/**/*", "./**/*.so"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.8"
 temper-core = "0.0.3"
 
 [build-system]

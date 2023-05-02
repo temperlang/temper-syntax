@@ -19,7 +19,7 @@ now, so we get it to ourselves.
 
 TODO Recognize indentation relative to previous, such as outlines.
 
-          new Rule("^\\s*\\n {4}", Whitespace, "indented"),
+          new Rule(raw"^\s*\n {4}", Whitespace, "indented"),
           inherit,
         ].as<List<RuleOption>>()),
 
@@ -29,7 +29,7 @@ TODO Recognize indentation relative to previous, such as outlines.
 This seems to recognize the end of indented sections ok for the moment, limited
 to 4-space indentation from line start for now.
 
-            "(?s)(.*?)(?=\\Z|\\n(?: \\{1,3\\}[^ ]|[^ ]|$))",
+            raw"(?s)(.*?)(?=\Z|\n(?: {1,3}[^ ]|[^ ]|$))",
             bygroups(using("Temper")),
             "#pop",
           ),

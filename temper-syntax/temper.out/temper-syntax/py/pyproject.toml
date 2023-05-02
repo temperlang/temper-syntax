@@ -3,7 +3,7 @@ name = "temper-syntax"
 version = "0.0.1"
 description = ""
 readme = ""
-requires-python = "~=3.6"
+requires-python = "~=3.8"
 license = {text = ""}
 authors = [ ]
 maintainers = [ ]
@@ -13,7 +13,6 @@ urls = { }
 dependencies = [
     "temper-core == 0.0.3"
 ]
-packages = [{ include = "temper_syntax" }]
 
 [project.scripts]
 
@@ -29,10 +28,10 @@ license = ""
 description = ""
 authors = [ ]
 packages = [{ include = "temper_syntax" }]
-include = ["temper_syntax/**/*"]
+include = ["temper_syntax/**/*", "./**/*.so"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.8"
 temper-core = "0.0.3"
 
 [build-system]

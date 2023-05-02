@@ -1,44 +1,43 @@
-from temper_core import TemperObject as TemperObject0, str_cat as str_cat_1259, list_join as list_join_1240, bool_not as bool_not_1247, list_builder_add as list_builder_add_1243
-from typing import Callable as Callable3
-from builtins import list as list_1264
+from temper_core import TemperObject as TemperObject0, str_cat as str_cat_1232, list_join as list_join_1214, bool_not as bool_not_1221, list_builder_add as list_builder_add_1217
+from typing import List as List6, Callable as Callable3
+from builtins import list as list_1235
 from temper_core import LoggingConsole
-vGlobalConsole__36_1265 = LoggingConsole(__name__)
+vGlobalConsole__36_1236 = LoggingConsole(__name__)
 class TestFixtureBase(TemperObject0):
   __slots__ = ()
 passing__3: 'bool' = True
-t_76: 'list[str]' = list_1264()
-messages__4: 'list[str]' = t_76
+t_72: 'List6[str]' = list_1235()
+messages__4: 'List6[str]' = t_72
 def test(name__5: 'str', body__6: 'Callable3[[], None]') -> 'None':
-  global messages__4, passing__3, vGlobalConsole__36_1265
+  global messages__4, passing__3, vGlobalConsole__36_1236
   return__1: 'None'
-  t_71: 'Callable3[[str], str]'
-  t_72: 'str'
+  t_67: 'Callable3[[str], str]'
+  t_68: 'str'
   return__1 = None
   passing__3 = True
-  t_67: 'list[str]' = list_1264()
-  messages__4 = t_67
+  t_63: 'List6[str]' = list_1235()
+  messages__4 = t_63
   body__6()
   if passing__3:
-    vGlobalConsole__36_1265.log(str_cat_1259(name__5, ': Passed'))
+    vGlobalConsole__36_1236.log(str_cat_1232(name__5, ': Passed'))
   else:
-    def fn__65(it__8: 'str') -> 'str':
-      return__44: 'str'
-      return__44 = it__8
-      return return__44
-    t_71 = fn__65
-    t_72 = list_join_1240(messages__4, '\n', t_71)
-    vGlobalConsole__36_1265.log(str_cat_1259(name__5, ': Failed ', t_72))
+    def fn__61(it__8: 'str') -> 'str':
+      return__42: 'str'
+      return__42 = it__8
+      return return__42
+    t_67 = fn__61
+    t_68 = list_join_1214(messages__4, '\n', t_67)
+    vGlobalConsole__36_1236.log(str_cat_1232(name__5, ': Failed ', t_68))
   return return__1
-def assert11(success__9: 'bool', message__10: 'Callable3[[], str]') -> 'None':
+def assert13(success__9: 'bool', message__10: 'Callable3[[], str]') -> 'None':
   global messages__4, passing__3
   return__2: 'None'
-  t_62: 'str'
+  t_58: 'str'
   return__2 = None
-  t_60: 'bool' = bool_not_1247(success__9)
-  if t_60:
+  if bool_not_1221(success__9):
     passing__3 = False
-    t_62 = message__10()
-    list_builder_add_1243(messages__4, t_62)
+    t_58 = message__10()
+    list_builder_add_1217(messages__4, t_58)
   return return__2
-return__43: 'None' = None
-export = return__43
+return__41: 'None' = None
+export = return__41

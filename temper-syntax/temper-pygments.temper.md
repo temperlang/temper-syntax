@@ -40,7 +40,7 @@ Main thing, though, is the list of rules for definition tokens.
 ### Root
 
         new MapEntry("root", [
-          new Rule("\\s+", Whitespace),
+          new Rule(raw"\s+", Whitespace),
           new Rule(
             words("class", "interface", "let", "public"),
             KeywordDeclaration,
@@ -54,7 +54,7 @@ Main thing, though, is the list of rules for definition tokens.
           new Rule("\"", StringKind, "string"),
           new Rule("[=+]+", Operator),
           new Rule("[{}();:.,]", Punctuation),
-          new Rule("\\d+\\.?\\d*|\\.\\d+", Number),
+          new Rule(raw"\d+\.?\d*|\.\d+", Number),
           new Rule("@${nameRegex}", NameDecorator),
           new Rule(nameRegex, Name),
         ].as<List<RuleOption>>()),
@@ -71,7 +71,7 @@ from core string chars, I don't get interp.
 
         new MapEntry("string", [
           new Rule("\"", StringKind, "#pop"),
-          new Rule("\\$\\{", StringInterpol, "interpolation"),
+          new Rule(raw"\$\{", StringInterpol, "interpolation"),
           new Rule("(?:[^\"$]|\\$[^{])+", StringKind),
         ].as<List<RuleOption>>()),
 

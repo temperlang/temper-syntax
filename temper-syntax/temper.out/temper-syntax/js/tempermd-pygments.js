@@ -47,7 +47,7 @@ export class TemperMdLexer {
         t_176 = mapEntryConstructor_61("root", t_177);
         t_171 = using_182("Temper");
         t_175 = bygroups_183(t_171);
-        t_174 = new Rule_98("(?s)(.*?)(?=\\Z|\\n(?: \\{1,3\\}[^ ]|[^ ]|\u0024))", t_175, "#pop");
+        t_174 = new Rule_98("(?s)(.*?)(?=\\Z|\\n(?: {1,3}[^ ]|[^ ]|\u0024))", t_175, "#pop");
         t_178 = requireIsArray__180(listify_60(t_174));
         t_173 = mapEntryConstructor_61("indented", t_178);
         t_172 = mapConstructor_62(listify_60(t_176, t_173));

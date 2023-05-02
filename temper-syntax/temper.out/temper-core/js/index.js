@@ -828,6 +828,14 @@ export function divIntInt(x, y) {
   /* not NaN or infinite */
   return result;
 }
+export function modIntInt(x, y) {
+  const result = trunc(x % y);
+  if (!isSafeInteger(result)) {
+    throw noResultException;
+  }
+  /* not NaN or infinite */
+  return result;
+}
 export function minusDub(x) {
   return -x;
 }
@@ -868,7 +876,7 @@ export function strCat(...args) {
 export function listify(...args) {
   return freeze(args);
 }
-export const genericCmp = (a, b) => {
+export function cmpGeneric(a, b) {
   if (typeof a === "string" && typeof b === "string") {
     if (Object.is(a, b)) {
       return 0;
@@ -901,46 +909,46 @@ export const genericCmp = (a, b) => {
   }
   throw noResultException;
 };
-export function genericLt(a, b) {
+export function ltGeneric(a, b) {
   if (typeof a === "number" && typeof b === "number") {
     return a < b || (a === 0 && b === 0 && Object.is(a, 0) < Object.is(b, 0));
   }
   if (typeof a == "boolean" && typeof b === "boolean") {
     return a < b;
   }
-  return genericCmp(a, b) < 0;
+  return cmpGeneric(a, b) < 0;
 }
-export function genericLe(a, b) {
+export function leGeneric(a, b) {
   if (typeof a === "number" && typeof b === "number") {
     return a <= b && (a !== 0 || b !== 0 || Object.is(a, 0) <= Object.is(b, 0));
   }
   if (typeof a == "boolean" && typeof b === "boolean") {
     return a <= b;
   }
-  return genericCmp(a, b) <= 0;
+  return cmpGeneric(a, b) <= 0;
 }
-export function genericGt(a, b) {
+export function gtGeneric(a, b) {
   if (typeof a === "number" && typeof b === "number") {
     return a > b || (a === 0 && b === 0 && Object.is(a, 0) > Object.is(b, 0));
   }
   if (typeof a == "boolean" && typeof b === "boolean") {
     return a > b;
   }
-  return genericCmp(a, b) > 0;
+  return cmpGeneric(a, b) > 0;
 }
-export function genericGe(a, b) {
+export function geGeneric(a, b) {
   if (typeof a === "number" && typeof b === "number") {
     return a >= b && (a !== 0 || b !== 0 || Object.is(a, 0) >= Object.is(b, 0));
   }
   if (typeof a == "boolean" && typeof b === "boolean") {
     return a >= b;
   }
-  return genericCmp(a, b) >= 0;
+  return cmpGeneric(a, b) >= 0;
 }
-export function genericEq(a, b) {
+export function eqGeneric(a, b) {
   return Object.is(a, b);
 }
-export function genericNe(a, b) {
+export function neGeneric(a, b) {
   return !Object.is(a, b);
 }
 export function fail() {

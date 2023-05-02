@@ -1,5 +1,5 @@
 from temper_core import TemperObject as TemperObject0
-from typing import Any as Any1, Union as Union2
+from typing import Any as Any1, Union as Union2, Tuple as Tuple3
 class RuleOption(TemperObject0):
   __slots__ = ()
   def constructor__19(this__0) -> Any1:
@@ -26,21 +26,21 @@ class Rule(RuleOption):
   def __init__(this__2, regex__24: 'str', kind__25: 'TokenKind', state: 'Union2[str, None]' = ...) -> None:
     state__26: 'Union2[str, None]' = state
     this__2.constructor__23(regex__24, kind__25, state__26)
-  def getregex__47(this__48) -> 'str':
+  @property
+  def regex(this__48) -> 'str':
     return__49: 'str'
     return__49 = this__48.regex__20
     return return__49
-  def getkind__51(this__52) -> 'TokenKind':
+  @property
+  def kind(this__52) -> 'TokenKind':
     return__53: 'TokenKind'
     return__53 = this__52.kind__21
     return return__53
-  def getstate__55(this__56) -> 'Union2[str, None]':
+  @property
+  def state(this__56) -> 'Union2[str, None]':
     return__57: 'Union2[str, None]'
     return__57 = this__56.state__22
     return return__57
-  regex = property(getregex__47, None)
-  kind = property(getkind__51, None)
-  state = property(getstate__55, None)
 class Include(RuleOption):
   state__27: 'str'
   __slots__ = ('state__27',)
@@ -51,11 +51,11 @@ class Include(RuleOption):
     return return__6
   def __init__(this__5, state__29: 'str') -> None:
     this__5.constructor__28(state__29)
-  def getstate__59(this__60) -> 'str':
+  @property
+  def state(this__60) -> 'str':
     return__61: 'str'
     return__61 = this__60.state__27
     return return__61
-  state = property(getstate__59, None)
 class Inherit(Rule):
   __slots__ = ()
   def constructor__32(this__8) -> Any1:
@@ -76,26 +76,26 @@ class Kind(TokenKind):
     return return__11
   def __init__(this__10, name__35: 'str') -> None:
     this__10.constructor__34(name__35)
-  def getname__62(this__63) -> 'str':
+  @property
+  def name(this__63) -> 'str':
     return__64: 'str'
     return__64 = this__63.name__33
     return return__64
-  name = property(getname__62, None)
 class ByGroups(TokenKind):
-  kinds__36: 'tuple[TokenKind, ...]'
+  kinds__36: 'Tuple3[TokenKind, ...]'
   __slots__ = ('kinds__36',)
-  def constructor__37(this__12, kinds__38: 'tuple[TokenKind, ...]') -> Any1:
+  def constructor__37(this__12, kinds__38: 'Tuple3[TokenKind, ...]') -> Any1:
     return__14: 'None'
     return__14 = None
     this__12.kinds__36 = kinds__38
     return return__14
-  def __init__(this__12, kinds__38: 'tuple[TokenKind, ...]') -> None:
+  def __init__(this__12, kinds__38: 'Tuple3[TokenKind, ...]') -> None:
     this__12.constructor__37(kinds__38)
-  def getkinds__66(this__67) -> 'tuple[TokenKind, ...]':
-    return__68: 'tuple[TokenKind, ...]'
+  @property
+  def kinds(this__67) -> 'Tuple3[TokenKind, ...]':
+    return__68: 'Tuple3[TokenKind, ...]'
     return__68 = this__67.kinds__36
     return return__68
-  kinds = property(getkinds__66, None)
 class Using(TokenKind):
   lexer__41: 'str'
   __slots__ = ('lexer__41',)
@@ -106,11 +106,11 @@ class Using(TokenKind):
     return return__17
   def __init__(this__16, lexer__43: 'str') -> None:
     this__16.constructor__42(lexer__43)
-  def getlexer__70(this__71) -> 'str':
+  @property
+  def lexer(this__71) -> 'str':
     return__72: 'str'
     return__72 = this__71.lexer__41
     return return__72
-  lexer = property(getlexer__70, None)
 def include(state__30: 'str') -> 'Include':
   return__7: 'Include'
   t_194: 'Include' = Include(state__30)
