@@ -24,12 +24,12 @@ class TemperLexer(TemperObject0):
     t_197: 'MapEntry__22[str, (Tuple3[RuleOption, ...])]'
     t_198: 'Include'
     t_199: 'MapEntry__22[str, (Tuple3[RuleOption, ...])]'
-    t_200: 'str'
-    t_201: 'str'
+    t_200: 'Rule'
+    t_201: 'Rule'
     t_202: 'str'
     t_203: 'str'
-    t_204: 'Rule'
-    t_205: 'Rule'
+    t_204: 'str'
+    t_205: 'str'
     t_206: 'Rule'
     t_207: 'Rule'
     t_208: 'Rule'
@@ -52,23 +52,23 @@ class TemperLexer(TemperObject0):
       filenames__44 = ('*.temper',)
     if tokens__45 is ...:
       t_189 = Rule('\\s+', Whitespace__32)
-      t_200 = words__6('false', 'NaN', 'null', 'true', 'void')
-      t_215 = Rule(t_200, KeywordConstant__22)
-      t_201 = words__6('class', 'interface', 'let', 'private', 'public', 'var')
-      t_214 = Rule(t_201, KeywordDeclaration__23)
-      t_202 = words__6('do', 'else', 'export', 'extends', 'fn', 'if', 'is', 'match', 'new')
-      t_213 = Rule(t_202, Keyword__21)
-      t_203 = words__6('AnyValue', 'Boolean', 'Float64', 'Function', 'Int', 'List', 'ListBuilder', 'Listed', 'Map', 'MapBuilder', 'MapKey', 'Mapped', 'NoResult', 'String', 'StringSlice', 'Void')
-      t_212 = Rule(t_203, NameBuiltin__25)
-      t_204 = Rule('"', StringKind__30, 'string')
-      t_205 = Rule('[=+]+', Operator__28)
-      t_206 = Rule('[{}();:.,]', Punctuation__29)
-      t_207 = Rule('\\d+\\.?\\d*|\\.\\d+', Number__27)
-      t_208 = Rule('@[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*', NameDecorator__26)
-      t_209 = Rule('[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*', Name__24)
-      t_210 = Rule('//.*?$', CommentSingleline__20)
-      t_211 = Rule('(?s)/\\*.*\\*/', CommentMultiline__19)
-      t_127 = cast_by_type5((t_189, t_215, t_214, t_213, t_212, t_204, t_205, t_206, t_207, t_208, t_209, t_210, t_211), tuple4)
+      t_200 = Rule('//.*?$', CommentSingleline__20)
+      t_201 = Rule('(?s)/\\*.*\\*/', CommentMultiline__19)
+      t_202 = words__6('false', 'NaN', 'null', 'true', 'void')
+      t_215 = Rule(t_202, KeywordConstant__22)
+      t_203 = words__6('class', 'interface', 'let', 'private', 'public', 'sealed', 'var')
+      t_214 = Rule(t_203, KeywordDeclaration__23)
+      t_204 = words__6('do', 'else', 'export', 'extends', 'fn', 'if', 'import', 'is', 'match', 'new', 'orelse')
+      t_213 = Rule(t_204, Keyword__21)
+      t_205 = words__6('AnyValue', 'Boolean', 'Float64', 'Function', 'Int', 'List', 'ListBuilder', 'Listed', 'Map', 'MapBuilder', 'MapKey', 'Mapped', 'NoResult', 'Null', 'String', 'StringSlice', 'Void')
+      t_212 = Rule(t_205, NameBuiltin__25)
+      t_206 = Rule('"', StringKind__30, 'string')
+      t_207 = Rule('[-=+*&|<>]+|/=?', Operator__28)
+      t_208 = Rule('[{}();:.,]', Punctuation__29)
+      t_209 = Rule('\\d+\\.?\\d*|\\.\\d+', Number__27)
+      t_210 = Rule('@[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*', NameDecorator__26)
+      t_211 = Rule('[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*', Name__24)
+      t_127 = cast_by_type5((t_189, t_200, t_201, t_215, t_214, t_213, t_212, t_206, t_207, t_208, t_209, t_210, t_211), tuple4)
       t_199 = MapEntry_255('root', t_127)
       t_191 = Rule('}', StringInterpol__31, '#pop')
       t_198 = include__10('root')

@@ -41,18 +41,25 @@ Main thing, though, is the list of rules for definition tokens.
 
         new MapEntry("root", [
           new Rule(raw"\s+", Whitespace),
+          new Rule("//.*?$", CommentSingleline),
+
+Multiline comments in Temper don't nest at present, so this should be fine.
+
+          new Rule(raw"(?s)/\*.*\*/", CommentMultiline),
           new Rule(
             words("false", "NaN", "null", "true", "void"),
             KeywordConstant,
           ),
           new Rule(
-            words("class", "interface", "let", "private", "public", "var"),
+            words(
+              "class", "interface", "let", "private", "public", "sealed", "var",
+            ),
             KeywordDeclaration,
           ),
           new Rule(
             words(
-              "do", "else", "export", "extends", "fn", "if", "is", "match",
-              "new",
+              "do", "else", "export", "extends", "fn", "if", "import", "is",
+              "match", "new", "orelse",
             ),
             Keyword,
           ),
@@ -60,21 +67,16 @@ Main thing, though, is the list of rules for definition tokens.
             words(
               "AnyValue", "Boolean", "Float64", "Function", "Int", "List",
               "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped",
-              "NoResult", "String", "StringSlice", "Void",
+              "NoResult", "Null", "String", "StringSlice", "Void",
             ),
             NameBuiltin,
           ),
           new Rule("\"", StringKind, "string"),
-          new Rule("[=+]+", Operator),
+          new Rule("[-=+*&|<>]+|/=?", Operator),
           new Rule("[{}();:.,]", Punctuation),
           new Rule(raw"\d+\.?\d*|\.\d+", Number),
           new Rule("@${nameRegex}", NameDecorator),
           new Rule(nameRegex, Name),
-          new Rule("//.*?$", CommentSingleline),
-
-Multiline comments in Temper don't nest at present, so this should be fine.
-
-          new Rule(raw"(?s)/\*.*\*/", CommentMultiline),
         ].as<List<RuleOption>>()),
 
 ### Strings

@@ -62,32 +62,32 @@ export class TemperLexer {
     }
     if (!(tokens_77 !== void 0)) {
       t_79 = new Rule_108("\\s+", Whitespace_109);
-      t_89 = words_110("false", "NaN", "null", "true", "void");
-      t_104 = new Rule_108(t_89, KeywordConstant_111);
-      t_90 = words_110("class", "interface", "let", "private", "public", "var");
-      t_103 = new Rule_108(t_90, KeywordDeclaration_112);
-      t_91 = words_110("do", "else", "export", "extends", "fn", "if", "is", "match", "new");
-      t_102 = new Rule_108(t_91, Keyword_113);
-      t_92 = words_110("AnyValue", "Boolean", "Float64", "Function", "Int", "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped", "NoResult", "String", "StringSlice", "Void");
-      t_101 = new Rule_108(t_92, NameBuiltin_114);
-      t_93 = new Rule_108("\u0022", StringKind_115, "string");
-      t_94 = new Rule_108("[=+]+", Operator_116);
-      t_95 = new Rule_108("[{}();:.,]", Punctuation_117);
-      t_96 = new Rule_108("\\d+\\.?\\d*|\\.\\d+", Number_118);
-      t_97 = new Rule_108("@[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", NameDecorator_119);
-      t_98 = new Rule_108("[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", Name_120);
-      t_99 = new Rule_108("//.*?\u0024", CommentSingleline_121);
-      t_100 = new Rule_108("(?s)/\\*.*\\*/", CommentMultiline_122);
+      t_89 = new Rule_108("//.*?\u0024", CommentSingleline_110);
+      t_90 = new Rule_108("(?s)/\\*.*\\*/", CommentMultiline_111);
+      t_91 = words_112("false", "NaN", "null", "true", "void");
+      t_104 = new Rule_108(t_91, KeywordConstant_113);
+      t_92 = words_112("class", "interface", "let", "private", "public", "sealed", "var");
+      t_103 = new Rule_108(t_92, KeywordDeclaration_114);
+      t_93 = words_112("do", "else", "export", "extends", "fn", "if", "import", "is", "match", "new", "orelse");
+      t_102 = new Rule_108(t_93, Keyword_115);
+      t_94 = words_112("AnyValue", "Boolean", "Float64", "Function", "Int", "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped", "NoResult", "Null", "String", "StringSlice", "Void");
+      t_101 = new Rule_108(t_94, NameBuiltin_116);
+      t_95 = new Rule_108("\u0022", StringKind_117, "string");
+      t_96 = new Rule_108("[-=+*\u0026|\u003c\u003e]+|/=?", Operator_118);
+      t_97 = new Rule_108("[{}();:.,]", Punctuation_119);
+      t_98 = new Rule_108("\\d+\\.?\\d*|\\.\\d+", Number_120);
+      t_99 = new Rule_108("@[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", NameDecorator_121);
+      t_100 = new Rule_108("[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", Name_122);
       {
-        t_105 = requireIsArray__123(listify_64(t_79, t_104, t_103, t_102, t_101, t_93, t_94, t_95, t_96, t_97, t_98, t_99, t_100));
+        t_105 = requireIsArray__123(listify_64(t_79, t_89, t_90, t_104, t_103, t_102, t_101, t_95, t_96, t_97, t_98, t_99, t_100));
         t_88 = mapEntryConstructor_65("root", t_105);
         t_80 = new Rule_108("}", StringInterpol_124, "#pop");
         t_87 = include_125("root");
         t_106 = requireIsArray__123(listify_64(t_80, t_87));
         t_86 = mapEntryConstructor_65("interpolation", t_106);
-        t_81 = new Rule_108("\u0022", StringKind_115, "#pop");
+        t_81 = new Rule_108("\u0022", StringKind_117, "#pop");
         t_84 = new Rule_108("\\\u0024\\{", StringInterpol_124, "interpolation");
-        t_85 = new Rule_108("(?:[^\u0022\u0024]|\\\u0024[^{])+", StringKind_115);
+        t_85 = new Rule_108("(?:[^\u0022\u0024]|\\\u0024[^{])+", StringKind_117);
         t_107 = requireIsArray__123(listify_64(t_81, t_84, t_85));
         t_83 = mapEntryConstructor_65("string", t_107);
         t_82 = mapConstructor_66(listify_64(t_88, t_86, t_83));
@@ -150,29 +150,29 @@ const using_149 = using_150;
 /** @type {Inherit_154} */
 const inherit_152 = inherit_153;
 /** @type {Kind_156} */
-const CommentMultiline_122 = CommentMultiline_155;
+const CommentMultiline_111 = CommentMultiline_155;
 /** @type {Kind_156} */
-const CommentSingleline_121 = CommentSingleline_157;
+const CommentSingleline_110 = CommentSingleline_157;
 /** @type {Kind_156} */
-const Keyword_113 = Keyword_158;
+const Keyword_115 = Keyword_158;
 /** @type {Kind_156} */
-const KeywordConstant_111 = KeywordConstant_159;
+const KeywordConstant_113 = KeywordConstant_159;
 /** @type {Kind_156} */
-const KeywordDeclaration_112 = KeywordDeclaration_160;
+const KeywordDeclaration_114 = KeywordDeclaration_160;
 /** @type {Kind_156} */
-const Name_120 = Name_161;
+const Name_122 = Name_161;
 /** @type {Kind_156} */
-const NameBuiltin_114 = NameBuiltin_162;
+const NameBuiltin_116 = NameBuiltin_162;
 /** @type {Kind_156} */
-const NameDecorator_119 = NameDecorator_163;
+const NameDecorator_121 = NameDecorator_163;
 /** @type {Kind_156} */
-const Number_118 = Number_164;
+const Number_120 = Number_164;
 /** @type {Kind_156} */
-const Operator_116 = Operator_165;
+const Operator_118 = Operator_165;
 /** @type {Kind_156} */
-const Punctuation_117 = Punctuation_166;
+const Punctuation_119 = Punctuation_166;
 /** @type {Kind_156} */
-const StringKind_115 = StringKind_167;
+const StringKind_117 = StringKind_167;
 /** @type {Kind_156} */
 const StringInterpol_124 = StringInterpol_168;
 /** @type {Kind_156} */
@@ -180,7 +180,7 @@ const Whitespace_109 = Whitespace_169;
 /** @type {string} */
 const nameRegex_170 = "[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*";
 /** @returns {string} */
-function words_110(...names_171) {
+function words_112(...names_171) {
   let return_172;
   function fn_173(x_174) {
     let return_175;
