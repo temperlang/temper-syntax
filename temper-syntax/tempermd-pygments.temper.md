@@ -30,7 +30,7 @@ This seems to recognize the end of indented sections ok for the moment, limited
 to 4-space indentation from line start for now.
 
             raw"(?s)(.*?)(?=\Z|\n(?: {1,3}[^ ]|[^ ]|$))",
-            bygroups(using("Temper")),
+            bygroups([using("Temper")]),
             "#pop",
           ),
         ].as<List<RuleOption>>()),

@@ -42,14 +42,27 @@ Main thing, though, is the list of rules for definition tokens.
         new MapEntry("root", [
           new Rule(raw"\s+", Whitespace),
           new Rule(
-            words("class", "interface", "let", "public"),
+            words("false", "NaN", "null", "true", "void"),
+            KeywordConstant,
+          ),
+          new Rule(
+            words("class", "interface", "let", "private", "public", "var"),
             KeywordDeclaration,
           ),
           new Rule(
             words(
-              "do", "else", "export", "extends", "if", "is", "match", "new"
+              "do", "else", "export", "extends", "fn", "if", "is", "match",
+              "new",
             ),
-            KeywordDeclaration,
+            Keyword,
+          ),
+          new Rule(
+            words(
+              "AnyValue", "Boolean", "Float64", "Function", "Int", "List",
+              "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped",
+              "NoResult", "String", "StringSlice", "Void",
+            ),
+            NameBuiltin,
           ),
           new Rule("\"", StringKind, "string"),
           new Rule("[=+]+", Operator),

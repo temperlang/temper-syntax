@@ -113,44 +113,48 @@ class Using(TokenKind):
     return return__72
 def include(state__30: 'str') -> 'Include':
   return__7: 'Include'
-  t_206: 'Include' = Include(state__30)
-  return__7 = t_206
+  t_218: 'Include' = Include(state__30)
+  return__7 = t_218
   return return__7
-t_214: 'Inherit' = Inherit()
-inherit: 'Inherit' = t_214
-t_215: 'Kind' = Kind('Comment.Multiline')
-CommentMultiline: 'Kind' = t_215
-t_217: 'Kind' = Kind('Comment.Singleline')
-CommentSingleline: 'Kind' = t_217
-t_219: 'Kind' = Kind('Keyword')
-Keyword: 'Kind' = t_219
-t_221: 'Kind' = Kind('Keyword.Declaration')
-KeywordDeclaration: 'Kind' = t_221
-t_223: 'Kind' = Kind('Name')
-Name: 'Kind' = t_223
-t_225: 'Kind' = Kind('Name.Decorator')
-NameDecorator: 'Kind' = t_225
-t_227: 'Kind' = Kind('Number')
-Number: 'Kind' = t_227
-t_229: 'Kind' = Kind('Operator')
-Operator: 'Kind' = t_229
-t_231: 'Kind' = Kind('Punctuation')
-Punctuation: 'Kind' = t_231
-t_233: 'Kind' = Kind('String')
-StringKind: 'Kind' = t_233
-t_235: 'Kind' = Kind('String.Interpol')
-StringInterpol: 'Kind' = t_235
-t_237: 'Kind' = Kind('Whitespace')
-Whitespace: 'Kind' = t_237
-def bygroups(*kinds__39: 'TokenKind') -> 'ByGroups':
+t_226: 'Inherit' = Inherit()
+inherit: 'Inherit' = t_226
+t_227: 'Kind' = Kind('Comment.Multiline')
+CommentMultiline: 'Kind' = t_227
+t_229: 'Kind' = Kind('Comment.Singleline')
+CommentSingleline: 'Kind' = t_229
+t_231: 'Kind' = Kind('Keyword')
+Keyword: 'Kind' = t_231
+t_233: 'Kind' = Kind('Keyword.Constant')
+KeywordConstant: 'Kind' = t_233
+t_235: 'Kind' = Kind('Keyword.Declaration')
+KeywordDeclaration: 'Kind' = t_235
+t_237: 'Kind' = Kind('Name')
+Name: 'Kind' = t_237
+t_239: 'Kind' = Kind('Name.Builtin')
+NameBuiltin: 'Kind' = t_239
+t_241: 'Kind' = Kind('Name.Decorator')
+NameDecorator: 'Kind' = t_241
+t_243: 'Kind' = Kind('Number')
+Number: 'Kind' = t_243
+t_245: 'Kind' = Kind('Operator')
+Operator: 'Kind' = t_245
+t_247: 'Kind' = Kind('Punctuation')
+Punctuation: 'Kind' = t_247
+t_249: 'Kind' = Kind('String')
+StringKind: 'Kind' = t_249
+t_251: 'Kind' = Kind('String.Interpol')
+StringInterpol: 'Kind' = t_251
+t_253: 'Kind' = Kind('Whitespace')
+Whitespace: 'Kind' = t_253
+def bygroups(kinds__39: 'Tuple3[TokenKind, ...]') -> 'ByGroups':
   return__15: 'ByGroups'
-  t_199: 'ByGroups' = ByGroups(kinds__39)
-  return__15 = t_199
+  t_211: 'ByGroups' = ByGroups(kinds__39)
+  return__15 = t_211
   return return__15
 def using(lexer__44: 'str') -> 'Using':
   return__18: 'Using'
-  t_195: 'Using' = Using(lexer__44)
-  return__18 = t_195
+  t_207: 'Using' = Using(lexer__44)
+  return__18 = t_207
   return return__18
-return__148: 'None' = None
-export = return__148
+return__156: 'None' = None
+export = return__156

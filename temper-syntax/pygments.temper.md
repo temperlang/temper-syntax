@@ -52,8 +52,10 @@ And I'd like to make these static members of `Kind`, but we have a
     export let CommentMultiline: Kind = new Kind("Comment.Multiline");
     export let CommentSingleline: Kind = new Kind("Comment.Singleline");
     export let Keyword: Kind = new Kind("Keyword");
+    export let KeywordConstant: Kind = new Kind("Keyword.Constant");
     export let KeywordDeclaration: Kind = new Kind("Keyword.Declaration");
     export let Name: Kind = new Kind("Name");
+    export let NameBuiltin: Kind = new Kind("Name.Builtin");
     export let NameDecorator: Kind = new Kind("Name.Decorator");
     export let Number: Kind = new Kind("Number");
     export let Operator: Kind = new Kind("Operator");
@@ -68,7 +70,7 @@ And I'd like to make these static members of `Kind`, but we have a
       public kinds: List<TokenKind>;
     }
 
-    export let bygroups(...kinds: List<TokenKind>): ByGroups {
+    export let bygroups(kinds: List<TokenKind>): ByGroups {
       new ByGroups(kinds)
     }
 

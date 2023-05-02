@@ -1,138 +1,142 @@
 import {
-  ByGroups as ByGroups_137, CommentMultiline as CommentMultiline_145, CommentSingleline as CommentSingleline_147, Include as Include_130, Inherit as Inherit_144, KeywordDeclaration as KeywordDeclaration_150, Keyword as Keyword_149, Kind as Kind_146, NameDecorator as NameDecorator_152, Name as Name_151, Number as Number_153, Operator as Operator_154, Punctuation as Punctuation_155, RuleOption as RuleOption_71, Rule as Rule_102, StringInterpol as StringInterpol_157, StringKind as StringKind_156, Using as Using_141, Whitespace as Whitespace_158, bygroups as bygroups_136, include as include_129, inherit as inherit_143, using as using_140
+  ByGroups as ByGroups_147, CommentMultiline as CommentMultiline_155, CommentSingleline as CommentSingleline_157, Include as Include_139, Inherit as Inherit_154, KeywordConstant as KeywordConstant_159, KeywordDeclaration as KeywordDeclaration_160, Keyword as Keyword_158, Kind as Kind_156, NameBuiltin as NameBuiltin_162, NameDecorator as NameDecorator_163, Name as Name_161, Number as Number_164, Operator as Operator_165, Punctuation as Punctuation_166, RuleOption as RuleOption_73, Rule as Rule_108, StringInterpol as StringInterpol_168, StringKind as StringKind_167, TokenKind as TokenKind_146, Using as Using_151, Whitespace as Whitespace_169, bygroups as bygroups_145, include as include_138, inherit as inherit_153, using as using_150
 } from "./pygments.js";
 import {
-  listify as listify_62, mapEntryConstructor as mapEntryConstructor_63, mapConstructor as mapConstructor_64, requireIsArray as requireIsArray__188
+  listify as listify_64, mapEntryConstructor as mapEntryConstructor_65, mapConstructor as mapConstructor_66, requireIsArray as requireIsArray__199
 } from "@temperlang/core";
 export class TemperMdLexer {
   /** @type {string} */
-  #name_169;
+  #name_180;
   /** @type {Array<string>} */
-  #aliases_170;
+  #aliases_181;
   /** @type {Array<string>} */
-  #filenames_171;
-  /** @type {Map<string, Array<RuleOption_71>>} */
-  #tokens_172;
+  #filenames_182;
+  /** @type {Map<string, Array<RuleOption_73>>} */
+  #tokens_183;
   /**
-   * @param {string} name_173
-   * @param {Array<string>} aliases_174
-   * @param {Array<string>} filenames_175
-   * @param {Map<string, Array<RuleOption_71>>} tokens_176
+   * @param {string} name_184
+   * @param {Array<string>} aliases_185
+   * @param {Array<string>} filenames_186
+   * @param {Map<string, Array<RuleOption_73>>} tokens_187
    */
-  constructor(name_173, aliases_174, filenames_175, tokens_176) {
-    let return_177;
-    let t_178;
-    let t_179;
-    let t_180;
-    let t_181;
-    let t_182;
-    let t_183;
-    let t_184;
-    return_177 = void 0;
-    let t_185;
-    let t_186;
-    if (!(name_173 !== void 0)) {
-      name_173 = "TemperMarkdown";
+  constructor(name_184, aliases_185, filenames_186, tokens_187) {
+    let return_188;
+    let t_189;
+    let t_190;
+    let t_191;
+    let t_192;
+    let t_193;
+    let t_194;
+    let t_195;
+    return_188 = void 0;
+    let t_196;
+    let t_197;
+    if (!(name_184 !== void 0)) {
+      name_184 = "TemperMarkdown";
     }
-    if (!(aliases_174 !== void 0)) {
-      aliases_174 = listify_62("temper.md", "tempermd");
+    if (!(aliases_185 !== void 0)) {
+      aliases_185 = listify_64("temper.md", "tempermd");
     }
-    if (!(filenames_175 !== void 0)) {
-      filenames_175 = listify_62("*.temper.md", "*.tempermd");
+    if (!(filenames_186 !== void 0)) {
+      filenames_186 = listify_64("*.temper.md", "*.tempermd");
     }
-    if (!(tokens_176 !== void 0)) {
-      t_178 = new Rule_102("^\\s*\\n {4}", Whitespace_187, "indented");
+    if (!(tokens_187 !== void 0)) {
+      t_189 = new Rule_108("^\\s*\\n {4}", Whitespace_198, "indented");
       {
-        t_185 = requireIsArray__188(listify_62(t_178, inherit_189));
-        t_184 = mapEntryConstructor_63("root", t_185);
-        t_179 = using_190("Temper");
-        t_183 = bygroups_191(t_179);
-        t_182 = new Rule_102("(?s)(.*?)(?=\\Z|\\n(?: {1,3}[^ ]|[^ ]|\u0024))", t_183, "#pop");
-        t_186 = requireIsArray__188(listify_62(t_182));
-        t_181 = mapEntryConstructor_63("indented", t_186);
-        t_180 = mapConstructor_64(listify_62(t_184, t_181));
-        tokens_176 = t_180;
+        t_196 = requireIsArray__199(listify_64(t_189, inherit_200));
+        t_195 = mapEntryConstructor_65("root", t_196);
+        t_190 = using_201("Temper");
+        t_194 = bygroups_202(listify_64(t_190));
+        t_193 = new Rule_108("(?s)(.*?)(?=\\Z|\\n(?: {1,3}[^ ]|[^ ]|\u0024))", t_194, "#pop");
+        t_197 = requireIsArray__199(listify_64(t_193));
+        t_192 = mapEntryConstructor_65("indented", t_197);
+        t_191 = mapConstructor_66(listify_64(t_195, t_192));
+        tokens_187 = t_191;
       }
     }
-    this.#name_169 = name_173;
-    this.#aliases_170 = aliases_174;
-    this.#filenames_171 = filenames_175;
-    this.#tokens_172 = tokens_176;
+    this.#name_180 = name_184;
+    this.#aliases_181 = aliases_185;
+    this.#filenames_182 = filenames_186;
+    this.#tokens_183 = tokens_187;
     return;
   }
   /** @returns {string} */
   get name() {
-    let return_193;
-    return_193 = this.#name_169;
-    return return_193;
+    let return_204;
+    return_204 = this.#name_180;
+    return return_204;
   }
   /** @returns {Array<string>} */
   get aliases() {
-    let return_195;
-    return_195 = this.#aliases_170;
-    return return_195;
+    let return_206;
+    return_206 = this.#aliases_181;
+    return return_206;
   }
   /** @returns {Array<string>} */
   get filenames() {
-    let return_197;
-    return_197 = this.#filenames_171;
-    return return_197;
+    let return_208;
+    return_208 = this.#filenames_182;
+    return return_208;
   }
-  /** @returns {Map<string, Array<RuleOption_71>>} */
+  /** @returns {Map<string, Array<RuleOption_73>>} */
   get tokens() {
-    let return_199;
-    return_199 = this.#tokens_172;
-    return return_199;
+    let return_210;
+    return_210 = this.#tokens_183;
+    return return_210;
   }
 };
-/** @type {Type_126} */
-const RuleOption_200 = "RuleOption: Type";
-/** @type {Type_126} */
-const Rule_201 = "Rule: Type";
-/** @type {Type_126} */
-const Include_202 = "Include: Type";
-/** @type {(state: string) => Include_130} */
-const include_203 = include_129;
-/** @type {Type_126} */
-const Inherit_204 = "Inherit: Type";
-/** @type {Type_126} */
-const TokenKind_205 = "TokenKind: Type";
-/** @type {Type_126} */
-const Kind_206 = "Kind: Type";
-/** @type {Type_126} */
-const ByGroups_207 = "ByGroups: Type";
-/** @type {() => ByGroups_137} */
-const bygroups_191 = bygroups_136;
-/** @type {Type_126} */
-const Using_208 = "Using: Type";
-/** @type {(lexer: string) => Using_141} */
-const using_190 = using_140;
-/** @type {Inherit_144} */
-const inherit_189 = inherit_143;
-/** @type {Kind_146} */
-const CommentMultiline_209 = CommentMultiline_145;
-/** @type {Kind_146} */
-const CommentSingleline_210 = CommentSingleline_147;
-/** @type {Kind_146} */
-const Keyword_211 = Keyword_149;
-/** @type {Kind_146} */
-const KeywordDeclaration_212 = KeywordDeclaration_150;
-/** @type {Kind_146} */
-const Name_213 = Name_151;
-/** @type {Kind_146} */
-const NameDecorator_214 = NameDecorator_152;
-/** @type {Kind_146} */
-const Number_215 = Number_153;
-/** @type {Kind_146} */
-const Operator_216 = Operator_154;
-/** @type {Kind_146} */
-const Punctuation_217 = Punctuation_155;
-/** @type {Kind_146} */
-const StringKind_218 = StringKind_156;
-/** @type {Kind_146} */
-const StringInterpol_219 = StringInterpol_157;
-/** @type {Kind_146} */
-const Whitespace_187 = Whitespace_158;
-/** @type {Type_126} */
-const return_220 = "TemperMdLexer: Type";
-export default return_220;
+/** @type {Type_135} */
+const RuleOption_211 = "RuleOption: Type";
+/** @type {Type_135} */
+const Rule_212 = "Rule: Type";
+/** @type {Type_135} */
+const Include_213 = "Include: Type";
+/** @type {(state: string) => Include_139} */
+const include_214 = include_138;
+/** @type {Type_135} */
+const Inherit_215 = "Inherit: Type";
+/** @type {Type_135} */
+const TokenKind_216 = "TokenKind: Type";
+/** @type {Type_135} */
+const Kind_217 = "Kind: Type";
+/** @type {Type_135} */
+const ByGroups_218 = "ByGroups: Type";
+/** @type {(kinds: Array<TokenKind_146>) => ByGroups_147} */
+const bygroups_202 = bygroups_145;
+/** @type {Type_135} */
+const Using_219 = "Using: Type";
+/** @type {(lexer: string) => Using_151} */
+const using_201 = using_150;
+/** @type {Inherit_154} */
+const inherit_200 = inherit_153;
+/** @type {Kind_156} */
+const CommentMultiline_220 = CommentMultiline_155;
+/** @type {Kind_156} */
+const CommentSingleline_221 = CommentSingleline_157;
+/** @type {Kind_156} */
+const Keyword_222 = Keyword_158;
+/** @type {Kind_156} */
+const KeywordConstant_223 = KeywordConstant_159;
+/** @type {Kind_156} */
+const KeywordDeclaration_224 = KeywordDeclaration_160;
+/** @type {Kind_156} */
+const Name_225 = Name_161;
+/** @type {Kind_156} */
+const NameBuiltin_226 = NameBuiltin_162;
+/** @type {Kind_156} */
+const NameDecorator_227 = NameDecorator_163;
+/** @type {Kind_156} */
+const Number_228 = Number_164;
+/** @type {Kind_156} */
+const Operator_229 = Operator_165;
+/** @type {Kind_156} */
+const Punctuation_230 = Punctuation_166;
+/** @type {Kind_156} */
+const StringKind_231 = StringKind_167;
+/** @type {Kind_156} */
+const StringInterpol_232 = StringInterpol_168;
+/** @type {Kind_156} */
+const Whitespace_198 = Whitespace_169;
+/** @type {Type_135} */
+const return_233 = "TemperMdLexer: Type";
+export default return_233;

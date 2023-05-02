@@ -170,67 +170,80 @@ let t_44 = new Kind("Keyword");
 export const Keyword = t_44;
 ;
 /** @type {Kind} */
-let t_45 = new Kind("Keyword.Declaration");
+let t_45 = new Kind("Keyword.Constant");
 /** @type {Kind} */
-export const KeywordDeclaration = t_45;
+export const KeywordConstant = t_45;
 ;
 /** @type {Kind} */
-let t_46 = new Kind("Name");
+let t_46 = new Kind("Keyword.Declaration");
 /** @type {Kind} */
-export const Name = t_46;
+export const KeywordDeclaration = t_46;
 ;
 /** @type {Kind} */
-let t_47 = new Kind("Name.Decorator");
+let t_47 = new Kind("Name");
 /** @type {Kind} */
-export const NameDecorator = t_47;
+export const Name = t_47;
 ;
 /** @type {Kind} */
-let t_48 = new Kind("Number");
+let t_48 = new Kind("Name.Builtin");
 /** @type {Kind} */
-export const Number = t_48;
+export const NameBuiltin = t_48;
 ;
 /** @type {Kind} */
-let t_49 = new Kind("Operator");
+let t_49 = new Kind("Name.Decorator");
 /** @type {Kind} */
-export const Operator = t_49;
+export const NameDecorator = t_49;
 ;
 /** @type {Kind} */
-let t_50 = new Kind("Punctuation");
+let t_50 = new Kind("Number");
 /** @type {Kind} */
-export const Punctuation = t_50;
+export const Number = t_50;
 ;
 /** @type {Kind} */
-let t_51 = new Kind("String");
+let t_51 = new Kind("Operator");
 /** @type {Kind} */
-export const StringKind = t_51;
+export const Operator = t_51;
 ;
 /** @type {Kind} */
-let t_52 = new Kind("String.Interpol");
+let t_52 = new Kind("Punctuation");
 /** @type {Kind} */
-export const StringInterpol = t_52;
+export const Punctuation = t_52;
 ;
 /** @type {Kind} */
-let t_53 = new Kind("Whitespace");
+let t_53 = new Kind("String");
 /** @type {Kind} */
-export const Whitespace = t_53;
+export const StringKind = t_53;
 ;
-/** @returns {ByGroups} */
-export function bygroups(...kinds_54) {
-  let return_55;
-  let t_56 = new ByGroups(kinds_54);
-  return_55 = t_56;
-  return return_55;
+/** @type {Kind} */
+let t_54 = new Kind("String.Interpol");
+/** @type {Kind} */
+export const StringInterpol = t_54;
+;
+/** @type {Kind} */
+let t_55 = new Kind("Whitespace");
+/** @type {Kind} */
+export const Whitespace = t_55;
+;
+/**
+ * @param {Array<TokenKind>} kinds_56
+ * @returns {ByGroups}
+ */
+export function bygroups(kinds_56) {
+  let return_57;
+  let t_58 = new ByGroups(kinds_56);
+  return_57 = t_58;
+  return return_57;
 };
 /**
- * @param {string} lexer_57
+ * @param {string} lexer_59
  * @returns {Using}
  */
-export function using(lexer_57) {
-  let return_58;
-  let t_59 = new Using(lexer_57);
-  return_58 = t_59;
-  return return_58;
+export function using(lexer_59) {
+  let return_60;
+  let t_61 = new Using(lexer_59);
+  return_60 = t_61;
+  return return_60;
 };
 /** @type {void} */
-const return_60 = void 0;
-export default return_60;
+const return_62 = void 0;
+export default return_62;
