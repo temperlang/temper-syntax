@@ -49,7 +49,7 @@ url = "../temper-syntax/temper.out/temper-syntax/py"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "4d3a3e3de0156eed4e6e35924fc78ce476ad91d1ceb4ab6f1e81fb6c9c79fda4"
+content-hash = "5caef256ee3e33bd4f5d55b33864df26046ca97e97fa36d6955b38d966f33805"
 
 [metadata.files]
 pygments = [
