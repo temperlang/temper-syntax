@@ -57,6 +57,11 @@ Main thing, though, is the list of rules for definition tokens.
           new Rule(raw"\d+\.?\d*|\.\d+", Number),
           new Rule("@${nameRegex}", NameDecorator),
           new Rule(nameRegex, Name),
+          new Rule("//.*?$", CommentSingleline),
+
+Multiline comments in Temper don't nest at present, so this should be fine.
+
+          new Rule(raw"(?s)/\*.*\*/", CommentMultiline),
         ].as<List<RuleOption>>()),
 
 ### Strings

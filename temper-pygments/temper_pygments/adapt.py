@@ -40,6 +40,8 @@ def adapt_tokens(tokens):
 
 
 kinds = {
+    "Comment.Multiline": Token.Comment.Multiline,
+    "Comment.Singleline": Token.Comment.Singleline,
     "Keyword": Token.Keyword,
     "Keyword.Declaration": Token.Keyword.Declaration,
     "Name": Token.Name,

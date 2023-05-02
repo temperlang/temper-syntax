@@ -5,6 +5,47 @@ from textwrap import dedent
 
 
 class TemperLexerTest(unittest.TestCase):
+    def test_comments(self):
+        lexer = TemperLexer()
+        tokens = lexer.get_tokens(
+            dedent(
+                """
+                let n = 5; // Comment
+                /* Longer /*
+                Comment here. */ let m = n + 5;
+                """
+            )
+        )
+        expected = [
+            (Token.Keyword.Declaration, "let"),
+            (Token.Whitespace, " "),
+            (Token.Name, "n"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "="),
+            (Token.Whitespace, " "),
+            (Token.Literal.Number, "5"),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, " "),
+            (Token.Comment.Singleline, "// Comment"),
+            (Token.Whitespace, "\n"),
+            (Token.Comment.Multiline, "/* Longer /*\nComment here. */"),
+            (Token.Whitespace, " "),
+            (Token.Keyword.Declaration, "let"),
+            (Token.Whitespace, " "),
+            (Token.Name, "m"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "="),
+            (Token.Whitespace, " "),
+            (Token.Name, "n"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "+"),
+            (Token.Whitespace, " "),
+            (Token.Literal.Number, "5"),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, "\n"),
+        ]
+        self.assertEqual(expected, [*tokens])
+
     def test_interp(self):
         lexer = TemperLexer()
         tokens = lexer.get_tokens(
