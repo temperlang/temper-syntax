@@ -1,197 +1,145 @@
 import {
-  ByGroups as ByGroups_147, CommentMultiline as CommentMultiline_155, CommentSingleline as CommentSingleline_157, Include as Include_139, Inherit as Inherit_154, KeywordConstant as KeywordConstant_159, KeywordDeclaration as KeywordDeclaration_160, Keyword as Keyword_158, Kind as Kind_156, NameBuiltin as NameBuiltin_162, NameDecorator as NameDecorator_163, Name as Name_161, Number as Number_164, Operator as Operator_165, Punctuation as Punctuation_166, RuleOption as RuleOption_73, Rule as Rule_108, StringInterpol as StringInterpol_168, StringKind as StringKind_167, TokenKind as TokenKind_146, Using as Using_151, Whitespace as Whitespace_169, bygroups as bygroups_145, include as include_138, inherit as inherit_153, using as using_150
-} from "./pygments.js";
-import {
-  listify as listify_64, mapEntryConstructor as mapEntryConstructor_65, mapConstructor as mapConstructor_66, listJoin as listJoin_67, strCat as strCat_68, requireIsArray as requireIsArray__123
+  listify as listify_63, mapEntryConstructor as mapEntryConstructor_64, mapConstructor as mapConstructor_65, listJoin as listJoin_66, strCat as strCat_67, requireIsArray as requireIsArray__133
 } from "@temperlang/core";
+import {
+  RuleOption as RuleOption_68, Rule as Rule_69, Include as Include_70, include as include_71, Inherit as Inherit_72, TokenKind as TokenKind_73, Kind as Kind_74, ByGroups as ByGroups_75, bygroups as bygroups_76, Using as Using_77, using as using_78, inherit as inherit_79, CommentMultiline as CommentMultiline_80, CommentSingleline as CommentSingleline_81, Keyword as Keyword_82, KeywordConstant as KeywordConstant_83, KeywordDeclaration as KeywordDeclaration_84, Name as Name_85, NameBuiltin as NameBuiltin_86, NameDecorator as NameDecorator_87, Number as Number_88, Operator as Operator_89, Punctuation as Punctuation_90, StringKind as StringKind_91, StringInterpol as StringInterpol_92, Whitespace as Whitespace_93
+} from "./pygments.js";
 export class TemperLexer {
   /** @type {string} */
-  #name_69;
+  #name_94;
   /** @type {Array<string>} */
-  #aliases_70;
+  #aliases_95;
   /** @type {Array<string>} */
-  #filenames_71;
-  /** @type {Map<string, Array<RuleOption_73>>} */
-  #tokens_72;
+  #filenames_96;
+  /** @type {Map<string, Array<RuleOption_68>>} */
+  #tokens_97;
   /**
-   * @param {string} name_74
-   * @param {Array<string>} aliases_75
-   * @param {Array<string>} filenames_76
-   * @param {Map<string, Array<RuleOption_73>>} tokens_77
+   * @param {string} name_98
+   * @param {Array<string>} aliases_99
+   * @param {Array<string>} filenames_100
+   * @param {Map<string, Array<RuleOption_68>>} tokens_101
    */
-  constructor(name_74, aliases_75, filenames_76, tokens_77) {
-    let return_78;
-    let t_79;
-    let t_80;
-    let t_81;
-    let t_82;
-    let t_83;
-    let t_84;
-    let t_85;
-    let t_86;
-    let t_87;
-    let t_88;
-    let t_89;
-    let t_90;
-    let t_91;
-    let t_92;
-    let t_93;
-    let t_94;
-    let t_95;
-    let t_96;
-    let t_97;
-    let t_98;
-    let t_99;
-    let t_100;
-    let t_101;
-    let t_102;
+  constructor(name_98, aliases_99, filenames_100, tokens_101) {
+    let return_102;
     let t_103;
     let t_104;
-    return_78 = void 0;
     let t_105;
     let t_106;
     let t_107;
-    if (!(name_74 !== void 0)) {
-      name_74 = "Temper";
+    let t_108;
+    let t_109;
+    let t_110;
+    let t_111;
+    let t_112;
+    let t_113;
+    let t_114;
+    let t_115;
+    let t_116;
+    let t_117;
+    let t_118;
+    let t_119;
+    let t_120;
+    let t_121;
+    let t_122;
+    let t_123;
+    let t_124;
+    let t_125;
+    let t_126;
+    let t_127;
+    let t_128;
+    return_102 = void 0;
+    let t_129;
+    let t_130;
+    let t_131;
+    if (!(name_98 !== void 0)) {
+      name_98 = "Temper";
     }
-    if (!(aliases_75 !== void 0)) {
-      aliases_75 = listify_64("temper");
+    if (!(aliases_99 !== void 0)) {
+      aliases_99 = listify_63("temper");
     }
-    if (!(filenames_76 !== void 0)) {
-      filenames_76 = listify_64("*.temper");
+    if (!(filenames_100 !== void 0)) {
+      filenames_100 = listify_63("*.temper");
     }
-    if (!(tokens_77 !== void 0)) {
-      t_79 = new Rule_108("\\s+", Whitespace_109);
-      t_89 = new Rule_108("//.*?\u0024", CommentSingleline_110);
-      t_90 = new Rule_108("(?s)/\\*.*\\*/", CommentMultiline_111);
-      t_91 = words_112("false", "NaN", "null", "true", "void");
-      t_104 = new Rule_108(t_91, KeywordConstant_113);
-      t_92 = words_112("class", "interface", "let", "private", "public", "sealed", "var");
-      t_103 = new Rule_108(t_92, KeywordDeclaration_114);
-      t_93 = words_112("do", "else", "export", "extends", "fn", "if", "import", "is", "match", "new", "orelse");
-      t_102 = new Rule_108(t_93, Keyword_115);
-      t_94 = words_112("AnyValue", "Boolean", "Float64", "Function", "Int", "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped", "NoResult", "Null", "String", "StringSlice", "Void");
-      t_101 = new Rule_108(t_94, NameBuiltin_116);
-      t_95 = new Rule_108("\u0022", StringKind_117, "string");
-      t_96 = new Rule_108("[-=+*\u0026|\u003c\u003e]+|/=?", Operator_118);
-      t_97 = new Rule_108("[{}();:.,]", Punctuation_119);
-      t_98 = new Rule_108("\\d+\\.?\\d*|\\.\\d+", Number_120);
-      t_99 = new Rule_108("@[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", NameDecorator_121);
-      t_100 = new Rule_108("[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", Name_122);
+    if (!(tokens_101 !== void 0)) {
+      t_103 = new Rule_69("\\s+", Whitespace_93);
+      t_113 = new Rule_69("//.*?\u0024", CommentSingleline_81);
+      t_114 = new Rule_69("(?s)/\\*.*\\*/", CommentMultiline_80);
+      t_115 = words_132("false", "NaN", "null", "true", "void");
+      t_128 = new Rule_69(t_115, KeywordConstant_83);
+      t_116 = words_132("class", "interface", "let", "private", "public", "sealed", "var");
+      t_127 = new Rule_69(t_116, KeywordDeclaration_84);
+      t_117 = words_132("do", "else", "export", "extends", "fn", "if", "import", "is", "match", "new", "orelse");
+      t_126 = new Rule_69(t_117, Keyword_82);
+      t_118 = words_132("AnyValue", "Boolean", "Float64", "Function", "Int", "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped", "NoResult", "Null", "String", "StringSlice", "Void");
+      t_125 = new Rule_69(t_118, NameBuiltin_86);
+      t_119 = new Rule_69("\u0022", StringKind_91, "string");
+      t_120 = new Rule_69("[-=+*\u0026|\u003c\u003e]+|/=?", Operator_89);
+      t_121 = new Rule_69("[{}();:.,]", Punctuation_90);
+      t_122 = new Rule_69("\\d+\\.?\\d*|\\.\\d+", Number_88);
+      t_123 = new Rule_69("@[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", NameDecorator_87);
+      t_124 = new Rule_69("[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", Name_85);
       {
-        t_105 = requireIsArray__123(listify_64(t_79, t_89, t_90, t_104, t_103, t_102, t_101, t_95, t_96, t_97, t_98, t_99, t_100));
-        t_88 = mapEntryConstructor_65("root", t_105);
-        t_80 = new Rule_108("}", StringInterpol_124, "#pop");
-        t_87 = include_125("root");
-        t_106 = requireIsArray__123(listify_64(t_80, t_87));
-        t_86 = mapEntryConstructor_65("interpolation", t_106);
-        t_81 = new Rule_108("\u0022", StringKind_117, "#pop");
-        t_84 = new Rule_108("\\\u0024\\{", StringInterpol_124, "interpolation");
-        t_85 = new Rule_108("(?:[^\u0022\u0024]|\\\u0024[^{])+", StringKind_117);
-        t_107 = requireIsArray__123(listify_64(t_81, t_84, t_85));
-        t_83 = mapEntryConstructor_65("string", t_107);
-        t_82 = mapConstructor_66(listify_64(t_88, t_86, t_83));
-        tokens_77 = t_82;
+        t_129 = requireIsArray__133(listify_63(t_103, t_113, t_114, t_128, t_127, t_126, t_125, t_119, t_120, t_121, t_122, t_123, t_124));
+        t_112 = mapEntryConstructor_64("root", t_129);
+        t_104 = new Rule_69("}", StringInterpol_92, "#pop");
+        t_111 = include_71("root");
+        t_130 = requireIsArray__133(listify_63(t_104, t_111));
+        t_110 = mapEntryConstructor_64("interpolation", t_130);
+        t_105 = new Rule_69("\u0022", StringKind_91, "#pop");
+        t_108 = new Rule_69("\\\u0024\\{", StringInterpol_92, "interpolation");
+        t_109 = new Rule_69("(?:[^\u0022\u0024]|\\\u0024[^{])+", StringKind_91);
+        t_131 = requireIsArray__133(listify_63(t_105, t_108, t_109));
+        t_107 = mapEntryConstructor_64("string", t_131);
+        t_106 = mapConstructor_65(listify_63(t_112, t_110, t_107));
+        tokens_101 = t_106;
       }
     }
-    this.#name_69 = name_74;
-    this.#aliases_70 = aliases_75;
-    this.#filenames_71 = filenames_76;
-    this.#tokens_72 = tokens_77;
+    this.#name_94 = name_98;
+    this.#aliases_95 = aliases_99;
+    this.#filenames_96 = filenames_100;
+    this.#tokens_97 = tokens_101;
     return;
   }
   /** @returns {string} */
   get name() {
-    let return_127;
-    return_127 = this.#name_69;
-    return return_127;
+    let return_135;
+    return_135 = this.#name_94;
+    return return_135;
   }
   /** @returns {Array<string>} */
   get aliases() {
-    let return_129;
-    return_129 = this.#aliases_70;
-    return return_129;
+    let return_137;
+    return_137 = this.#aliases_95;
+    return return_137;
   }
   /** @returns {Array<string>} */
   get filenames() {
-    let return_131;
-    return_131 = this.#filenames_71;
-    return return_131;
+    let return_139;
+    return_139 = this.#filenames_96;
+    return return_139;
   }
-  /** @returns {Map<string, Array<RuleOption_73>>} */
+  /** @returns {Map<string, Array<RuleOption_68>>} */
   get tokens() {
-    let return_133;
-    return_133 = this.#tokens_72;
-    return return_133;
+    let return_141;
+    return_141 = this.#tokens_97;
+    return return_141;
   }
 };
-/** @type {Type_135} */
-const RuleOption_134 = "RuleOption: Type";
-/** @type {Type_135} */
-const Rule_136 = "Rule: Type";
-/** @type {Type_135} */
-const Include_137 = "Include: Type";
-/** @type {(state: string) => Include_139} */
-const include_125 = include_138;
-/** @type {Type_135} */
-const Inherit_140 = "Inherit: Type";
-/** @type {Type_135} */
-const TokenKind_141 = "TokenKind: Type";
-/** @type {Type_135} */
-const Kind_142 = "Kind: Type";
-/** @type {Type_135} */
-const ByGroups_143 = "ByGroups: Type";
-/** @type {(kinds: Array<TokenKind_146>) => ByGroups_147} */
-const bygroups_144 = bygroups_145;
-/** @type {Type_135} */
-const Using_148 = "Using: Type";
-/** @type {(lexer: string) => Using_151} */
-const using_149 = using_150;
-/** @type {Inherit_154} */
-const inherit_152 = inherit_153;
-/** @type {Kind_156} */
-const CommentMultiline_111 = CommentMultiline_155;
-/** @type {Kind_156} */
-const CommentSingleline_110 = CommentSingleline_157;
-/** @type {Kind_156} */
-const Keyword_115 = Keyword_158;
-/** @type {Kind_156} */
-const KeywordConstant_113 = KeywordConstant_159;
-/** @type {Kind_156} */
-const KeywordDeclaration_114 = KeywordDeclaration_160;
-/** @type {Kind_156} */
-const Name_122 = Name_161;
-/** @type {Kind_156} */
-const NameBuiltin_116 = NameBuiltin_162;
-/** @type {Kind_156} */
-const NameDecorator_121 = NameDecorator_163;
-/** @type {Kind_156} */
-const Number_120 = Number_164;
-/** @type {Kind_156} */
-const Operator_118 = Operator_165;
-/** @type {Kind_156} */
-const Punctuation_119 = Punctuation_166;
-/** @type {Kind_156} */
-const StringKind_117 = StringKind_167;
-/** @type {Kind_156} */
-const StringInterpol_124 = StringInterpol_168;
-/** @type {Kind_156} */
-const Whitespace_109 = Whitespace_169;
 /** @type {string} */
-const nameRegex_170 = "[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*";
+const nameRegex_142 = "[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*";
 /** @returns {string} */
-function words_112(...names_171) {
-  let return_172;
-  function fn_173(x_174) {
-    let return_175;
-    return_175 = x_174;
-    return return_175;
+function words_132(...names_143) {
+  let return_144;
+  function fn_145(x_146) {
+    let return_147;
+    return_147 = x_146;
+    return return_147;
   }
-  let t_176 = fn_173;
-  let t_177 = listJoin_67(names_171, "|", t_176);
-  return_172 = strCat_68("\\b(?:", t_177, ")\\b");
-  return return_172;
+  let t_148 = fn_145;
+  let t_149 = listJoin_66(names_143, "|", t_148);
+  return_144 = strCat_67("\\b(?:", t_149, ")\\b");
+  return return_144;
 }
-/** @type {Type_135} */
-const return_178 = "TemperLexer: Type";
-export default return_178;
+/** @type {Type_151} */
+const return_150 = "TemperLexer: Type";
+export default return_150;

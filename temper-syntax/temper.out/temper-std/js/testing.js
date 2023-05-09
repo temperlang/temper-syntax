@@ -1,65 +1,65 @@
 import {
-  InterfaceType_2
+  InterfaceType_1
 } from "./regex.js";
 import {
-  globalConsole as vGlobalConsole__36_352, strCat as strCat_11, listJoin as listJoin_8, listBuilderAdd as listBuilderAdd_10
+  globalConsole as vGlobalConsole__36_351, strCat as strCat_10, listJoin as listJoin_7, listBuilderAdd as listBuilderAdd_9
 } from "@temperlang/core";
 /**
  * @typedef {{}}
  * TestFixtureBase
  */
-export const TestFixtureBase = new InterfaceType_2("TestFixtureBase", [], [], 1);
+export const TestFixtureBase = new InterfaceType_1("TestFixtureBase", [], [], 1);
 ;
 /** @type {boolean} */
-let passing_353 = true;
+let passing_352 = true;
 /** @type {Array<string>} */
-let t_354 = [];
+let t_353 = [];
 /** @type {Array<string>} */
-let messages_355 = t_354;
+let messages_354 = t_353;
 /**
- * @param {string} name_356
- * @param {() => void} body_357
+ * @param {string} name_355
+ * @param {() => void} body_356
  * @returns {void}
  */
-export function test(name_356, body_357) {
-  let return_358;
+export function test(name_355, body_356) {
+  let return_357;
+  let t_358;
   let t_359;
-  let t_360;
-  return_358 = void 0;
-  passing_353 = true;
-  let t_361 = [];
-  messages_355 = t_361;
-  body_357();
-  if (passing_353) {
-    vGlobalConsole__36_352.log(strCat_11(name_356, ": Passed"));
+  return_357 = void 0;
+  passing_352 = true;
+  let t_360 = [];
+  messages_354 = t_360;
+  body_356();
+  if (passing_352) {
+    vGlobalConsole__36_351.log(strCat_10(name_355, ": Passed"));
   } else {
-    function fn_362(it_363) {
-      let return_364;
-      return_364 = it_363;
-      return return_364;
+    function fn_361(it_362) {
+      let return_363;
+      return_363 = it_362;
+      return return_363;
     }
-    t_359 = fn_362;
-    t_360 = listJoin_8(messages_355, "\n", t_359);
-    vGlobalConsole__36_352.log(strCat_11(name_356, ": Failed ", t_360));
+    t_358 = fn_361;
+    t_359 = listJoin_7(messages_354, "\n", t_358);
+    vGlobalConsole__36_351.log(strCat_10(name_355, ": Failed ", t_359));
   }
-  return return_358;
+  return return_357;
 };
 /**
- * @param {boolean} success_365
- * @param {() => string} message_366
+ * @param {boolean} success_364
+ * @param {() => string} message_365
  * @returns {void}
  */
-export function assert(success_365, message_366) {
-  let return_367;
-  let t_368;
-  return_367 = void 0;
-  if (! success_365) {
-    passing_353 = false;
-    t_368 = message_366();
-    listBuilderAdd_10(messages_355, t_368);
+export function assert(success_364, message_365) {
+  let return_366;
+  let t_367;
+  return_366 = void 0;
+  if (! success_364) {
+    passing_352 = false;
+    t_367 = message_365();
+    listBuilderAdd_9(messages_354, t_367);
   }
-  return return_367;
+  return return_366;
 };
 /** @type {void} */
-const return_369 = void 0;
-export default return_369;
+const return_368 = void 0;
+export default return_368;

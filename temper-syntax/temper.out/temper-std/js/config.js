@@ -11,5 +11,5 @@ export const license = "Apache-2.0";
 export const jsName = "@temperlang/std";
 ;
 /** @type {void} */
-const return_0 = void 0;
-export default return_0;
+const return_369 = void 0;
+export default return_369;

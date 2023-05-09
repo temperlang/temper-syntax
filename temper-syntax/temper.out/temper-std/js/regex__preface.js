@@ -1,3 +1,3 @@
 /** @type {void} */
-const return_1 = void 0;
-export default return_1;
+const return_0 = void 0;
+export default return_0;

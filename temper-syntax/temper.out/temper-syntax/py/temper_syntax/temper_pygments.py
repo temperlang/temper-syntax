@@ -1,7 +1,8 @@
 from temper_core import TemperObject as TemperObject0, cast_by_type as cast_by_type5, MapEntry as MapEntry_255, map_constructor as map_constructor_256, list_join as list_join_257, str_cat as str_cat_258
 from typing import Tuple as Tuple3, Any as Any1, Callable as Callable6
 from builtins import tuple as tuple4
-from temper_syntax.pygments import RuleOption, Rule, Include, include, bygroups, TokenKind, ByGroups, using, Using, inherit, Inherit, CommentMultiline, Kind, CommentSingleline, Keyword, KeywordConstant, KeywordDeclaration, Name, NameBuiltin, NameDecorator, Number, Operator, Punctuation, StringKind, StringInterpol, Whitespace
+from temper_syntax.pygments import RuleOption, Rule, Include
+from temper_syntax.pygments import RuleOption as RuleOption__7, Rule as Rule__8, Include as Include__9, include as include__10, Inherit as Inherit__11, TokenKind as TokenKind__12, Kind as Kind__13, ByGroups as ByGroups__14, bygroups as bygroups__15, Using as Using__16, using as using__17, inherit as inherit__18, CommentMultiline as CommentMultiline__19, CommentSingleline as CommentSingleline__20, Keyword as Keyword__21, KeywordConstant as KeywordConstant__22, KeywordDeclaration as KeywordDeclaration__23, Name as Name__24, NameBuiltin as NameBuiltin__25, NameDecorator as NameDecorator__26, Number as Number__27, Operator as Operator__28, Punctuation as Punctuation__29, StringKind as StringKind__30, StringInterpol as StringInterpol__31, Whitespace as Whitespace__32
 class TemperLexer(TemperObject0):
   name__37: 'str'
   aliases__38: 'Tuple3[str, ...]'
@@ -112,32 +113,6 @@ class TemperLexer(TemperObject0):
     return__61: 'Map__16[str, (Tuple3[RuleOption, ...])]'
     return__61 = this__60.tokens__40
     return return__61
-RuleOption__7: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: RuleOption: Type>>', NotImplemented)[1]
-Rule__8: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Rule: Type>>', NotImplemented)[1]
-Include__9: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Include: Type>>', NotImplemented)[1]
-include__10: 'Callable6[[str], Include]' = include
-Inherit__11: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Inherit: Type>>', NotImplemented)[1]
-TokenKind__12: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: TokenKind: Type>>', NotImplemented)[1]
-Kind__13: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Kind: Type>>', NotImplemented)[1]
-ByGroups__14: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: ByGroups: Type>>', NotImplemented)[1]
-bygroups__15: 'Callable6[[Tuple3[TokenKind, ...]], ByGroups]' = bygroups
-Using__16: 'Any1' = ('<<lang.temper.value.TypeTag<out kotlin.Any>: Type, lang.temper.value.Value<*>: Using: Type>>', NotImplemented)[1]
-using__17: 'Callable6[[str], Using]' = using
-inherit__18: 'Inherit' = inherit
-CommentMultiline__19: 'Kind' = CommentMultiline
-CommentSingleline__20: 'Kind' = CommentSingleline
-Keyword__21: 'Kind' = Keyword
-KeywordConstant__22: 'Kind' = KeywordConstant
-KeywordDeclaration__23: 'Kind' = KeywordDeclaration
-Name__24: 'Kind' = Name
-NameBuiltin__25: 'Kind' = NameBuiltin
-NameDecorator__26: 'Kind' = NameDecorator
-Number__27: 'Kind' = Number
-Operator__28: 'Kind' = Operator
-Punctuation__29: 'Kind' = Punctuation
-StringKind__30: 'Kind' = StringKind
-StringInterpol__31: 'Kind' = StringInterpol
-Whitespace__32: 'Kind' = Whitespace
 nameRegex__33: 'str' = '[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*'
 def words__6(*names__34: 'str') -> 'str':
   global list_join_257, str_cat_258
