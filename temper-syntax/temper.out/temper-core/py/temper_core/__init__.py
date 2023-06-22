@@ -853,7 +853,7 @@ def map_builder_to_map(builder):
 # trick if we ever want to go there: https://stackoverflow.com/a/58621986
 # For vscode, at least, I had to adjust that example to repeat the fields in
 # the generic subclass, and I had to explicitly type the variable.
-MapEntry = namedtuple("MapEntry", ["key", "value"])
+Pair = namedtuple("Pair", ["key", "value"])
 
 
 _missing = object()
@@ -867,7 +867,7 @@ def mapped_get(map, key):
 
 
 def mapped_to_list(map):
-    return tuple(MapEntry(*item) for item in map.items())
+    return tuple(Pair(*item) for item in map.items())
 
 
 ## Utility functions

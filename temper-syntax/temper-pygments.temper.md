@@ -39,7 +39,7 @@ Main thing, though, is the list of rules for definition tokens.
 
 ### Root
 
-        new MapEntry("root", [
+        new Pair("root", [
           new Rule(raw"\s+", Whitespace),
           new Rule("//.*?$", CommentSingleline),
 
@@ -81,7 +81,7 @@ Multiline comments in Temper don't nest at present, so this should be fine.
 
 ### Strings
 
-        new MapEntry("interpolation", [
+        new Pair("interpolation", [
           new Rule("}", StringInterpol, "#pop"),
           include("root"),
         ].as<List<RuleOption>>()),
@@ -89,7 +89,7 @@ Multiline comments in Temper don't nest at present, so this should be fine.
 I'm not sure if order matters here. Seems simpler, but if I don't exclude `${`
 from core string chars, I don't get interp.
 
-        new MapEntry("string", [
+        new Pair("string", [
           new Rule("\"", StringKind, "#pop"),
           new Rule(raw"\$\{", StringInterpol, "interpolation"),
           new Rule("(?:[^\"$]|\\$[^{])+", StringKind),

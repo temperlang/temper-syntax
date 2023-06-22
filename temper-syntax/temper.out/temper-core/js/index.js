@@ -636,8 +636,8 @@ export function mapBuilderSet(builder, key, value) {
 export function mapBuilderToMap(builder) {
   return Object.freeze(new FreezeMap(builder));
 }
-// MapEntry
-class MapEntry {
+// Pair
+class Pair {
   constructor(key, value) {
     this.key = key;
     this.value = value;
@@ -652,8 +652,8 @@ class MapEntry {
     return 2;
   }
 }
-export function mapEntryConstructor(key, value) {
-  return Object.freeze(new MapEntry(key, value));
+export function pairConstructor(key, value) {
+  return Object.freeze(new Pair(key, value));
 }
 // Mapped
 export function mappedGet(map, key) {
@@ -666,7 +666,7 @@ export function mappedGet(map, key) {
   return result;
 }
 export function mappedToList(map) {
-  return Array.from(map, ([key, value]) => new MapEntry(key, value));
+  return Array.from(map, ([key, value]) => new Pair(key, value));
 }
 
 // Implements extension method Deque::constructor

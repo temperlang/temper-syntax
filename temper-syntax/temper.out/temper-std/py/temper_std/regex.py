@@ -1,7 +1,7 @@
-from temper_core import TemperObject as TemperObject0, cast_by_type as cast_by_type7, Label as Label9, NoResultException as NoResultException10, isinstance_int as isinstance_int11, cast_by_test as cast_by_test12, list_join as list_join_1214, generic_eq as generic_eq_1216, list_builder_add as list_builder_add_1217, string_code_points as string_code_points_1220, bool_not as bool_not_1221, list_get as list_get_1225, int_to_string as int_to_string_1231, str_cat as str_cat_1232
+from temper_core import TemperObject as TemperObject0, cast_by_type as cast_by_type7, Label as Label9, NoResultException as NoResultException10, isinstance_int as isinstance_int11, cast_by_test as cast_by_test12, list_join as list_join_1214, generic_eq as generic_eq_1217, list_builder_add as list_builder_add_1218, string_code_points as string_code_points_1221, bool_not as bool_not_1222, list_get as list_get_1228, int_to_string as int_to_string_1238, str_cat as str_cat_1239
 from typing import Union as Union1, NoReturn as NoReturn2, Callable as Callable3, Any as Any4, Tuple as Tuple5, List as List6
-from builtins import Exception as Exception8, len as len_1224, list as list_1235
-from temper_core.regex import compiled_regex_compile_formatted as compiled_regex_compile_formatted_1210, compiled_regex_compiled_found as compiled_regex_compiled_found_1211, compiled_regex_compiled_find as compiled_regex_compiled_find_1212, compiled_regex_compiled_replace as compiled_regex_compiled_replace_1213, regex_formatter_push_capture_name as regex_formatter_push_capture_name_1218, regex_formatter_push_code_to as regex_formatter_push_code_to_1219
+from builtins import Exception as Exception8, len as len_1227, list as list_1244
+from temper_core.regex import compiled_regex_compile_formatted as compiled_regex_compile_formatted_1210, compiled_regex_compiled_found as compiled_regex_compiled_found_1211, compiled_regex_compiled_find as compiled_regex_compiled_find_1212, compiled_regex_compiled_replace as compiled_regex_compiled_replace_1213, regex_formatter_push_capture_name as regex_formatter_push_capture_name_1219, regex_formatter_push_code_to as regex_formatter_push_code_to_1220
 class Regex(TemperObject0):
   __slots__ = ()
   def compiled(this__8) -> 'CompiledRegex':
@@ -343,12 +343,12 @@ class RegexFormatter__29(TemperObject0):
       t_755 = True
     except Exception8:
       t_755 = False
-    with Label9() as s_1215:
+    with Label9() as s__1215_1216:
       if t_755:
         try:
           t_756 = cast_by_type7(regex__233, Capture)
         except Exception8:
-          s_1215.break_()
+          s__1215_1216.break_()
         this__31.pushCapture__235(t_756)
       else:
         try:
@@ -360,7 +360,7 @@ class RegexFormatter__29(TemperObject0):
           try:
             t_760 = cast_by_type7(regex__233, CodePoints)
           except Exception8:
-            s_1215.break_()
+            s__1215_1216.break_()
           this__31.pushCodePoints__251(t_760, False)
         else:
           try:
@@ -372,7 +372,7 @@ class RegexFormatter__29(TemperObject0):
             try:
               t_764 = cast_by_type7(regex__233, CodeRange)
             except Exception8:
-              s_1215.break_()
+              s__1215_1216.break_()
             this__31.pushCodeRange__256(t_764)
           else:
             try:
@@ -384,7 +384,7 @@ class RegexFormatter__29(TemperObject0):
               try:
                 t_768 = cast_by_type7(regex__233, CodeSet)
               except Exception8:
-                s_1215.break_()
+                s__1215_1216.break_()
               this__31.pushCodeSet__262(t_768)
             else:
               try:
@@ -396,7 +396,7 @@ class RegexFormatter__29(TemperObject0):
                 try:
                   t_772 = cast_by_type7(regex__233, Or)
                 except Exception8:
-                  s_1215.break_()
+                  s__1215_1216.break_()
                 this__31.pushOr__274(t_772)
               else:
                 try:
@@ -408,7 +408,7 @@ class RegexFormatter__29(TemperObject0):
                   try:
                     t_776 = cast_by_type7(regex__233, Repeat)
                   except Exception8:
-                    s_1215.break_()
+                    s__1215_1216.break_()
                   this__31.pushRepeat__278(t_776)
                 else:
                   try:
@@ -420,43 +420,43 @@ class RegexFormatter__29(TemperObject0):
                     try:
                       t_780 = cast_by_type7(regex__233, Sequence)
                     except Exception8:
-                      s_1215.break_()
+                      s__1215_1216.break_()
                     this__31.pushSequence__283(t_780)
-                  elif generic_eq_1216(regex__233, Begin):
+                  elif generic_eq_1217(regex__233, begin):
                     try:
-                      list_builder_add_1217(this__31.out__227, '^')
+                      list_builder_add_1218(this__31.out__227, '^')
                     except Exception8:
-                      s_1215.break_()
-                  elif generic_eq_1216(regex__233, Dot):
+                      s__1215_1216.break_()
+                  elif generic_eq_1217(regex__233, dot):
                     try:
-                      list_builder_add_1217(this__31.out__227, '.')
+                      list_builder_add_1218(this__31.out__227, '.')
                     except Exception8:
-                      s_1215.break_()
-                  elif generic_eq_1216(regex__233, End):
+                      s__1215_1216.break_()
+                  elif generic_eq_1217(regex__233, end):
                     try:
-                      list_builder_add_1217(this__31.out__227, '$')
+                      list_builder_add_1218(this__31.out__227, '$')
                     except Exception8:
-                      s_1215.break_()
-                  elif generic_eq_1216(regex__233, WordBoundary):
+                      s__1215_1216.break_()
+                  elif generic_eq_1217(regex__233, word_boundary):
                     try:
-                      list_builder_add_1217(this__31.out__227, '\\b')
+                      list_builder_add_1218(this__31.out__227, '\\b')
                     except Exception8:
-                      s_1215.break_()
-                  elif generic_eq_1216(regex__233, Digit):
+                      s__1215_1216.break_()
+                  elif generic_eq_1217(regex__233, digit):
                     try:
-                      list_builder_add_1217(this__31.out__227, '\\d')
+                      list_builder_add_1218(this__31.out__227, '\\d')
                     except Exception8:
-                      s_1215.break_()
-                  elif generic_eq_1216(regex__233, Space):
+                      s__1215_1216.break_()
+                  elif generic_eq_1217(regex__233, space):
                     try:
-                      list_builder_add_1217(this__31.out__227, '\\s')
+                      list_builder_add_1218(this__31.out__227, '\\s')
                     except Exception8:
-                      s_1215.break_()
-                  elif generic_eq_1216(regex__233, Word):
+                      s__1215_1216.break_()
+                  elif generic_eq_1217(regex__233, word):
                     try:
-                      list_builder_add_1217(this__31.out__227, '\\w')
+                      list_builder_add_1218(this__31.out__227, '\\w')
                     except Exception8:
-                      s_1215.break_()
+                      s__1215_1216.break_()
       return return__102
     raise NoResultException10()
   def pushCapture__235(this__32, capture__236: 'Capture') -> 'None':
@@ -465,18 +465,18 @@ class RegexFormatter__29(TemperObject0):
     t_1108: 'Regex'
     return__103 = None
     t_750: 'List6[str]'
-    list_builder_add_1217(this__32.out__227, '(')
+    list_builder_add_1218(this__32.out__227, '(')
     t_750 = this__32.out__227
     t_1106 = capture__236.name
-    regex_formatter_push_capture_name_1218(this__32, t_750, t_1106)
+    regex_formatter_push_capture_name_1219(this__32, t_750, t_1106)
     t_1108 = capture__236.item
     this__32.pushRegex__232(t_1108)
-    list_builder_add_1217(this__32.out__227, ')')
+    list_builder_add_1218(this__32.out__227, ')')
     return return__103
   def pushCode__242(this__34, code__243: 'int', insideCodeSet__244: 'bool') -> 'None':
     return__105: 'None'
     return__105 = None
-    regex_formatter_push_code_to_1219(this__34, this__34.out__227, code__243, insideCodeSet__244)
+    regex_formatter_push_code_to_1220(this__34, this__34.out__227, code__243, insideCodeSet__244)
     return return__105
   def pushCodePoints__251(this__36, codePoints__252: 'CodePoints', insideCodeSet__253: 'bool') -> 'None':
     return__107: 'None'
@@ -485,11 +485,11 @@ class RegexFormatter__29(TemperObject0):
     t_1098: 'Any4'
     return__107 = None
     t_1095: 'str' = codePoints__252.value
-    t_1100: 'Any4' = string_code_points_1220(t_1095)
+    t_1100: 'Any4' = string_code_points_1221(t_1095)
     slice__255: 'Any4' = t_1100
     while True:
       t_1096 = slice__255.is_empty
-      if bool_not_1221(t_1096):
+      if bool_not_1222(t_1096):
         t_1097 = slice__255.read()
         this__36.pushCode__242(t_1097, insideCodeSet__253)
         t_1098 = slice__255.advance(1)
@@ -500,9 +500,9 @@ class RegexFormatter__29(TemperObject0):
   def pushCodeRange__256(this__37, codeRange__257: 'CodeRange') -> 'None':
     return__108: 'None'
     return__108 = None
-    list_builder_add_1217(this__37.out__227, '[')
+    list_builder_add_1218(this__37.out__227, '[')
     this__37.pushCodeRangeUnwrapped__259(codeRange__257)
-    list_builder_add_1217(this__37.out__227, ']')
+    list_builder_add_1218(this__37.out__227, ']')
     return return__108
   def pushCodeRangeUnwrapped__259(this__38, codeRange__260: 'CodeRange') -> 'None':
     return__109: 'None'
@@ -510,7 +510,7 @@ class RegexFormatter__29(TemperObject0):
     return__109 = None
     t_1088: 'int' = codeRange__260.min
     this__38.pushCode__242(t_1088, True)
-    list_builder_add_1217(this__38.out__227, '-')
+    list_builder_add_1218(this__38.out__227, '-')
     t_1090 = codeRange__260.max
     this__38.pushCode__242(t_1090, True)
     return return__109
@@ -531,37 +531,37 @@ class RegexFormatter__29(TemperObject0):
       t_720 = True
     except Exception8:
       t_720 = False
-    with Label9() as s_1222:
+    with Label9() as s__1223_1225:
       if t_720:
-        with Label9() as s_1223:
+        with Label9() as s__1224_1226:
           try:
             t_721 = cast_by_type7(adjusted__265, CodeSet)
-            list_builder_add_1217(this__39.out__227, '[')
+            list_builder_add_1218(this__39.out__227, '[')
           except Exception8:
-            s_1223.break_()
+            s__1224_1226.break_()
           t_1086 = t_721.negated
           if t_1086:
             try:
-              list_builder_add_1217(this__39.out__227, '^')
+              list_builder_add_1218(this__39.out__227, '^')
             except Exception8:
-              s_1223.break_()
+              s__1224_1226.break_()
           i__266: 'int' = 0
           while True:
             t_1082 = t_721.items
-            t_1085 = len_1224(t_1082)
+            t_1085 = len_1227(t_1082)
             if i__266 < t_1085:
               t_1083 = t_721.items
               try:
-                t_727 = list_get_1225(t_1083, i__266)
+                t_727 = list_get_1228(t_1083, i__266)
               except Exception8:
-                s_1223.break_()
+                s__1224_1226.break_()
               this__39.pushCodeSetItem__271(t_727)
               i__266 = i__266 + 1
             else:
               break
           try:
-            list_builder_add_1217(this__39.out__227, ']')
-            s_1222.break_()
+            list_builder_add_1218(this__39.out__227, ']')
+            s__1223_1225.break_()
           except Exception8:
             pass
         raise NoResultException10()
@@ -585,12 +585,12 @@ class RegexFormatter__29(TemperObject0):
       t_707 = True
     except Exception8:
       t_707 = False
-    with Label9() as s_1226:
+    with Label9() as s__1229_1230:
       if t_707:
         try:
           t_708 = cast_by_type7(codePart__272, CodePoints)
         except Exception8:
-          s_1226.break_()
+          s__1229_1230.break_()
         this__41.pushCodePoints__251(t_708, True)
       else:
         try:
@@ -602,7 +602,7 @@ class RegexFormatter__29(TemperObject0):
           try:
             t_712 = cast_by_type7(codePart__272, CodeRange)
           except Exception8:
-            s_1226.break_()
+            s__1229_1230.break_()
           this__41.pushCodeRangeUnwrapped__259(t_712)
         else:
           try:
@@ -614,7 +614,7 @@ class RegexFormatter__29(TemperObject0):
             try:
               t_716 = cast_by_type7(codePart__272, SpecialSet)
             except Exception8:
-              s_1226.break_()
+              s__1229_1230.break_()
             this__41.pushRegex__232(t_716)
       return return__112
     raise NoResultException10()
@@ -629,35 +629,35 @@ class RegexFormatter__29(TemperObject0):
     t_702: 'Regex'
     t_1066: 'Tuple5[Regex, ...]' = or__275.items
     t_1073: 'bool' = not t_1066
-    with Label9() as s_1228:
-      if bool_not_1221(t_1073):
-        with Label9() as s_1229:
+    with Label9() as s__1231_1234:
+      if bool_not_1222(t_1073):
+        with Label9() as s__1232_1235:
           try:
-            list_builder_add_1217(this__42.out__227, '(?:')
+            list_builder_add_1218(this__42.out__227, '(?:')
             t_1071 = or__275.items
-            t_697 = list_get_1225(t_1071, 0)
+            t_697 = list_get_1228(t_1071, 0)
           except Exception8:
-            s_1229.break_()
+            s__1232_1235.break_()
           this__42.pushRegex__232(t_697)
           i__277: 'int' = 1
           while True:
             t_1067 = or__275.items
-            t_1070 = len_1224(t_1067)
+            t_1070 = len_1227(t_1067)
             if i__277 < t_1070:
               try:
-                list_builder_add_1217(this__42.out__227, '|')
+                list_builder_add_1218(this__42.out__227, '|')
                 t_1068 = or__275.items
-                t_702 = list_get_1225(t_1068, i__277)
+                t_702 = list_get_1228(t_1068, i__277)
               except Exception8:
                 break
               this__42.pushRegex__232(t_702)
               i__277 = i__277 + 1
             else:
               try:
-                list_builder_add_1217(this__42.out__227, ')')
+                list_builder_add_1218(this__42.out__227, ')')
               except Exception8:
-                s_1229.break_()
-              s_1228.break_()
+                s__1232_1235.break_()
+              s__1231_1234.break_()
         raise NoResultException10()
     return return__113
   def pushRepeat__278(this__43, repeat__279: 'Repeat') -> 'None':
@@ -675,18 +675,18 @@ class RegexFormatter__29(TemperObject0):
     t_684: 'List6[str]'
     t_685: 'int'
     t_687: 'List6[str]'
-    with Label9() as s_1230:
+    with Label9() as s__1236_1237:
       min__281: 'int'
       try:
-        list_builder_add_1217(this__43.out__227, '(?:')
+        list_builder_add_1218(this__43.out__227, '(?:')
         t_1059 = repeat__279.item
         this__43.pushRegex__232(t_1059)
-        list_builder_add_1217(this__43.out__227, ')')
+        list_builder_add_1218(this__43.out__227, ')')
         t_1061 = repeat__279.min
         min__281 = t_1061
         t_676 = repeat__279.max
       except Exception8:
-        s_1230.break_()
+        s__1236_1237.break_()
       max__282: 'Union1[int, None]' = t_676
       if min__281 == 0:
         t_677 = max__282 == 1
@@ -694,9 +694,9 @@ class RegexFormatter__29(TemperObject0):
         t_677 = False
       if t_677:
         try:
-          list_builder_add_1217(this__43.out__227, '?')
+          list_builder_add_1218(this__43.out__227, '?')
         except Exception8:
-          s_1230.break_()
+          s__1236_1237.break_()
       else:
         if min__281 == 0:
           t_679 = max__282 == None
@@ -704,9 +704,9 @@ class RegexFormatter__29(TemperObject0):
           t_679 = False
         if t_679:
           try:
-            list_builder_add_1217(this__43.out__227, '*')
+            list_builder_add_1218(this__43.out__227, '*')
           except Exception8:
-            s_1230.break_()
+            s__1236_1237.break_()
         else:
           if min__281 == 1:
             t_681 = max__282 == None
@@ -714,39 +714,39 @@ class RegexFormatter__29(TemperObject0):
             t_681 = False
           if t_681:
             try:
-              list_builder_add_1217(this__43.out__227, '+')
+              list_builder_add_1218(this__43.out__227, '+')
             except Exception8:
-              s_1230.break_()
+              s__1236_1237.break_()
           else:
             t_684 = this__43.out__227
-            t_1062 = int_to_string_1231(min__281)
+            t_1062 = int_to_string_1238(min__281)
             try:
-              list_builder_add_1217(t_684, str_cat_1232('{', t_1062))
+              list_builder_add_1218(t_684, str_cat_1239('{', t_1062))
             except Exception8:
-              s_1230.break_()
+              s__1236_1237.break_()
             if min__281 != max__282:
               try:
-                list_builder_add_1217(this__43.out__227, ',')
+                list_builder_add_1218(this__43.out__227, ',')
               except Exception8:
-                s_1230.break_()
+                s__1236_1237.break_()
               if max__282 != None:
                 t_687 = this__43.out__227
                 try:
                   t_685 = cast_by_test12(max__282, isinstance_int11)
-                  t_1063 = int_to_string_1231(t_685)
-                  list_builder_add_1217(t_687, t_1063)
+                  t_1063 = int_to_string_1238(t_685)
+                  list_builder_add_1218(t_687, t_1063)
                 except Exception8:
-                  s_1230.break_()
+                  s__1236_1237.break_()
             try:
-              list_builder_add_1217(this__43.out__227, '}')
+              list_builder_add_1218(this__43.out__227, '}')
             except Exception8:
-              s_1230.break_()
+              s__1236_1237.break_()
       t_1064 = repeat__279.reluctant
       if t_1064:
         try:
-          list_builder_add_1217(this__43.out__227, '?')
+          list_builder_add_1218(this__43.out__227, '?')
         except Exception8:
-          s_1230.break_()
+          s__1236_1237.break_()
       return return__114
     raise NoResultException10()
   def pushSequence__283(this__44, sequence__284: 'Sequence') -> 'None':
@@ -757,20 +757,20 @@ class RegexFormatter__29(TemperObject0):
     return__115 = None
     t_670: 'Regex'
     i__286: 'int' = 0
-    with Label9() as s_1233:
+    with Label9() as s__1240_1241:
       while True:
         t_1054 = sequence__284.items
-        t_1057 = len_1224(t_1054)
+        t_1057 = len_1227(t_1054)
         if i__286 < t_1057:
           t_1055 = sequence__284.items
           try:
-            t_670 = list_get_1225(t_1055, i__286)
+            t_670 = list_get_1228(t_1055, i__286)
           except Exception8:
             break
           this__44.pushRegex__232(t_670)
           i__286 = i__286 + 1
         else:
-          s_1233.break_()
+          s__1240_1241.break_()
       raise NoResultException10()
     return return__115
   def max_code(this__45, codePart__288: 'CodePart') -> 'Union1[int, None]':
@@ -800,12 +800,12 @@ class RegexFormatter__29(TemperObject0):
       t_643 = True
     except Exception8:
       t_643 = False
-    with Label9() as s_1234:
+    with Label9() as s__1242_1243:
       if t_643:
         try:
           t_644 = cast_by_type7(codePart__288, CodePoints)
         except Exception8:
-          s_1234.break_()
+          s__1242_1243.break_()
         t_1044 = t_644.value
         value__290: 'str' = t_1044
         t_1045 = not value__290
@@ -813,11 +813,11 @@ class RegexFormatter__29(TemperObject0):
           t_652 = None
         else:
           max__291: 'int' = 0
-          t_1046 = string_code_points_1220(value__290)
+          t_1046 = string_code_points_1221(value__290)
           slice__292: 'Any4' = t_1046
           while True:
             t_1047 = slice__292.is_empty
-            if bool_not_1221(t_1047):
+            if bool_not_1222(t_1047):
               t_1048 = slice__292.read()
               next__293: 'int' = t_1048
               if next__293 > max__291:
@@ -839,19 +839,19 @@ class RegexFormatter__29(TemperObject0):
           try:
             t_657 = cast_by_type7(codePart__288, CodeRange)
           except Exception8:
-            s_1234.break_()
+            s__1242_1243.break_()
           t_1050 = t_657.max
           t_666 = t_1050
-        elif generic_eq_1216(codePart__288, Digit):
-          t_1041 = string_code_points_1220('9')
+        elif generic_eq_1217(codePart__288, digit):
+          t_1041 = string_code_points_1221('9')
           t_1051 = t_1041.read()
           t_666 = t_1051
-        elif generic_eq_1216(codePart__288, Space):
-          t_1042 = string_code_points_1220(' ')
+        elif generic_eq_1217(codePart__288, space):
+          t_1042 = string_code_points_1221(' ')
           t_1052 = t_1042.read()
           t_666 = t_1052
-        elif generic_eq_1216(codePart__288, Word):
-          t_1043 = string_code_points_1220('z')
+        elif generic_eq_1217(codePart__288, word):
+          t_1043 = string_code_points_1221('z')
           t_1053 = t_1043.read()
           t_666 = t_1053
         else:
@@ -868,7 +868,7 @@ class RegexFormatter__29(TemperObject0):
     t_1037: 'List6[str]'
     return__100 = None
     if out__295 is ...:
-      t_1037 = list_1235()
+      t_1037 = list_1244()
       out__295 = t_1037
     this__98.out__227 = out__295
     return return__100
@@ -884,7 +884,7 @@ class Begin__12(Special):
   def __init__(this__54) -> None:
     this__54.constructor__137()
 t_1202: 'Begin__12' = Begin__12()
-Begin: 'Begin__12' = t_1202
+begin: 'Begin__12' = t_1202
 class Dot__13(Special):
   __slots__ = ()
   def constructor__138(this__56) -> Any4:
@@ -894,7 +894,7 @@ class Dot__13(Special):
   def __init__(this__56) -> None:
     this__56.constructor__138()
 t_1203: 'Dot__13' = Dot__13()
-Dot: 'Dot__13' = t_1203
+dot: 'Dot__13' = t_1203
 class End__14(Special):
   __slots__ = ()
   def constructor__139(this__58) -> Any4:
@@ -904,7 +904,7 @@ class End__14(Special):
   def __init__(this__58) -> None:
     this__58.constructor__139()
 t_1204: 'End__14' = End__14()
-End: 'End__14' = t_1204
+end: 'End__14' = t_1204
 class WordBoundary__15(Special):
   __slots__ = ()
   def constructor__140(this__60) -> Any4:
@@ -914,7 +914,7 @@ class WordBoundary__15(Special):
   def __init__(this__60) -> None:
     this__60.constructor__140()
 t_1205: 'WordBoundary__15' = WordBoundary__15()
-WordBoundary: 'WordBoundary__15' = t_1205
+word_boundary: 'WordBoundary__15' = t_1205
 class Digit__16(SpecialSet):
   __slots__ = ()
   def constructor__141(this__62) -> Any4:
@@ -924,7 +924,7 @@ class Digit__16(SpecialSet):
   def __init__(this__62) -> None:
     this__62.constructor__141()
 t_1206: 'Digit__16' = Digit__16()
-Digit: 'Digit__16' = t_1206
+digit: 'Digit__16' = t_1206
 class Space__17(SpecialSet):
   __slots__ = ()
   def constructor__142(this__64) -> Any4:
@@ -934,7 +934,7 @@ class Space__17(SpecialSet):
   def __init__(this__64) -> None:
     this__64.constructor__142()
 t_1207: 'Space__17' = Space__17()
-Space: 'Space__17' = t_1207
+space: 'Space__17' = t_1207
 class Word__18(SpecialSet):
   __slots__ = ()
   def constructor__143(this__66) -> Any4:
@@ -944,11 +944,11 @@ class Word__18(SpecialSet):
   def __init__(this__66) -> None:
     this__66.constructor__143()
 t_1208: 'Word__18' = Word__18()
-Word: 'Word__18' = t_1208
+word: 'Word__18' = t_1208
 def entire(item__166: 'Regex') -> 'Regex':
-  global Begin, End
+  global begin, end
   return__79: 'Regex'
-  t_1165: 'Regex' = Sequence((Begin, item__166, End))
+  t_1165: 'Regex' = Sequence((begin, item__166, end))
   return__79 = t_1165
   return return__79
 def one_or_more(item__168: 'Regex', reluctant: 'bool' = ...) -> 'Repeat':

@@ -5,13 +5,14 @@ description = ""
 readme = ""
 requires-python = "~=3.8"
 license = {text = ""}
-authors = [ ]
+authors = [  ]
+
 maintainers = [ ]
 keywords = [ ]
 classifiers = [ ]
 urls = { }
 dependencies = [
-    "temper-core == 0.0.3"
+    "temper-core == 0.0.5"
 ]
 
 [project.scripts]
@@ -26,13 +27,14 @@ name = "temper-syntax"
 version = "0.0.1"
 license = ""
 description = ""
-authors = [ ]
+authors = [  ]
+
 packages = [{ include = "temper_syntax" }]
 include = ["temper_syntax/**/*", "./**/*.so"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-temper-core = "0.0.3"
+temper-core = "0.0.5"
 
 [build-system]
 requires = ["poetry_core>=1.0.0"]
@@ -41,5 +43,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 python_functions = "test_[!_]*"
 python_files = "test_*.py"
-python_classes = "*"
+python_classes = "Test__*"
 testpaths = ["tests"]

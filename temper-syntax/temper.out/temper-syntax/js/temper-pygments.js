@@ -1,5 +1,5 @@
 import {
-  listify as listify_63, mapEntryConstructor as mapEntryConstructor_64, mapConstructor as mapConstructor_65, listJoin as listJoin_66, strCat as strCat_67, requireIsArray as requireIsArray__133
+  listify as listify_63, pairConstructor as pairConstructor_64, mapConstructor as mapConstructor_65, listJoin as listJoin_66, strCat as strCat_67, requireIsArray as requireIsArray__133
 } from "@temperlang/core";
 import {
   RuleOption as RuleOption_68, Rule as Rule_69, Include as Include_70, include as include_71, Inherit as Inherit_72, TokenKind as TokenKind_73, Kind as Kind_74, ByGroups as ByGroups_75, bygroups as bygroups_76, Using as Using_77, using as using_78, inherit as inherit_79, CommentMultiline as CommentMultiline_80, CommentSingleline as CommentSingleline_81, Keyword as Keyword_82, KeywordConstant as KeywordConstant_83, KeywordDeclaration as KeywordDeclaration_84, Name as Name_85, NameBuiltin as NameBuiltin_86, NameDecorator as NameDecorator_87, Number as Number_88, Operator as Operator_89, Punctuation as Punctuation_90, StringKind as StringKind_91, StringInterpol as StringInterpol_92, Whitespace as Whitespace_93
@@ -80,16 +80,16 @@ export class TemperLexer {
       t_124 = new Rule_69("[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*", Name_85);
       {
         t_129 = requireIsArray__133(listify_63(t_103, t_113, t_114, t_128, t_127, t_126, t_125, t_119, t_120, t_121, t_122, t_123, t_124));
-        t_112 = mapEntryConstructor_64("root", t_129);
+        t_112 = pairConstructor_64("root", t_129);
         t_104 = new Rule_69("}", StringInterpol_92, "#pop");
         t_111 = include_71("root");
         t_130 = requireIsArray__133(listify_63(t_104, t_111));
-        t_110 = mapEntryConstructor_64("interpolation", t_130);
+        t_110 = pairConstructor_64("interpolation", t_130);
         t_105 = new Rule_69("\u0022", StringKind_91, "#pop");
         t_108 = new Rule_69("\\\u0024\\{", StringInterpol_92, "interpolation");
         t_109 = new Rule_69("(?:[^\u0022\u0024]|\\\u0024[^{])+", StringKind_91);
         t_131 = requireIsArray__133(listify_63(t_105, t_108, t_109));
-        t_107 = mapEntryConstructor_64("string", t_131);
+        t_107 = pairConstructor_64("string", t_131);
         t_106 = mapConstructor_65(listify_63(t_112, t_110, t_107));
         tokens_101 = t_106;
       }

@@ -1,9 +1,12 @@
 {
     "name": "@temperlang/std",
-    "version": "0.0.3",
+    "version": "0.0.5",
+    "author": "Temper Contributors",
+    "description": "Optional support library provided with Temper",
+    "homepage": "https://temperlang.dev/",
     "license": "Apache-2.0",
     "type": "module",
     "dependencies": {
-        "@temperlang/core": "0.0.3"
+        "@temperlang/core": "0.0.5"
     }
 }
