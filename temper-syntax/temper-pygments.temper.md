@@ -2,17 +2,13 @@
 
     let { ... } = import("./pygments");
 
-## Helper functions
+## Reused values
 
-[For now][issue1631], helpers have to be before the usage in the class below.
+Variables have to go syntactically before mention right now.
 
 Be sloppy with names for now. TODO More complete Unicode support.
 
     let nameRegex = "[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*";
-
-    let words(...names: List<String>): String {
-      "\\b(?:${names.join("|") { (x);; x }})\\b"
-    }
 
 ## Lexer class
 
@@ -97,6 +93,12 @@ from core string chars, I don't get interp.
 
       ]);
 
+    }
+
+## Helper functions
+
+    let words(...names: List<String>): String {
+      "\\b(?:${names.join("|") { (x);; x }})\\b"
     }
 
 [issue1631]: https://github.com/temper-lang/temper/issues/1631

@@ -28,92 +28,92 @@ public final class TemperLexer {
     public List<String> aliases;
     public List<String> filenames;
     public Map<String, List<RuleOption>> tokens;
-    public TemperLexer(@Nullable String name__42, @Nullable List<String> aliases__43, @Nullable List<String> filenames__44, @Nullable Map<String, List<RuleOption>> tokens__45) {
-        Rule t_189;
-        Rule t_191;
-        Rule t_192;
-        Map<String, List<RuleOption>> t_193;
-        Entry<String, List<RuleOption>> t_194;
-        Rule t_195;
+    public TemperLexer(@Nullable String name__39, @Nullable List<String> aliases__40, @Nullable List<String> filenames__41, @Nullable Map<String, List<RuleOption>> tokens__42) {
+        Rule t_194;
         Rule t_196;
-        Entry<String, List<RuleOption>> t_197;
-        Include t_198;
+        Rule t_197;
+        Map<String, List<RuleOption>> t_198;
         Entry<String, List<RuleOption>> t_199;
         Rule t_200;
         Rule t_201;
-        String t_202;
-        String t_203;
-        String t_204;
-        String t_205;
+        Entry<String, List<RuleOption>> t_202;
+        Include t_203;
+        Entry<String, List<RuleOption>> t_204;
+        Rule t_205;
         Rule t_206;
-        Rule t_207;
-        Rule t_208;
-        Rule t_209;
-        Rule t_210;
+        String t_207;
+        String t_208;
+        String t_209;
+        String t_210;
         Rule t_211;
         Rule t_212;
         Rule t_213;
         Rule t_214;
         Rule t_215;
-        List<RuleOption> t_127;
-        List<RuleOption> t_131;
-        List<RuleOption> t_136;
-        if (name__42 == null) {
-            name__42 = "Temper";
+        Rule t_216;
+        Rule t_217;
+        Rule t_218;
+        Rule t_219;
+        Rule t_220;
+        List<RuleOption> t_128;
+        List<RuleOption> t_132;
+        List<RuleOption> t_137;
+        if (name__39 == null) {
+            name__39 = "Temper";
         }
-        if (aliases__43 == null) {
-            aliases__43 = List.of("temper");
+        if (aliases__40 == null) {
+            aliases__40 = List.of("temper");
         }
-        if (filenames__44 == null) {
-            filenames__44 = List.of("*.temper");
+        if (filenames__41 == null) {
+            filenames__41 = List.of("*.temper");
         }
-        if (tokens__45 == null) {
-            t_189 = new Rule("\\s+", Whitespace);
-            t_200 = new Rule("//.*?$", CommentSingleline);
-            t_201 = new Rule("(?s)/\\*.*\\*/", CommentMultiline);
-            t_202 = TemperPygmentsGlobal.words__6("false", "NaN", "null", "true", "void");
-            t_215 = new Rule(t_202, KeywordConstant);
-            t_203 = TemperPygmentsGlobal.words__6("class", "interface", "let", "private", "public", "sealed", "var");
-            t_214 = new Rule(t_203, KeywordDeclaration);
-            t_204 = TemperPygmentsGlobal.words__6("do", "else", "export", "extends", "fn", "if", "import", "is", "match", "new", "orelse");
-            t_213 = new Rule(t_204, Keyword);
-            t_205 = TemperPygmentsGlobal.words__6("AnyValue", "Boolean", "Float64", "Function", "Int", "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped", "NoResult", "Null", "String", "StringSlice", "Void");
-            t_212 = new Rule(t_205, NameBuiltin);
-            t_206 = new Rule("\"", StringKind, "string");
-            t_207 = new Rule("[-=+*&|<>]+|/=?", Operator);
-            t_208 = new Rule("[{}();:.,]", Punctuation);
-            t_209 = new Rule("\\d+\\.?\\d*|\\.\\d+", Number);
-            t_210 = new Rule("@[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*", NameDecorator);
-            t_211 = new Rule("[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*", Name);
+        if (tokens__42 == null) {
+            t_194 = new Rule("\\s+", Whitespace);
+            t_205 = new Rule("//.*?$", CommentSingleline);
+            t_206 = new Rule("(?s)/\\*.*\\*/", CommentMultiline);
+            t_207 = TemperPygmentsGlobal.words__6("false", "NaN", "null", "true", "void");
+            t_220 = new Rule(t_207, KeywordConstant);
+            t_208 = TemperPygmentsGlobal.words__6("class", "interface", "let", "private", "public", "sealed", "var");
+            t_219 = new Rule(t_208, KeywordDeclaration);
+            t_209 = TemperPygmentsGlobal.words__6("do", "else", "export", "extends", "fn", "if", "import", "is", "match", "new", "orelse");
+            t_218 = new Rule(t_209, Keyword);
+            t_210 = TemperPygmentsGlobal.words__6("AnyValue", "Boolean", "Float64", "Function", "Int", "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped", "NoResult", "Null", "String", "StringSlice", "Void");
+            t_217 = new Rule(t_210, NameBuiltin);
+            t_211 = new Rule("\"", StringKind, "string");
+            t_212 = new Rule("[-=+*&|<>]+|/=?", Operator);
+            t_213 = new Rule("[{}();:.,]", Punctuation);
+            t_214 = new Rule("\\d+\\.?\\d*|\\.\\d+", Number);
+            t_215 = new Rule("@[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*", NameDecorator);
+            t_216 = new Rule("[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*", Name);
             {
-                t_127 = Core.cast(List.class, List.of(t_189, t_200, t_201, t_215, t_214, t_213, t_212, t_206, t_207, t_208, t_209, t_210, t_211));
-                t_199 = new SimpleImmutableEntry<>("root", t_127);
-                t_191 = new Rule("}", StringInterpol, "#pop");
-                t_198 = PygmentsGlobal.include("root");
-                t_131 = Core.cast(List.class, List.of(t_191, t_198));
-                t_197 = new SimpleImmutableEntry<>("interpolation", t_131);
-                t_192 = new Rule("\"", StringKind, "#pop");
-                t_195 = new Rule("\\$\\{", StringInterpol, "interpolation");
-                t_196 = new Rule("(?:[^\"$]|\\$[^{])+", StringKind);
-                t_136 = Core.cast(List.class, List.of(t_192, t_195, t_196));
-                t_194 = new SimpleImmutableEntry<>("string", t_136);
-                t_193 = Core.mapCopyOf(List.of(t_199, t_197, t_194));
-                tokens__45 = t_193;
+                t_128 = Core.cast(List.class, List.of(t_194, t_205, t_206, t_220, t_219, t_218, t_217, t_211, t_212, t_213, t_214, t_215, t_216));
+                t_204 = new SimpleImmutableEntry<>("root", t_128);
+                t_196 = new Rule("}", StringInterpol, "#pop");
+                t_203 = PygmentsGlobal.include("root");
+                t_132 = Core.cast(List.class, List.of(t_196, t_203));
+                t_202 = new SimpleImmutableEntry<>("interpolation", t_132);
+                t_197 = new Rule("\"", StringKind, "#pop");
+                t_200 = new Rule("\\$\\{", StringInterpol, "interpolation");
+                t_201 = new Rule("(?:[^\"$]|\\$[^{])+", StringKind);
+                t_137 = Core.cast(List.class, List.of(t_197, t_200, t_201));
+                t_199 = new SimpleImmutableEntry<>("string", t_137);
+                t_198 = Core.mapCopyOf(List.of(t_204, t_202, t_199));
+                tokens__42 = t_198;
             }
         }
-        this.name = name__42;
-        this.aliases = aliases__43;
-        this.filenames = filenames__44;
-        this.tokens = tokens__45;
+        this.name = name__39;
+        this.aliases = aliases__40;
+        this.filenames = filenames__41;
+        this.tokens = tokens__42;
     }
-    public TemperLexer(@Nullable String name__42, @Nullable List<String> aliases__43, @Nullable List<String> filenames__44) {
-        this(name__42, aliases__43, filenames__44, null);
+    public TemperLexer(@Nullable String name__39, @Nullable List<String> aliases__40, @Nullable List<String> filenames__41) {
+        this(name__39, aliases__40, filenames__41, null);
     }
-    public TemperLexer(@Nullable String name__42, @Nullable List<String> aliases__43) {
-        this(name__42, aliases__43, null, null);
+    public TemperLexer(@Nullable String name__39, @Nullable List<String> aliases__40) {
+        this(name__39, aliases__40, null, null);
     }
-    public TemperLexer(@Nullable String name__42) {
-        this(name__42, null, null, null);
+    public TemperLexer(@Nullable String name__39) {
+        this(name__39, null, null, null);
     }
     public TemperLexer() {
         this(null, null, null, null);

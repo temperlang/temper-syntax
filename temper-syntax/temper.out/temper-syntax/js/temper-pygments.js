@@ -125,21 +125,21 @@ export class TemperLexer {
     return return_141;
   }
 };
-/** @type {string} */
-const nameRegex_142 = "[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*";
 /** @returns {string} */
-function words_132(...names_143) {
-  let return_144;
-  function fn_145(x_146) {
-    let return_147;
-    return_147 = x_146;
-    return return_147;
+function words_132(...names_142) {
+  let return_143;
+  function fn_144(x_145) {
+    let return_146;
+    return_146 = x_145;
+    return return_146;
   }
-  let t_148 = fn_145;
-  let t_149 = listJoin_66(names_143, "|", t_148);
-  return_144 = strCat_67("\\b(?:", t_149, ")\\b");
-  return return_144;
+  let t_147 = fn_144;
+  let t_148 = listJoin_66(names_142, "|", t_147);
+  return_143 = strCat_67("\\b(?:", t_148, ")\\b");
+  return return_143;
 }
-/** @type {Type_151} */
-const return_150 = "TemperLexer: Type";
+/** @type {string} */
+const nameRegex_149 = "[_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e][_\u003c\u003cLu\u003e\u003e\u003c\u003cLl\u003e\u003e0-9]*";
+/** @type {void} */
+const return_150 = void 0;
 export default return_150;
