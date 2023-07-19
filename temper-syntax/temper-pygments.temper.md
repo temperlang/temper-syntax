@@ -1,15 +1,5 @@
 # Temper Pygments Lexer
 
-    let { ... } = import("./pygments");
-
-## Reused values
-
-Variables have to go syntactically before mention right now.
-
-Be sloppy with names for now. TODO More complete Unicode support.
-
-    let nameRegex = "[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*";
-
 ## Lexer class
 
 We can't easily access backend classes, so we can't subclass
@@ -27,13 +17,13 @@ the [Pygments documentation][pygments-lexer-docs].
       public aliases: List<String> = ["temper"];
       public filenames: List<String> = ["*.temper"];
 
-## Token Rules
+### Token rules
 
 Main thing, though, is the list of rules for definition tokens.
 
       public tokens: Map<String, List<RuleOption>> = new Map([
 
-### Root
+#### Root
 
         new Pair("root", [
           new Rule(raw"\s+", Whitespace),
@@ -75,7 +65,7 @@ Multiline comments in Temper don't nest at present, so this should be fine.
           new Rule(nameRegex, Name),
         ].as<List<RuleOption>>()),
 
-### Strings
+#### Strings
 
         new Pair("interpolation", [
           new Rule("}", StringInterpol, "#pop"),
@@ -95,11 +85,19 @@ from core string chars, I don't get interp.
 
     }
 
-## Helper functions
+## Helper functions and values
+
+Be sloppy with names for now. TODO More complete Unicode support.
+
+    let nameRegex = "[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*";
 
     let words(...names: List<String>): String {
       "\\b(?:${names.join("|") { (x);; x }})\\b"
     }
+
+## Imports and links
+
+    let { ... } = import("./pygments");
 
 [issue1631]: https://github.com/temper-lang/temper/issues/1631
 [pygments-lexer-docs]: https://pygments.org/docs/lexerdevelopment/

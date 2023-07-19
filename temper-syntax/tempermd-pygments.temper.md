@@ -1,7 +1,5 @@
 # Temper Markdown Pygments Lexer Info
 
-    let { ... } = import("./pygments");
-
 There's less to do here than for the core Temper lexer, but keeping core
 metadata central to the Temper Syntax library is still nice.
 
@@ -36,3 +34,5 @@ to 4-space indentation from line start for now.
         ].as<List<RuleOption>>()),
       ]);
     }
+
+    let { ... } = import("./pygments");
