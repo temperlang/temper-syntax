@@ -259,8 +259,10 @@ public final class Core {
 
         /** Read the code this slice is pointing at. */
         public abstract int read();
-        /** Return a slice that is advanced by count codes. */
+        /** Return a slice that is advanced by count code units. */
         public abstract S advance(int count);
+        /** Return a slice whose right is count code units from the left. */
+        public abstract S limit(int count);
     }
 
     /** Specifically for utf8 and utf32, since utf16 is simpler in Java. */
@@ -377,28 +379,41 @@ public final class Core {
         }
 
         @Override public Utf8StringSlice advance(int count) {
+            int newLeft = advanceLeft(count);
+            return newLeft == this.left ? this : new Utf8StringSlice(content, newLeft, right);
+        }
+
+        @Override public Utf8StringSlice limit(int count) {
+            int newRight = advanceLeft(count);
+            return newRight == this.right ? this : new Utf8StringSlice(content, left, newRight);
+        }
+
+        private int advanceLeft(int count) {
+            int left = this.left;
+            int right = this.right;
             if (count <= 0) {
-                return this;
-            } else if (count == 1) {
-                int left = this.left;
-                int right = this.right;
-                if (left >= right) {
-                    return this;
-                }
-                CharSequence content = this.content;
-                int cp = codePointAt(content, left >> 2);
-                int newLeft;
-                if (cp < 0x80) {
-                    newLeft = left + 4;
-                } else {
-                    int byteOffset = left & 3;
-                    int nBytes = nUtf8BytesInChar(cp);
-                    newLeft = (byteOffset + 1 < nBytes) ? left + 1 : (left & ~3) + ((nBytes + 4) & ~3);
-                }
-                return new Utf8StringSlice(content, newLeft, right);
-            } else {
-                throw new UnsupportedOperationException("TODO");
+                return left;
             }
+            CharSequence content = this.content;
+            int newLeft = left;
+            while (count > 0 && newLeft < right) {
+                int cp = codePointAt(content, newLeft >> 2);
+                if (cp < 0x80) {
+                    newLeft = newLeft + 4;
+                    count -= 1;
+                } else {
+                    int byteOffset = newLeft & 3;
+                    int nBytes = nUtf8BytesInChar(cp);
+                    int nToAdvance = Math.min(nBytes - byteOffset, count);
+                    newLeft = (byteOffset + nToAdvance < nBytes)
+                        // Step within code point
+                        ? newLeft + nToAdvance
+                        // Step forward to next code point
+                        : (newLeft & ~3) + ((nBytes + 4) & ~3);
+                    count -= nToAdvance;
+                }
+            }
+            return Math.min(newLeft, right);
         }
 
         @Override public PrimitiveIterator.OfInt iterator() {
@@ -467,16 +482,17 @@ public final class Core {
         }
 
         @Override public Utf16StringSlice advance(int count) {
-            if (count <= 0) {
-                return this;
-            } else {
-                if (left >= right) {
-                    return this;
-                }
-                int newLeft = left + count;
-                if (newLeft >= right) { newLeft = right; }
-                return new Utf16StringSlice(content, newLeft, right);
-            }
+            int newLeft = advanceLeft(count);
+            return newLeft == left ? this : new Utf16StringSlice(content, newLeft, right);
+        }
+
+        @Override public Utf16StringSlice limit(int count) {
+            int newRight = advanceLeft(count);
+            return newRight == right ? this : new Utf16StringSlice(content, left, newRight);
+        }
+
+        private int advanceLeft(int count) {
+            return count <= 0 ? left : Math.min(right, left + count);
         }
 
         @Override public PrimitiveIterator.OfInt iterator() {
@@ -540,15 +556,22 @@ public final class Core {
         }
 
         @Override public CodePointStringSlice advance(int count) {
-            if (count <= 0 || left >= right) {
-                return this;
-            }
+            int newLeft = advanceLeft(count);
+            return newLeft == left ? this : new CodePointStringSlice(content, newLeft, right);
+        }
+
+        @Override public CodePointStringSlice limit(int count) {
+            int newRight = advanceLeft(count);
+            return newRight == right ? this : new CodePointStringSlice(content, left, newRight);
+        }
+
+        private int advanceLeft(int count) {
             int newLeft = left;
             for (int i = count; i > 0 && newLeft < right; --i) {
                 newLeft += Character.charCount(codePointAt(content, newLeft));
             }
             if (newLeft >= right) { newLeft = right; }
-            return new CodePointStringSlice(this.content, newLeft, right);
+            return newLeft;
         }
 
         @Override public PrimitiveIterator.OfInt iterator() {

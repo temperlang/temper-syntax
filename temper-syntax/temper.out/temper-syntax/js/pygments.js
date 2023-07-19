@@ -23,13 +23,13 @@ export class Rule {
    */
   constructor(regex_7, kind_8, state_9) {
     let return_10;
-    return_10 = void 0;
     if (!(state_9 !== void 0)) {
       state_9 = null;
     }
     this.#regex_4 = regex_7;
     this.#kind_5 = kind_8;
     this.#state_6 = state_9;
+    return_10 = void 0;
     return;
   }
   /** @returns {string} */
@@ -58,8 +58,8 @@ export class Include {
   /** @param {string} state_18 */
   constructor(state_18) {
     let return_19;
-    return_19 = void 0;
     this.#state_17 = state_18;
+    return_19 = void 0;
     return;
   }
   /** @returns {string} */
@@ -91,8 +91,8 @@ export class Kind {
   /** @param {string} name_24 */
   constructor(name_24) {
     let return_25;
-    return_25 = void 0;
     this.#name_23 = name_24;
+    return_25 = void 0;
     return;
   }
   /** @returns {string} */
@@ -109,8 +109,8 @@ export class ByGroups {
   /** @param {Array<TokenKind>} kinds_29 */
   constructor(kinds_29) {
     let return_30;
-    return_30 = void 0;
     this.#kinds_28 = kinds_29;
+    return_30 = void 0;
     return;
   }
   /** @returns {Array<TokenKind>} */
@@ -127,8 +127,8 @@ export class Using {
   /** @param {string} lexer_34 */
   constructor(lexer_34) {
     let return_35;
-    return_35 = void 0;
     this.#lexer_33 = lexer_34;
+    return_35 = void 0;
     return;
   }
   /** @returns {string} */

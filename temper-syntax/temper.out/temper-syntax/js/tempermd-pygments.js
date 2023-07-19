@@ -2,7 +2,7 @@ import {
   listify as listify_63, pairConstructor as pairConstructor_64, mapConstructor as mapConstructor_65, requireIsArray as requireIsArray__196
 } from "@temperlang/core";
 import {
-  RuleOption as RuleOption_152, Rule as Rule_153, Using as Using_154, ByGroups as ByGroups_155, Include as Include_156, include as include_157, Inherit as Inherit_158, TokenKind as TokenKind_159, Kind as Kind_160, bygroups as bygroups_161, using as using_162, inherit as inherit_163, CommentMultiline as CommentMultiline_164, CommentSingleline as CommentSingleline_165, Keyword as Keyword_166, KeywordConstant as KeywordConstant_167, KeywordDeclaration as KeywordDeclaration_168, Name as Name_169, NameBuiltin as NameBuiltin_170, NameDecorator as NameDecorator_171, Number as Number_172, Operator as Operator_173, Punctuation as Punctuation_174, StringKind as StringKind_175, StringInterpol as StringInterpol_176, Whitespace as Whitespace_177
+  RuleOption as RuleOption_152, Rule as Rule_153, Using as Using_154, ByGroups as ByGroups_155, Whitespace as Whitespace_156, Kind as Kind_157, inherit as inherit_158, Inherit as Inherit_159, bygroups as bygroups_160, TokenKind as TokenKind_161, using as using_162, Include as Include_163, include as include_164, CommentMultiline as CommentMultiline_165, CommentSingleline as CommentSingleline_166, Keyword as Keyword_167, KeywordConstant as KeywordConstant_168, KeywordDeclaration as KeywordDeclaration_169, Name as Name_170, NameBuiltin as NameBuiltin_171, NameDecorator as NameDecorator_172, Number as Number_173, Operator as Operator_174, Punctuation as Punctuation_175, StringKind as StringKind_176, StringInterpol as StringInterpol_177
 } from "./pygments.js";
 export class TemperMdLexer {
   /** @type {string} */
@@ -28,7 +28,6 @@ export class TemperMdLexer {
     let t_191;
     let t_192;
     let t_193;
-    return_186 = void 0;
     let t_194;
     let t_195;
     if (!(name_182 !== void 0)) {
@@ -41,12 +40,12 @@ export class TemperMdLexer {
       filenames_184 = listify_63("*.temper.md", "*.tempermd");
     }
     if (!(tokens_185 !== void 0)) {
-      t_187 = new Rule_153("^\\s*\\n {4}", Whitespace_177, "indented");
+      t_187 = new Rule_153("^\\s*\\n {4}", Whitespace_156, "indented");
       {
-        t_194 = requireIsArray__196(listify_63(t_187, inherit_163));
+        t_194 = requireIsArray__196(listify_63(t_187, inherit_158));
         t_193 = pairConstructor_64("root", t_194);
         t_188 = using_162("Temper");
-        t_192 = bygroups_161(listify_63(t_188));
+        t_192 = bygroups_160(listify_63(t_188));
         t_191 = new Rule_153("(?s)(.*?)(?=\\Z|\\n(?: {1,3}[^ ]|[^ ]|\u0024))", t_192, "#pop");
         t_195 = requireIsArray__196(listify_63(t_191));
         t_190 = pairConstructor_64("indented", t_195);
@@ -58,6 +57,7 @@ export class TemperMdLexer {
     this.#aliases_179 = aliases_183;
     this.#filenames_180 = filenames_184;
     this.#tokens_181 = tokens_185;
+    return_186 = void 0;
     return;
   }
   /** @returns {string} */
@@ -85,6 +85,6 @@ export class TemperMdLexer {
     return return_204;
   }
 };
-/** @type {Type_206} */
-const return_205 = "TemperMdLexer: Type";
+/** @type {void} */
+const return_205 = void 0;
 export default return_205;

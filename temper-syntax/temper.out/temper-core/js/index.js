@@ -131,32 +131,53 @@ class Utf8StringSlice extends TrickyStringSlice {
     }
   }
 
-  advance(count) {
-    if (count <= 0) {
-      return this;
-    } else if (count === 1) {
-      let left = this.left;
-      let right = this.right;
-      if (left >= right) {
-        return this;
-      }
-      let content = this.content;
-      let cp = content.codePointAt(left >> 2);
-      let newLeft;
-      if (cp < 0x80) {
-        newLeft = left + 4;
+  /**
+   * @param {number} count
+   * @return {number}
+   */
+  _advanceLeft(count) {
+    let left = this.left;
+    let content = this.content;
+    let contentLen = content.length;
+    let idx = left >> 2;
+    let sub = left & 3;
+
+    while (count > 0 && idx < contentLen) {
+      let cp = content.codePointAt(idx);
+      let rem = nUtf8BytesInChar(cp) - sub;
+      if (rem > count) {
+        sub += count;
+        count = 0;
       } else {
-        let byteOffset = left & 3;
-        let nBytes = nUtf8BytesInChar(cp);
-        newLeft =
-          byteOffset + 1 < nBytes
-            ? left + 1
-            : (left & ~3) + ((nBytes + 4) & ~3);
+        count -= rem;
+        sub = 0;
+        idx += cp > 0x10000 ? 2 : 1;
       }
-      return new Utf8StringSlice(content, newLeft, right);
-    } else {
-      throw new Error("TODO");
     }
+
+    return count ? this.right : Math.min(idx << 2 | sub, this.right);
+  }
+
+  /**
+   * @param {number} count
+   * @return {Utf8StringSlice}
+   */
+  advance(count) {
+    let newLeft = this._advanceLeft(count);
+    return (this.left === newLeft)
+      ? this
+      : new Utf8StringSlice(this.content, newLeft, this.right);
+  }
+
+  /**
+   * @param {number} count
+   * @return {Utf8StringSlice}
+   */
+  limit(count) {
+    let newRight = this._advanceLeft(count);
+    return (this.right === newRight)
+      ? this
+      : new Utf8StringSlice(this.content, this.left, newRight);
   }
 
   [Symbol.iterator]() {
@@ -222,21 +243,34 @@ class Utf16StringSlice {
     return this.content.charCodeAt(left);
   }
 
+  /**
+   * @param {number} count
+   * @return {number}
+   */
+  _advanceLeft(count) {
+    return Math.min(this.left + count, this.right);
+  }
+
+  /**
+   * @param {number} count
+   * @return {Utf16StringSlice}
+   */
   advance(count) {
-    if (count <= 0) {
-      return this;
-    } else {
-      let left = this.left;
-      let right = this.right;
-      if (left >= right) {
-        return this;
-      }
-      let newLeft = left + count;
-      if (newLeft >= right) {
-        newLeft = right;
-      }
-      return new Utf16StringSlice(this.content, newLeft, right);
-    }
+    let newLeft = this._advanceLeft(count);
+    return this.left === newLeft
+      ? this
+      : new Utf16StringSlice(this.content, newLeft, this.right);
+  }
+
+  /**
+   * @param {number} count
+   * @return {Utf16StringSlice}
+   */
+  limit(count) {
+    let newRight = this._advanceLeft(count);
+    return this.right === newRight
+      ? this
+      : new Utf16StringSlice(this.content, this.left, newRight);
   }
 
   [Symbol.iterator]() {
@@ -300,30 +334,50 @@ class CodePointsStringSlice extends TrickyStringSlice {
     return this.content.codePointAt(this.left);
   }
 
-  advance(count) {
-    if (count <= 0) {
-      return this;
-    } else {
-      let left = this.left;
-      let right = this.right;
-      let content = this.content;
-      if (left >= right) {
-        return this;
+  /**
+   * @param {number} count
+   * @return {number}
+   */
+  _advanceLeft(count) {
+    let left = this.left;
+    let right = this.right;
+    let content = this.content;
+    if (count <= 0) { return left }
+    let newLeft = left;
+    for (let i = count; i && newLeft < right; --i) {
+      let cp = content.codePointAt(newLeft);
+      if (cp > 0xffff) {
+        newLeft += 2;
+      } else {
+        newLeft += 1;
       }
-      let newLeft = left;
-      for (let i = count; i && newLeft < right; --i) {
-        let cp = content.codePointAt(newLeft);
-        if (cp > 0xffff) {
-          newLeft += 2;
-        } else {
-          newLeft += 1;
-        }
-      }
-      if (newLeft >= right) {
-        newLeft = right;
-      }
-      return new CodePointsStringSlice(this.content, newLeft, right);
     }
+    if (newLeft >= right) {
+      newLeft = right;
+    }
+    return newLeft;
+  }
+
+  /**
+   * @param {number} count
+   * @return {CodePointsStringSlice}
+   */
+  advance(count) {
+    let newLeft = this._advanceLeft(count);
+    return (newLeft === this.left)
+      ? this
+      : new CodePointsStringSlice(this.content, newLeft, this.right);
+  }
+
+  /**
+   * @param {number} count
+   * @return {CodePointsStringSlice}
+   */
+  limit(count) {
+    let newRight = this._advanceLeft(count);
+    return (newRight === this.right)
+      ? this
+      : new CodePointsStringSlice(this.content, this.left, newRight);
   }
 
   [Symbol.iterator]() {
@@ -667,6 +721,18 @@ export function mappedGet(map, key) {
 }
 export function mappedToList(map) {
   return Array.from(map, ([key, value]) => new Pair(key, value));
+}
+
+// Implements Date::constructor
+export function dateConstructor(year, month, day) {
+  let d = new Date(0);
+  // If we were to pass year into `new Date`, then it would
+  // have 1900 added when in the range [0, 99].
+  // developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date#year
+  d.setUTCFullYear(year);
+  d.setUTCMonth(month - 1 /* JS months are zero indexed */);
+  d.setUTCDate(day);  // UTCDay is day of the week
+  return d;
 }
 
 // Implements extension method Deque::constructor

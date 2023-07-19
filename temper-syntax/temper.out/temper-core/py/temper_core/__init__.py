@@ -7,6 +7,7 @@ from logging import getLogger, INFO
 from math import inf, isnan, copysign
 from typing import Union, Any, Callable, Iterable, NoReturn, TypeVar, Sequence, cast, Tuple, List
 from sys import float_info
+import datetime
 import re
 import types
 
@@ -361,36 +362,48 @@ class StringSlice(object):
 
 
 class Utf8StringSlice(StringSlice):
-    __slots__ = ("_content", "_left")
+    __slots__ = ("_content", "_left", "_right")
     _left: int
+    _right: int
     _content: str
 
-    def __init__(self, left: int, content: str):
-        if left >> 2 >= len(content):
+    def __init__(self, left: int, right: int, content: str):
+        if left >= right:
             left = 0
+            right = 0
             content = ""
         self._left = left
+        self._right = right
         self._content = content
 
     def __iter__(self) -> Iterable[int]:
-        left, content = self._left, self._content
-        utf8 = "utf-8"
-        idx, sub = left >> 2, left & 3
-        if sub:
-            for byt in islice(encode(content[idx], utf8), sub, None):
-                yield int(byt)
-            idx += 1
-        for buf in iterencode(_str_iter_at(content, idx), utf8):
-            yield from map(int, buf)
+        left, right, content = self._left, self._right, self._content
+        if left < right:
+            idx, sub = left >> 2, left & 3
+            ridx, rsub = right >> 2, right & 3
+            # Iterate over every but the last code point in range.
+            # The loop that follows iterates over bytes up to rsub in the last.
+            while idx < ridx:
+                cp = ord(content[idx])
+                n = _utf8_size(cp)
+                for byte_index in range(sub, n):
+                    yield _utf8_byte_of(cp, byte_index, n)
+                idx, sub = idx + 1, 0
+            if rsub:
+                cp = ord(content[idx])
+                n = _utf8_size(cp)
+                for byte_index in range(sub, rsub):
+                    yield _utf8_byte_of(cp, byte_index, n)
 
     def __bool__(self) -> bool:
-        return bool(self._content)
+        return self._left < self._right
 
     def __len__(self) -> int:
-        left, content = self._left, self._content
-        return sum(_utf8_size(char) for char in _str_iter_at(content, left >> 2)) - (
-            left & 3
-        )
+        left, right, content = self._left, self._right, self._content
+        n = -(left & 3) + (right & 3)
+        for i in range(left >> 2, right >> 2):
+            n += _utf8_size(ord(content[i]))
+        return n
 
     def _left_plus(self, count: int) -> int:
         left, content = self._left, self._content
@@ -398,7 +411,7 @@ class Utf8StringSlice(StringSlice):
         idx, sub = left >> 2, left & 3
 
         while count > 0 and idx < len_content:
-            rem = _utf8_size(content[idx]) - sub
+            rem = _utf8_size(ord(content[idx])) - sub
             if rem > count:
                 sub += count
                 count = 0
@@ -407,69 +420,101 @@ class Utf8StringSlice(StringSlice):
                 sub = 0
                 idx += 1
 
-        return -1 if count else idx << 2 | sub
+        return -1 if count else min(idx << 2 | sub, self._right)
 
     def advance(self, count: int) -> "Utf8StringSlice":
-        if count <= 0:
-            result = self
-        else:
-            left, content = self._left_plus(count), self._content
-            if left < 0:
-                left, content = 0, ""
-            result = Utf8StringSlice(left, content)
-        return result
+        left, right, content = self._left_plus(count), self._right, self._content
+        if left < 0:
+            left, right, content = 0, 0, ""
+        if left == self._left:
+            return self
+        return Utf8StringSlice(left, right, content)
+
+    def limit(self, count: int) -> "Utf8StringSlice":
+        left, right, content = self._left, self._left_plus(count), self._content
+        if left >= right:
+            left, right, content = 0, 0, ""
+        if right == self._right:
+            return self
+        return Utf8StringSlice(left, right, content)
 
     def to_json(self):
-        left, content = self._left, self._content
-        right = len(content) << 2
+        left, right, content = self._left, self._right, self._content
         return {"left": left, "right": right, "content": content}
 
     def __str__(self) -> str:
-        left, content = self._left, self._content
-        idx, sub = left >> 2, left & 3
-        if sub:
+        left, right, content = self._left, self._right, self._content
+        if left >= right: return ""
+        lidx, lsub = left >> 2, left & 3
+        ridx, rsub = right >> 2, right & 3
+        pre, post = "", ""
+        if lsub:
             pre = "\ufffd"
-            idx += 1
-        else:
-            pre = ""
-        return pre + content[idx:]
-
+            lidx += 1
+        if rsub:
+            if ridx - 1 >= lidx:
+                post = "\ufffd"
+            else:
+                pre = "\ufffd"
+        return pre + content[lidx:ridx] + post
 
 class Utf16StringSlice(StringSlice):
-    __slots__ = ("_content", "_left")
+    __slots__ = ("_content", "_left", "_right")
     _left: int
+    _right: int
     _content: str
 
-    def __init__(self, left: int, content: str):
-        if left >> 1 >= len(content):
+    def __init__(self, left: int, right: int, content: str):
+        if left >= right:
             left = 0
+            right = 0
             content = ""
         self._left = left
+        self._right = right
         self._content = content
 
     def __iter__(self) -> Iterable[int]:
-        left, content = self._left, self._content
+        left, right, content = self._left, self._right, self._content
         utf16 = "utf-16-be"
-        idx, sub = left >> 1, left & 1
-        if sub:
-            for hi, lo in islice(_iter_pairs(encode(content[idx], utf16)), sub, None):
-                yield hi << 8 | lo
+        lidx, lsub = left >> 1, left & 1
+        ridx, rsub = right >> 1, right & 1
+        idx = lidx
+        if lsub and idx < ridx:
+            cp = ord(content[idx])
+            yield (0xDC00 | ((cp - 0x1_0000) & 0x3FF))
             idx += 1
-        for buf in iterencode(_str_iter_at(content, idx), utf16):
-            for hi, lo in _iter_pairs(buf):
-                yield hi << 8 | lo
+        while idx < ridx:
+            cp = ord(content[idx])
+            if cp < 0x1_0000:
+                yield cp
+            else:
+                cp -= 0x1_0000
+                yield (0xD800 | ((cp >> 10) & 0x3FF))
+                yield (0xDC00 | (cp & 0x3FF))
+            idx += 1
+        if rsub and idx == ridx:
+            cp = ord(content[idx])
+            yield (0xD800 | (((cp - 0x1_0000) >> 10) & 0x3FF))
 
     def __bool__(self) -> bool:
         return bool(self._content)
 
     def __len__(self) -> int:
-        left, content = self._left, self._content
-        return sum(_utf16_size(char) for char in _str_iter_at(content, left >> 1)) - (
-            left & 1
-        )
+        left, right, content = self._left, self._right, self._content
+        lidx, lsub = left >> 1, left & 1
+        ridx, rsub = right >> 1, right & 1
+        n = rsub + ridx - lidx
+        if lsub:
+            lidx += 1
+        for i in range(lidx, ridx):
+            cp = ord(content[i])
+            if cp > 0x1_0000:
+                n += 1
+        return n
 
     def _left_plus(self, count: int) -> int:
         left, content = self._left, self._content
+        if count <= 0: return left
         len_content = len(content)
         idx, sub = left >> 1, left & 1
 
@@ -483,76 +528,102 @@ class Utf16StringSlice(StringSlice):
                 sub = 0
                 idx += 1
 
-        return -1 if count else idx << 1 | sub
+        return -1 if count else min(idx << 1 | sub, self._right)
 
     def advance(self, count: int) -> "Utf16StringSlice":
-        if count <= 0:
-            result = self
-        else:
-            left, content = self._left_plus(count), self._content
-            if left < 0:
-                left, content = 0, ""
-            result = Utf16StringSlice(left, content)
-        return result
+        left, right, content = self._left_plus(count), self._right, self._content
+        if left < 0:
+            left, right, content = 0, 0, ""
+        if left == self._left:
+            return self
+        return Utf16StringSlice(left, right, content)
+
+    def limit(self, count: int) -> "Utf16StringSlice":
+        left, right, content = self._left, self._left_plus(count), self._content
+        if left >= right:
+            left, right, content = 0, 0, ""
+        if right == self._right:
+            return self
+        return Utf16StringSlice(left, right, content)
 
     def to_json(self):
-        left, content = self._left, self._content
-        right = len(content) << 1
+        left, right, content = self._left, self._right, self._content
         return {"left": left, "right": right, "content": content}
 
     def __str__(self) -> str:
-        left, content = self._left, self._content
-        idx, sub = left >> 1, left & 1
-        if sub:
+        left, right, content = self._left, self._right, self._content
+        if left == right:
+            # It's ok to split a pair if left and right are together
+            return ""
+        lidx, lsub = left >> 1, left & 1
+        ridx, rsub = right >> 1, right & 1
+        if lsub:
             pre = "\ufffd"
-            idx += 1
+            lidx += 1
         else:
             pre = ""
-        return pre + content[idx:]
+        if rsub:
+            post = "\ufffd"
+        else:
+            post = ""
+        return pre + content[lidx:ridx] + post
 
 
 class CodePointsStringSlice(StringSlice):
-    __slots__ = ("_content", "_left")
+    __slots__ = ("_content", "_left", "_right")
     _left: int
+    _right: int
     _content: str
 
-    def __init__(self, left: int, content: str):
-        if left >= len(content):
+    def __init__(self, left: int, right: int, content: str):
+        if left >= right:
             content = ""
             left = 0
+            right = 0
         self._left = left
+        self._right = right
         self._content = content
 
     def __iter__(self) -> Iterable[int]:
-        left, content = self._left, self._content
-        return (ord(c) for c in _str_iter_at(content, left))
+        left, right, content = self._left, self._right, self._content
+        for i in range(left, right):
+            yield ord(content[i])
 
     def __len__(self) -> int:
-        return len(self._content) - self._left
+        return self._right - self._left
 
     def __bool__(self) -> bool:
         return bool(self._content)
 
     def _left_plus(self, count: int) -> int:
         left = self._left + count
-        return -1 if left > len(self._content) else left
+        return -1 if left > len(self._content) else min(left, self._right)
 
     def advance(self, count: int) -> "CodePointsStringSlice":
         if count <= 0:
             result = self
         else:
-            left, content = self._left_plus(count), self._content
+            left, right, content = self._left_plus(count), self._right, self._content
             if left < 0:
-                left, content = 0, ""
-            result = CodePointsStringSlice(left, content)
+                left, right, content = 0, 0, ""
+            result = CodePointsStringSlice(left, right, content)
+        return result
+
+    def limit(self, count: int) -> "CodePointsStringSlice":
+        if count <= 0:
+            result = CodePointsStringSlice(0, 0, "")
+        else:
+            left, right, content = self._left, self._left_plus(count), self._content
+            if right <= self._left:
+                left, right, content = 0, 0, ""
+            result = CodePointsStringSlice(left, right, content)
         return result
 
     def __str__(self) -> str:
-        return self._content[self._left :]
+        return self._content[self._left : self._right]
 
     def to_json(self):
-        left, content = self._left, self._content
-        return {"left": left, "right": len(content), "content": content}
+        return {"left": self._left, "right": self._right, "content": self._content}
 
 
 class DenseBitVector(object):
@@ -604,17 +675,17 @@ class DenseBitVector(object):
 
 def string_utf8(string: str) -> Utf8StringSlice:
     "Implements connected method String::utf8"
-    return Utf8StringSlice(0, string)
+    return Utf8StringSlice(0, len(string) << 2, string)
 
 
 def string_utf16(string: str) -> Utf16StringSlice:
-    "Implements connected method String::utf8"
-    return Utf16StringSlice(0, string)
+    "Implements connected method String::utf16"
+    return Utf16StringSlice(0, len(string) << 1, string)
 
 
 def string_code_points(string: str) -> CodePointsStringSlice:
-    "Implements connected method String::utf8"
-    return CodePointsStringSlice(0, string)
+    "Implements connected method String::codePoints"
+    return CodePointsStringSlice(0, len(string), string)
 
 
 ## Connected methods
@@ -702,6 +773,9 @@ def float64_to_string(value: float) -> str:
 def boolean_to_string(value: bool) -> str:
     return "true" if value else "false"
 
+
+def date_to_string(value: datetime.date) -> str:
+    return "%04d-%02d-%02d" % (value.year, value.month, value.day)
 
 def string_split(string: str, separator: str) -> Tuple[str, ...]:
     "split a string, returning a list of elements."
@@ -887,17 +961,52 @@ def _str_iter_at(string: Iterable[str], offset: int) -> Iterable[str]:
     return iterator
 
 
-def _utf8_size(char: str) -> int:
-    num = ord(char)
-    if 0 <= num < 0o200:
+def _utf8_size(code_point: int) -> int:
+    if 0 <= code_point < 0o200:
         return 1
-    elif 0o200 <= num < 0o4000:
+    elif 0o200 <= code_point < 0o4000:
         return 2
-    elif 0o4000 <= num < 0o100000:
+    elif 0o4000 <= code_point < 0o100000:
         return 3
     else:
         return 4
 
+
+# (and_mask, or_mask, shift) triplets for each byte depending on the high 4 bits of a
+# codepoint in UTF-8 encoding.
+#
+# | First code point | Last code point | Byte 0    | Byte 1    | Byte 2    | Byte 3    |
+# | ---------------- | --------------- | --------- | --------- | --------- | --------- |
+# | U+0000           | U+007F          | 0xxx_xxxx |           |           |           |
+# | U+0080           | U+07FF          | 110x_xxxx | 10xx_xxxx |           |           |
+# | U+0800           | U+FFFF          | 1110_xxxx | 10xx_xxxx | 10xx_xxxx |           |
+# | U+10000          | U+10FFFF        | 1111_0xxx | 10xx_xxxx | 10xx_xxxx | 10xx_xxxx |
+_utf8_byte_infos = (
+  (0b0111_1111, 0, 0),
+  None,
+  None,
+  None,
+
+  (0b0001_1111, 0b1100_0000, 6),
+  (0b0011_1111, 0b1000_0000, 0),
+  None,
+  None,
+
+  (0b0000_1111, 0b1110_0000, 12),
+  (0b0011_1111, 0b1000_0000, 6),
+  (0b0011_1111, 0b1000_0000, 0),
+  None,
+
+  (0b0000_0111, 0b1111_0000, 18),
+  (0b0011_1111, 0b1000_0000, 12),
+  (0b0011_1111, 0b1000_0000, 6),
+  (0b0011_1111, 0b1000_0000, 0),
+)
+
+
+def _utf8_byte_of(code_point: int, byte_offset: int, n_bytes: int) -> int:
+    and_mask, or_mask, shift = _utf8_byte_infos[(n_bytes - 1) * 4 + byte_offset]
+    return ((code_point >> shift) & and_mask) | or_mask
 
 def _utf16_size(char: str) -> int:
     return 1 + (ord(char) >= 0x10000)
@@ -910,4 +1019,3 @@ def _iter_pairs(iterable: Sequence[T]):
     # twice thus converts a list into pairs.
     # We"re not using zip_longest, so we must ensure the list has an even length.
     return zip(iterator, iterator)
-

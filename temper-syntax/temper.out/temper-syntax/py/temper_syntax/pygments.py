@@ -16,12 +16,12 @@ class Rule(RuleOption):
   def constructor__23(this__2, regex__24: 'str', kind__25: 'TokenKind', state: 'Union2[str, None]' = ...) -> Any1:
     state__26: 'Union2[str, None]' = state
     return__4: 'None'
-    return__4 = None
     if state__26 is ...:
       state__26 = None
     this__2.regex__20 = regex__24
     this__2.kind__21 = kind__25
     this__2.state__22 = state__26
+    return__4 = None
     return return__4
   def __init__(this__2, regex__24: 'str', kind__25: 'TokenKind', state: 'Union2[str, None]' = ...) -> None:
     state__26: 'Union2[str, None]' = state
@@ -46,8 +46,8 @@ class Include(RuleOption):
   __slots__ = ('state__27',)
   def constructor__28(this__5, state__29: 'str') -> Any1:
     return__6: 'None'
-    return__6 = None
     this__5.state__27 = state__29
+    return__6 = None
     return return__6
   def __init__(this__5, state__29: 'str') -> None:
     this__5.constructor__28(state__29)
@@ -71,8 +71,8 @@ class Kind(TokenKind):
   __slots__ = ('name__33',)
   def constructor__34(this__10, name__35: 'str') -> Any1:
     return__11: 'None'
-    return__11 = None
     this__10.name__33 = name__35
+    return__11 = None
     return return__11
   def __init__(this__10, name__35: 'str') -> None:
     this__10.constructor__34(name__35)
@@ -86,8 +86,8 @@ class ByGroups(TokenKind):
   __slots__ = ('kinds__36',)
   def constructor__37(this__12, kinds__38: 'Tuple3[TokenKind, ...]') -> Any1:
     return__14: 'None'
-    return__14 = None
     this__12.kinds__36 = kinds__38
+    return__14 = None
     return return__14
   def __init__(this__12, kinds__38: 'Tuple3[TokenKind, ...]') -> None:
     this__12.constructor__37(kinds__38)
@@ -101,8 +101,8 @@ class Using(TokenKind):
   __slots__ = ('lexer__41',)
   def constructor__42(this__16, lexer__43: 'str') -> Any1:
     return__17: 'None'
-    return__17 = None
     this__16.lexer__41 = lexer__43
+    return__17 = None
     return return__17
   def __init__(this__16, lexer__43: 'str') -> None:
     this__16.constructor__42(lexer__43)
