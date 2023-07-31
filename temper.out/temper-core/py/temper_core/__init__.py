@@ -1,53 +1,59 @@
+"""
+Implementation of many of the connected methods in temper.
+"""
+
 from abc import abstractmethod, ABCMeta
-from codecs import iterencode, encode
-from collections import deque, namedtuple
-from contextlib import contextmanager
-from itertools import islice
 from logging import getLogger, INFO
 from math import inf, isnan, copysign
-from typing import Union, Any, Callable, Iterable, NoReturn, TypeVar, Sequence, cast, Tuple, List
+from typing import Union, Any, Callable, Iterable, NoReturn, TypeVar, Sequence, Tuple, List, Generic
 from sys import float_info
-import datetime
-import re
-import types
+from datetime import date as Date
+from types import MappingProxyType
 
 EllipsisType = Any
 
 class TemperComparable(metaclass=ABCMeta):
+    """Base class for comparable temper objects."""
+    __slots__ = ()
+
     @abstractmethod
-    def __eq__(self, other: Any) -> bool:
+    def __eq__(self, other: object) -> bool:
         pass
 
     @abstractmethod
-    def __le__(self, other: "C") -> bool:
+    def __le__(self, other: object) -> bool:
         pass
 
     @abstractmethod
-    def __lt__(self, other: "C") -> bool:
+    def __lt__(self, other: object) -> bool:
         pass
 
     @abstractmethod
-    def __ge__(self, other: "C") -> bool:
+    def __ge__(self, other: object) -> bool:
         pass
 
     @abstractmethod
-    def __gt__(self, other: "C") -> bool:
+    def __gt__(self, other: object) -> bool:
         pass
 
 T = TypeVar("T")
-C = TypeVar("C", bool, int, str, float, TemperComparable)
+C = TypeVar("C", bound="TemperComparable")
 
 class NoResultException(Exception):
+    """The value thrown with `fail()` and caught with `orelse`."""
+    __slots__ = ()
+
     def __init__(self, message="NO_RESULT"):
         Exception.__init__(self, message)
 
 
-class TemperObject(object):
+class TemperObject():
     "All user-defined classes include this marker class."
-
+    __slots__ = ()
 
 class TemperEnum(TemperObject):
     "Enum classes are user-defined classes additionally with this marker."
+    __slots__ = ()
 
 
 def get_static(reified_type, symbol=None) -> NoReturn:
@@ -55,7 +61,7 @@ def get_static(reified_type, symbol=None) -> NoReturn:
     raise NoResultException()
 
 
-def temper_print(value: Any):
+def temper_print(value: Any) -> None:
     "Temper semantics for printing."
     try:
         if isinstance(value, str):
@@ -63,17 +69,19 @@ def temper_print(value: Any):
         else:
             print(repr(value))
         return None
-    except Exception:
-        raise NoResultException()
+    except Exception as exc:
+        raise NoResultException() from exc
 
 
-class LoggingConsole(object):
+class LoggingConsole(TemperObject):
     """One class per file to log data to the console."""
+    __slots__ = ('logger',)
 
     def __init__(self, name: str):
         self.logger = getLogger(name)
 
     def log(self, message: str) -> None:
+        """Log a message to the console."""
         self.logger.log(INFO, message)
 
 
@@ -83,10 +91,12 @@ def str_cat(*parts: str) -> str:
 
 
 def no_result() -> NoResultException:
+    "Raises a NoResultException."
     raise NoResultException()
 
 
 def float_cmp(left: float, right: float):
+    "Three way compares floats, caring about sign of zeroes."
     if left == 0 and right == 0:
         left_float = copysign(1.0, left)
         right_float = copysign(1.0, right)
@@ -95,102 +105,121 @@ def float_cmp(left: float, right: float):
 
 
 def float_eq(left: float, right: float):
+    "Checks if two floats are exactly equal, caring about sign of zeros."
     return left == right and copysign(1.0, left) == copysign(1.0, right)
 
 
 def float_not_eq(left: float, right: float):
+    "Checks if two floats not are exactly equal, caring about sign of zeros."
     return left != right or copysign(1.0, left) != copysign(1.0, right)
 
 
 def float_lt_eq(left: float, right: float) -> bool:
+    "Checks if left <= right, caring about sign of zeros."
     return float_cmp(left, right) <= 0
 
 
 def float_lt(left: float, right: float) -> bool:
+    "Checks if left < right, caring about sign of zeros."
     return float_cmp(left, right) < 0
 
 
 def float_gt_eq(left: float, right: float) -> bool:
+    "Checks if left >= right, caring about sign of zeros."
     return float_cmp(left, right) >= 0
 
 
 def float_gt(left: float, right: float) -> bool:
+    "Checks if left <= right, caring about sign of zeros."
     return float_cmp(left, right) > 0
 
 
 def generic_cmp(left: C, right: C) -> int:
+    "Three way compares objects, caring about the sign of zeroes of floats."
     if isinstance(left, float) and isinstance(right, float):
         return float_cmp(left, right)
     return (left > right) - (left < right)
 
 
 def generic_eq(left: T, right: T) -> bool:
+    "Checks if two objects are exactly equal, caring about the sign of zeros of floats."
     if isinstance(left, float) and isinstance(right, float):
         return float_eq(left, right)
     return left == right
 
 
 def generic_not_eq(left: T, right: T) -> bool:
+    "Checks if two objects are not exactly equal, caring about the sign of zeros of floats."
     if isinstance(left, float) and isinstance(right, float):
         return float_not_eq(left, right)
     return left != right
 
 
 def generic_lt_eq(left: C, right: C) -> bool:
+    "Checks if two left <= right, caring about the sign of zeros of floats."
     if isinstance(left, float) and isinstance(right, float):
         return float_lt_eq(left, right)
     return left <= right
 
 
 def generic_lt(left: C, right: C) -> bool:
+    "Checks if two left <=right, caring about the sign of zeros of floats."
     if isinstance(left, float) and isinstance(right, float):
         return float_lt(left, right)
     return left < right
 
 
 def generic_gt_eq(left: C, right: C) -> bool:
+    "Checks if two left >= right, caring about the sign of zeros of floats."
     if isinstance(left, float) and isinstance(right, float):
         return float_gt_eq(left, right)
     return left >= right
 
 
 def generic_gt(left: C, right: C) -> bool:
+    "Checks if two left > right, caring about the sign of zeros of floats."
     if isinstance(left, float) and isinstance(right, float):
         return float_gt(left, right)
     return left > right
 
 
-def bool_not(value: bool) -> bool:
-    return not value
-
-
 def arith_int_div(dividend: int, divisor: int) -> int:
+    "Performs division on int, resulting in an int."
     try:
         return dividend // divisor
-    except ArithmeticError:
-        raise NoResultException()
+    except ArithmeticError as exc:
+        raise NoResultException() from exc
 
 
 def arith_dub_div(dividend: float, divisor: float) -> float:
+    "Performs division on Float64 (python float); dub stands for \"double\", like the c datatype."
     try:
         return dividend / divisor
-    except ArithmeticError:
-        raise NoResultException()
+    except ArithmeticError as exc:
+        raise NoResultException() from exc
 
 
 
 def arith_int_mod(dividend: int, divisor: int) -> int:
+    """
+    Performs remainder on ints, throws NoResultException if divisor is zero.
+    arith_int_mod(5, 3) == 2
+    arith_int_mod(-5, -3) == 1
+    arith_int_mod(5, -3) == -1
+    arith_int_mod(-5, -3) == -2
+    """
     try:
         return dividend % divisor
-    except ArithmeticError:
-        raise NoResultException()
+    except ArithmeticError as exc:
+        raise NoResultException() from exc
 
 
 def arith_dub_mod(dividend: float, divisor: float) -> float:
+    "Performs remainder on floats, throws NoResultException if it fails."
     try:
         return dividend % divisor
-    except ArithmeticError:
-        raise NoResultException()
+    except ArithmeticError as exc:
+        raise NoResultException() from exc
 
 
 def isinstance_int(val: Any) -> bool:
@@ -203,20 +232,22 @@ def isinstance_char(val: Any) -> bool:
     return isinstance(val, str) and len(val) == 1
 
 
-def cast_none(val: Any):
-    if isinstance(val, type(None)):
+def cast_none(val: Any) -> Any:
+    "Checks that value is not None."
+    if val is None:
         raise NoResultException()
     return val
 
 
 def cast_by_type(val: Any, py_type: type):
     "Cast to a python type by an isinstance check."
-    if not isinstance(val, py_type):
+    if isinstance(val, py_type):
+        return val
+    else:
         raise NoResultException()
-    return val
 
 
-def cast_by_test(val, predicate: Callable[[Any], bool]) -> Any:
+def cast_by_test(val, predicate: Callable[[Any], bool]) -> None:
     "This cast validates that a temper function meets some predicate, e.g. callable."
     if not predicate(val):
         raise NoResultException()
@@ -224,7 +255,10 @@ def cast_by_test(val, predicate: Callable[[Any], bool]) -> Any:
 
 
 class Nexter(object):
-    "Construct a consumer function that calls next on an iterator; mimics the javascript generator interface."
+    """
+    Construct a consumer function that calls next on an iterator
+    mimics the javascript generator interface.
+    """
     __slots__ = ("_iterator", "value", "done")
 
     def __init__(self, iterable):
@@ -236,26 +270,28 @@ class Nexter(object):
         if not self.done:
             try:
                 self.value = next(self._iterator)
-            except NoResultException as e:
+            except NoResultException as exc:
                 self.done = True
-                raise e
-            except StopIteration:
+                raise exc
+            except StopIteration as exc:
                 self.done = True
-                raise NoResultException()
+                raise NoResultException() from exc
         return self
 
 
 class Label(BaseException):
-    "A label enables labled breaks with reasonably readable python"
+    "A label enables labled breaks with reasonably readable python."
     __slots__ = ()
 
     def __enter__(self) -> "Label":
         return self
 
     def continue_(self) -> "Label":
+        "Continue to this label."
         raise self
 
     def break_(self) -> "Label":
+        "Break out of this label."
         raise self
 
     def __exit__(self, _exc_type: type, exc: BaseException, _traceback: Any) -> bool:
@@ -274,9 +310,11 @@ class LabelPair(BaseException):
         return self
 
     def break_(self) -> "LabelPair":
+        "Break out of this label."
         raise self
 
     def continue_(self) -> "InnerLabel":
+        "Continue to this label."
         raise self.continuing
 
     def __exit__(self, _exc_type: type, exc: BaseException, _exc_tb: Any) -> bool:
@@ -284,6 +322,7 @@ class LabelPair(BaseException):
 
 
 class InnerLabel(BaseException):
+    "Continue part of a LabelPair."
     __slots__ = ()
 
     def __enter__(self):
@@ -294,6 +333,8 @@ class InnerLabel(BaseException):
 
 
 class Symbol(object):
+    "A Temper Symbol."
+
     __slots__ = ("_text",)
     _text: str
 
@@ -302,6 +343,7 @@ class Symbol(object):
 
     @property
     def text(self) -> str:
+        "Returns the text of the symbol."
         return self._text
 
     def __eq__(self, other) -> bool:
@@ -313,19 +355,21 @@ class Symbol(object):
         return hash(self._text)
 
     def __repr__(self) -> str:
-        return "symbol({!r})".format(self._text)
+        return f"symbol({self.text!r})"
 
     def __str__(self) -> str:
         return self._text
 
 
-class StringSlice(object):
+class StringSlice:
+    "Substrings of various types, can be used to read charCodes."
     __slots__ = ()
 
     def __iter__(self):
         raise NotImplementedError()
 
-    def advance(self, count):
+    def advance(self, count: int) -> 'StringSlice':
+        "Move the cursor forward by the given number of characters."
         raise NotImplementedError()
 
     def _left_plus(self, count):
@@ -340,28 +384,34 @@ class StringSlice(object):
     def __str__(self) -> str:
         raise NotImplementedError()
 
-    def has_at_least(self, count):
+    def has_at_least(self, count: int) -> int:
+        "Checks if the length is enough."
         return count <= 0 or self._left_plus(count) != -1
 
-    def read(self):
+    def read(self) -> int:
+        "Get a the curent head's code point, depending on the slice type."
         try:
             return next(iter(self))
-        except StopIteration:
-            raise NoResultException()
+        except StopIteration as exc:
+            raise NoResultException() from exc
 
     @property
     def length(self) -> int:
+        "Temper's version of len()."
         return len(self)
 
     def to_string(self) -> str:
+        "Temper's version of str()."
         return str(self)
 
     @property
     def is_empty(self) -> bool:
+        "Checks if the current slice is empty (eg. if read would fail)."
         return not self
 
 
 class Utf8StringSlice(StringSlice):
+    "Implementation of a StringSlice that advances over utf8 codePoints."
     __slots__ = ("_content", "_left", "_right")
     _left: int
     _right: int
@@ -384,26 +434,26 @@ class Utf8StringSlice(StringSlice):
             # Iterate over every but the last code point in range.
             # The loop that follows iterates over bytes up to rsub in the last.
             while idx < ridx:
-                cp = ord(content[idx])
-                n = _utf8_size(cp)
-                for byte_index in range(sub, n):
-                    yield _utf8_byte_of(cp, byte_index, n)
+                code_point = ord(content[idx])
+                size = _utf8_size(code_point)
+                for byte_index in range(sub, size):
+                    yield _utf8_byte_of(code_point, byte_index, size)
                 idx, sub = idx + 1, 0
             if rsub:
-                cp = ord(content[idx])
-                n = _utf8_size(cp)
+                code_point = ord(content[idx])
+                size = _utf8_size(code_point)
                 for byte_index in range(sub, rsub):
-                    yield _utf8_byte_of(cp, byte_index, n)
+                    yield _utf8_byte_of(code_point, byte_index, size)
 
     def __bool__(self) -> bool:
         return self._left < self._right
 
     def __len__(self) -> int:
         left, right, content = self._left, self._right, self._content
-        n = -(left & 3) + (right & 3)
+        num = -(left & 3) + (right & 3)
         for i in range(left >> 2, right >> 2):
-            n += _utf8_size(ord(content[i]))
-        return n
+            num += _utf8_size(ord(content[i]))
+        return num
 
     def _left_plus(self, count: int) -> int:
         left, content = self._left, self._content
@@ -431,6 +481,7 @@ class Utf8StringSlice(StringSlice):
         return Utf8StringSlice(left, right, content)
 
     def limit(self, count: int) -> "Utf8StringSlice":
+        "Similar to advance, but moves the end count away from the current advance"
         left, right, content = self._left, self._left_plus(count), self._content
         if left >= right:
             left, right, content = 0, 0, ""
@@ -439,12 +490,14 @@ class Utf8StringSlice(StringSlice):
         return Utf8StringSlice(left, right, content)
 
     def to_json(self):
+        "Convert the Object into a JSON-compatable form."
         left, right, content = self._left, self._right, self._content
         return {"left": left, "right": right, "content": content}
 
     def __str__(self) -> str:
         left, right, content = self._left, self._right, self._content
-        if left >= right: return ""
+        if left >= right:
+            return ""
         lidx, lsub = left >> 2, left & 3
         ridx, rsub = right >> 2, right & 3
         pre, post = "", ""
@@ -459,6 +512,7 @@ class Utf8StringSlice(StringSlice):
         return pre + content[lidx:ridx] + post
 
 class Utf16StringSlice(StringSlice):
+    "Implementation of a StringSlice that advances over utf16 codePoints."
     __slots__ = ("_content", "_left", "_right")
     _left: int
     _right: int
@@ -475,26 +529,25 @@ class Utf16StringSlice(StringSlice):
 
     def __iter__(self) -> Iterable[int]:
         left, right, content = self._left, self._right, self._content
-        utf16 = "utf-16-be"
         lidx, lsub = left >> 1, left & 1
         ridx, rsub = right >> 1, right & 1
         idx = lidx
         if lsub and idx < ridx:
-            cp = ord(content[idx])
-            yield (0xDC00 | ((cp - 0x1_0000) & 0x3FF))
+            code_point = ord(content[idx])
+            yield 0xDC00 | ((code_point - 0x1_0000) & 0x3FF)
             idx += 1
         while idx < ridx:
-            cp = ord(content[idx])
-            if cp < 0x1_0000:
-                yield cp
+            code_point = ord(content[idx])
+            if code_point < 0x1_0000:
+                yield code_point
             else:
-                cp -= 0x1_0000
-                yield (0xD800 | ((cp >> 10) & 0x3FF))
-                yield (0xDC00 | (cp & 0x3FF))
+                code_point -= 0x1_0000
+                yield 0xD800 | ((code_point >> 10) & 0x3FF)
+                yield 0xDC00 | (code_point & 0x3FF)
             idx += 1
         if rsub and idx == ridx:
-            cp = ord(content[idx])
-            yield (0xD800 | (((cp - 0x1_0000) >> 10) & 0x3FF))
+            code_point = ord(content[idx])
+            yield (0xD800 | (((code_point - 0x1_0000) >> 10) & 0x3FF))
 
     def __bool__(self) -> bool:
         return bool(self._content)
@@ -503,18 +556,19 @@ class Utf16StringSlice(StringSlice):
         left, right, content = self._left, self._right, self._content
         lidx, lsub = left >> 1, left & 1
         ridx, rsub = right >> 1, right & 1
-        n = rsub + ridx - lidx
+        num = rsub + ridx - lidx
         if lsub:
             lidx += 1
         for i in range(lidx, ridx):
-            cp = ord(content[i])
-            if cp > 0x1_0000:
-                n += 1
-        return n
+            code_point = ord(content[i])
+            if code_point > 0x1_0000:
+                num += 1
+        return num
 
     def _left_plus(self, count: int) -> int:
         left, content = self._left, self._content
-        if count <= 0: return left
+        if count <= 0:
+            return left
         len_content = len(content)
         idx, sub = left >> 1, left & 1
 
@@ -539,6 +593,7 @@ class Utf16StringSlice(StringSlice):
         return Utf16StringSlice(left, right, content)
 
     def limit(self, count: int) -> "Utf16StringSlice":
+        "Similar to advance, but moves the end count away from the current advance"
         left, right, content = self._left, self._left_plus(count), self._content
         if left >= right:
             left, right, content = 0, 0, ""
@@ -547,6 +602,7 @@ class Utf16StringSlice(StringSlice):
         return Utf16StringSlice(left, right, content)
 
     def to_json(self):
+        "Convert the Object into a JSON-compatable form."
         left, right, content = self._left, self._right, self._content
         return {"left": left, "right": right, "content": content}
 
@@ -570,6 +626,7 @@ class Utf16StringSlice(StringSlice):
 
 
 class CodePointsStringSlice(StringSlice):
+    "Implementation of a StringSlice that advances over complete utf32 codePoints."
     __slots__ = ("_content", "_left", "_right")
     _left: int
     _right: int
@@ -610,6 +667,7 @@ class CodePointsStringSlice(StringSlice):
         return result
 
     def limit(self, count: int) -> "CodePointsStringSlice":
+        "Similar to advance, but moves the end count away from the current advance"
         if count <= 0:
             result = CodePointsStringSlice(0, 0, "")
         else:
@@ -623,14 +681,13 @@ class CodePointsStringSlice(StringSlice):
         return self._content[self._left : self._right]
 
     def to_json(self):
+        "Convert the Object into a JSON-compatable form."
         return {"left": self._left, "right": self._right, "content": self._content}
 
 
 class DenseBitVector(object):
     "An expandable bitvector backed by a bytearray."
     __slots__ = ("_bytearray",)
-    _not0 = re.compile(rb"[^\0]")  # Any byte other than 0
-    _tail0 = re.compile(rb"\0*$")  # Trailing 0 bytes
 
     def __init__(self, capacity: int):
         "Capacity is in bits."
@@ -638,53 +695,52 @@ class DenseBitVector(object):
 
     def __bool__(self) -> bool:
         "Test if any bit is set."
-        return bool(self._not0.search(self._bytearray))
+        return bool(rb'\0' in self._bytearray)
 
     def __bytes__(self) -> bytes:
         "Convert the bit vector into a read-only bytes value."
-        return self._tail0.sub(b"", self._bytearray)
+        return bytes(self._bytearray.rstrip(b'\0'))
 
     def get(self, idx: int) -> bool:
         "Read a bit from the vector as a boolean; or false if out of bounds."
         if idx < 0:
             return False
-        ba = self._bytearray
         byte_index = idx >> 3
-        if byte_index >= len(ba):
+        if byte_index >= len(self._bytearray):
             return False
-        return bool(ba[byte_index] & (1 << (idx & 7)))
+        return bool(self._bytearray[byte_index] & (1 << (idx & 7)))
 
     def set(self, idx: int, bit: bool):
         "set a bit in the bit vector, expanding the vector as needed."
         if idx < 0:
             raise NoResultException()
-        ba = self._bytearray
-        byte_size = len(ba)
+        byte_array = self._bytearray
+        byte_size = len(byte_array)
         byte_index = idx >> 3
         if byte_index >= byte_size:
-            ba.extend(b"\0" * (byte_index + 1 - byte_size))
+            byte_array.extend(b"\0" * (byte_index + 1 - byte_size))
         mask = 1 << (idx & 7)
         if bit:
-            ba[byte_index] |= mask
+            byte_array[byte_index] |= mask
         else:
-            ba[byte_index] &= ~mask
+            byte_array[byte_index] &= ~mask
 
 
 ## Constructors
 
 
 def string_utf8(string: str) -> Utf8StringSlice:
-    "Implements connected method String::utf8"
+    "Implements connected method String::utf8."
     return Utf8StringSlice(0, len(string) << 2, string)
 
 
 def string_utf16(string: str) -> Utf16StringSlice:
-    "Implements connected method String::utf16"
+    "Implements connected method String::utf16."
     return Utf16StringSlice(0, len(string) << 1, string)
 
 
 def string_code_points(string: str) -> CodePointsStringSlice:
-    "Implements connected method String::codePoints"
+    "Implements connected method String::codePoints."
     return CodePointsStringSlice(0, len(string), string)
 
 
@@ -692,14 +748,14 @@ def string_code_points(string: str) -> CodePointsStringSlice:
 
 
 def int_to_float64(value: int) -> float:
-    "Implements connected method Int::toFloat64"
+    "Implements connected method Int::toFloat64."
     try:
         return float(value)
-    except OverflowError:
-        raise NoResultException()
+    except OverflowError as exc:
+        raise NoResultException() from exc
 
 def int_to_float64_unsafe(value: int) -> float:
-    "Implements connected method Int::toFloat64Unsafe"
+    "Implements connected method Int::toFloat64Unsafe."
     try:
         return float(value)
     except OverflowError:
@@ -707,15 +763,15 @@ def int_to_float64_unsafe(value: int) -> float:
 
 
 def int_to_string(num, radix: int=10) -> str:
-    "Implements connected method Int::toString"
+    "Implements connected method Int::toString."
     if not 2 <= radix < 36:
         raise NoResultException()
     elif radix == 10:
         return str(num)
     elif radix == 16:
-        return "%x" % (num,)
+        return f"{num:x}"
     elif radix == 8:
-        return "%o" % (num,)
+        return f"{num:o}"
     else:
 
         def seq(rem):
@@ -733,17 +789,17 @@ def int_to_string(num, radix: int=10) -> str:
 
 
 def float64_to_int(value: float) -> int:
-    "Implements connected method Float64::toInt"
+    "Implements connected method Float64::toInt."
     # Potentially much more expensive in Python than other backends.
     # TODO Should we tighten the limits for float to int?
     try:
         return int(value)
-    except (OverflowError, ValueError):
-        raise NoResultException()
+    except (OverflowError, ValueError) as exc:
+        raise NoResultException() from exc
 
 
 def float64_to_int_unsafe(value: float) -> int:
-    "Implements connected method Float64::toIntUnsafe"
+    "Implements connected method Float64::toIntUnsafe."
     # Potentially much more expensive in Python than other backends.
     # TODO Should we tighten the limits for float to int?
     try:
@@ -759,7 +815,7 @@ def float64_to_int_unsafe(value: float) -> int:
 
 
 def float64_to_string(value: float) -> str:
-    "Implements connected method Float64::toString"
+    "Implements connected method Float64::toString."
     if value == inf:
         return "∞"
     elif value == -inf:
@@ -771,11 +827,14 @@ def float64_to_string(value: float) -> str:
 
 
 def boolean_to_string(value: bool) -> str:
+    "Turns a stirng into a boolean (lowercase like temper)."
     return "true" if value else "false"
 
 
-def date_to_string(value: datetime.date) -> str:
-    return "%04d-%02d-%02d" % (value.year, value.month, value.day)
+def date_to_string(value: Date) -> str:
+    "Turns a date into a string, YYYY-MM-DD."
+    return f"{value.year:04d}-{value.month:02d}-{value.day:02d}"
+
 
 def string_split(string: str, separator: str) -> Tuple[str, ...]:
     "split a string, returning a list of elements."
@@ -793,8 +852,8 @@ def list_get(lst: Sequence[T], index: int) -> T:
         raise NoResultException()
     try:
         return lst[index]
-    except IndexError:
-        raise NoResultException()
+    except IndexError as exc:
+        raise NoResultException() from exc
 
 
 def list_get_or(lst: Sequence[T], index: int, default: T) -> T:
@@ -841,15 +900,20 @@ def list_builder_remove_last(lst: List[T]) -> T:
     "Pops and returns the last item, if any, else raises."
     try:
         return lst.pop()
-    except IndexError:
-        raise NoResultException
+    except IndexError as exc:
+        raise NoResultException from exc
 
 def list_builder_reverse(lst: List[T]):
     "Reverses a list in place."
     lst.reverse()
 
 
-def list_builder_splice(lst: List[T], index: Union[int, EllipsisType] = ..., remove_count: Union[int, EllipsisType] = ..., new_values: Union[Sequence[T], EllipsisType] = ...) -> Tuple[T, ...]:
+def list_builder_splice(
+        lst: List[T],
+        index: Union[int, EllipsisType] = ...,
+        remove_count: Union[int, EllipsisType] = ...,
+        new_values: Union[Sequence[T], EllipsisType] = ...
+    ) -> Tuple[T, ...]:
     "Remove some items and insert others."
     # Work through defaults and bounds.
     if index is ... or index < 0:
@@ -864,24 +928,23 @@ def list_builder_splice(lst: List[T], index: Union[int, EllipsisType] = ..., rem
     lst[index:end_index] = () if new_values is ... else new_values
     return result
 
-
 def list_builder_set(lst: List[T], idx: int, val: T):
     "set a list element, returning no result if out of bounds, or void on success."
     if idx < 0:
         raise NoResultException()
     try:
         lst[idx] = val
-    except IndexError:
-        raise NoResultException()
+    except IndexError as exc:
+        raise NoResultException() from exc
     return None
 
 
 def list_map_dropping(lst: List[T], func: Callable[[T], Union[T, NoReturn]]) -> Tuple[T, ...]:
     "Map a list of elements, omitting any for which func produces no result."
     results = []
-    for e in lst:
+    for entry in lst:
         try:
-            results.append(func(e))
+            results.append(func(entry))
         except NoResultException:
             pass
     return tuple(results)
@@ -905,60 +968,67 @@ def dense_bit_vector_set(instance: DenseBitVector, idx: int, bit: bool) -> None:
     instance.set(idx, bit)
 
 
-def map_constructor(entries):
-    return types.MappingProxyType(dict(entries))
+Key = TypeVar("Key")
+Value = TypeVar("Value")
 
 
-def map_builder_remove(builder, key):
+class Pair(Generic[Key, Value]):
+    """
+    A Pair from key to value.
+    Often Used as MapKey's
+    """
+    key: Key
+    value: Value
+    __slots__ = ("key", "value")
+    def __init__(self, key: Key, value: Value) -> None:
+        self.key = key
+        self.value = value
+    def __subscript__(self, index: int) -> Union[Key, Value]:
+        if index == 0:
+            return self.key
+        elif index == 1:
+            return self.value
+        else:
+            raise NoResultException()
+
+
+def map_constructor(entries: Sequence[Pair[Key, Value]]) -> MappingProxyType[Key, Value]:
+    "Implements Map's constructor."
+    return MappingProxyType({entry.key:entry.value for entry in entries})
+
+
+def map_builder_remove(builder: dict[Key, Value], key: Key) -> Value:
+    "Implements MapBuilder's remove, which deletes an entry in a MapBuilder."
     try:
         return builder.pop(key)
-    except KeyError:
-        raise NoResultException()
+    except KeyError as exc:
+        raise NoResultException() from exc
 
-def map_builder_set(builder, key, value):
+
+def map_builder_set(builder: dict[Key, Value], key: Key, value: Value) -> None:
+    "Set's entry on a MapBuilder."
     builder[key] = value
 
 
-def map_builder_to_map(builder):
-    return map_constructor(builder)
+def map_builder_to_map(builder: dict[Key, Value]) -> MappingProxyType[Key, Value]:
+    "Converts a MapBuilder to a map."
+    return MappingProxyType(builder)
 
 
-# Generic named tuple is tricky, by the way, so just use simple mode. Example
-# trick if we ever want to go there: https://stackoverflow.com/a/58621986
-# For vscode, at least, I had to adjust that example to repeat the fields in
-# the generic subclass, and I had to explicitly type the variable.
-Pair = namedtuple("Pair", ["key", "value"])
-
-
-_missing = object()
-
-
-def mapped_get(map, key):
-    result = map.get(key, _missing)
-    if result is _missing:
+def mapped_get(mapped: dict[Key, Value], key: Key) -> Value:
+    "Get a value from a map by key."
+    if key in mapped:
+        return mapped[key]
+    else:
         raise NoResultException()
-    return result
 
 
-def mapped_to_list(map):
-    return tuple(Pair(*item) for item in map.items())
+def mapped_to_list(mapped: dict[Key, Value]) -> Tuple[Pair[Key, Value], ...]:
+    "Implements toList() for Mapping objects."
+    return tuple(Pair(*item) for item in mapped.items())
 
 
 ## Utility functions
-
-
-def _count_iter(iterable: Iterable[int]) -> int:
-    "Use a constrained deque to consume an enumeration of the iterable, giving us the count."
-    last = deque(enumerate(iterable, 1), 1)
-    return last.pop()[0] if last else 0
-
-
-def _str_iter_at(string: Iterable[str], offset: int) -> Iterable[str]:
-    "Return a string iterator skipped forward by 'offset' characters."
-    iterator: Any = iter(string)
-    if offset:
-        iterator.__setstate__(offset)
-    return iterator
 
 
 def _utf8_size(code_point: int) -> int:
@@ -972,6 +1042,9 @@ def _utf8_size(code_point: int) -> int:
         return 4
 
 
+# never gets hit, so this is just to skip a check in the below function
+_utf8_never = (0, 0, 0)
+
 # (and_mask, or_mask, shift) triplets for each byte depending on the high 4 bits of a
 # codepoint in UTF-8 encoding.
 #
@@ -983,19 +1056,19 @@ def _utf8_size(code_point: int) -> int:
 # | U+10000          | U+10FFFF        | 1111_0xxx | 10xx_xxxx | 10xx_xxxx | 10xx_xxxx |
 _utf8_byte_infos = (
   (0b0111_1111, 0, 0),
-  None,
-  None,
-  None,
+  _utf8_never,
+  _utf8_never,
+  _utf8_never,
 
   (0b0001_1111, 0b1100_0000, 6),
   (0b0011_1111, 0b1000_0000, 0),
-  None,
-  None,
+  _utf8_never,
+  _utf8_never,
 
   (0b0000_1111, 0b1110_0000, 12),
   (0b0011_1111, 0b1000_0000, 6),
   (0b0011_1111, 0b1000_0000, 0),
-  None,
+  _utf8_never,
 
   (0b0000_0111, 0b1111_0000, 18),
   (0b0011_1111, 0b1000_0000, 12),
@@ -1008,14 +1081,6 @@ def _utf8_byte_of(code_point: int, byte_offset: int, n_bytes: int) -> int:
     and_mask, or_mask, shift = _utf8_byte_infos[(n_bytes - 1) * 4 + byte_offset]
     return ((code_point >> shift) & and_mask) | or_mask
 
+
 def _utf16_size(char: str) -> int:
     return 1 + (ord(char) >= 0x10000)
-
-
-def _iter_pairs(iterable: Sequence[T]):
-    "Convert a stream like [1, 2, 3, 4] to [(1, 2), (3, 4)]."
-    iterator = iter(iterable)
-    # The semantics of zip are that it draws from iterators in a round-robin fashion. Passing the same iterator
-    # twice thus converts a list into pairs.
-    # We"re not using zip_longest, so we must ensure the list has an even length.
-    return zip(iterator, iterator)

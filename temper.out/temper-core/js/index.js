@@ -1033,3 +1033,18 @@ export function nexter(f) {
 
 // We might customize this in the future, but actual global console works today.
 export const globalConsole = console;
+
+/** Formats itself as a string on demand from a callback. */
+export class LazyString {
+  constructor(make) {
+    this.make = make;
+    this.value = null;
+  }
+
+  toString() {
+    if (this.value === null) {
+      this.value = this.make.call();
+    }
+    return this.value;
+  }
+}

@@ -1,5 +1,5 @@
 import {
-  compiledRegexCompileFormatted as compiledRegexCompileFormatted_68, compiledRegexCompiledFound as compiledRegexCompiledFound_69, compiledRegexCompiledFind as compiledRegexCompiledFind_70, compiledRegexCompiledReplace as compiledRegexCompiledReplace_71, eqGeneric as eqGeneric_72, regexFormatterPushCodeTo as regexFormatterPushCodeTo_73, regexFormatterAdjustCodeSet as regexFormatterAdjustCodeSet_74, ltGeneric as ltGeneric_75, listGet as listGet_76, gtGeneric as gtGeneric_77, listify as listify_24, listJoin as listJoin_5, listBuilderAdd as listBuilderAdd_2, strCat as strCat_4, stringCodePoints as stringCodePoints_29, eqGeneric as eqGeneric_26, intToString as intToString_28, neGeneric as neGeneric_27, InterfaceType as InterfaceType_1, requireInstanceOf as requireInstanceOf__240, noResultException as noResultException__242, requireIsSafeInteger as requireIsSafeInteger__334
+  compiledRegexCompileFormatted as compiledRegexCompileFormatted_68, compiledRegexCompiledFound as compiledRegexCompiledFound_69, compiledRegexCompiledFind as compiledRegexCompiledFind_70, compiledRegexCompiledReplace as compiledRegexCompiledReplace_71, eqGeneric as eqGeneric_72, regexFormatterPushCodeTo as regexFormatterPushCodeTo_73, regexFormatterAdjustCodeSet as regexFormatterAdjustCodeSet_74, ltGeneric as ltGeneric_75, listGet as listGet_76, gtGeneric as gtGeneric_77, listify as listify_1, listJoin as listJoin_49, listBuilderAdd as listBuilderAdd_47, strCat as strCat_8, stringCodePoints as stringCodePoints_6, eqGeneric as eqGeneric_3, intToString as intToString_5, neGeneric as neGeneric_4, InterfaceType as InterfaceType_46, requireInstanceOf as requireInstanceOf__240, noResultException as noResultException__242, requireIsSafeInteger as requireIsSafeInteger__334
 } from "@temperlang/core";
 function methodCompiled78() {
   let return_79;
@@ -33,11 +33,11 @@ function methodReplace91(text_92, format_93) {
 }
 /**
  * @typedef {{
- *   compiled: () => CompiledRegex, found: (text_82: string) => boolean, find: (text_87: string) => "Unsupported type: Map\u003cString, Group\u003e | NoResult", replace: (text_92: string, format_93: (arg0: Map<string, Group>) => string) => string
+ *   compiled: () => CompiledRegex, found: (text_82: string) => boolean, find: (text_87: string) => Map<string, Group>, replace: (text_92: string, format_93: (arg0: Map<string, Group>) => string) => string
  * }}
  * Regex
  */
-export const Regex = new InterfaceType_1("Regex", [["m", "compiled", methodCompiled78], ["m", "found", methodFound81], ["m", "find", methodFind86], ["m", "replace", methodReplace91]], [], 1);
+export const Regex = new InterfaceType_46("Regex", [["m", "compiled", methodCompiled78], ["m", "found", methodFound81], ["m", "find", methodFind86], ["m", "replace", methodReplace91]], [], 1);
 ;
 export class Capture {
   /** @type {string} */
@@ -73,7 +73,7 @@ Regex.implementedBy(Capture);
  * @typedef {{}}
  * CodePart
  */
-export const CodePart = new InterfaceType_1("CodePart", [], [Regex], 2);
+export const CodePart = new InterfaceType_46("CodePart", [], [Regex], 2);
 ;
 export class CodePoints {
   /** @type {string} */
@@ -97,13 +97,13 @@ CodePart.implementedBy(CodePoints);
  * @typedef {{}}
  * Special
  */
-export const Special = new InterfaceType_1("Special", [], [Regex], 2);
+export const Special = new InterfaceType_46("Special", [], [Regex], 2);
 ;
 /**
  * @typedef {{}}
  * SpecialSet
  */
-export const SpecialSet = new InterfaceType_1("SpecialSet", [], [CodePart, Special], 3);
+export const SpecialSet = new InterfaceType_46("SpecialSet", [], [CodePart, Special], 3);
 ;
 export class CodeRange {
   /** @type {number} */
@@ -191,14 +191,14 @@ export class Repeat {
   #item_134;
   /** @type {number} */
   #min_135;
-  /** @type {"Unsupported type: Int | Null"} */
+  /** @type {number | null} */
   #max_136;
   /** @type {boolean} */
   #reluctant_137;
   /**
    * @param {Regex} item_138
    * @param {number} min_139
-   * @param {"Unsupported type: Int | Null"} max_140
+   * @param {number | null} max_140
    * @param {boolean} reluctant_141
    */
   constructor(item_138, min_139, max_140, reluctant_141) {
@@ -225,7 +225,7 @@ export class Repeat {
     return_146 = this.#min_135;
     return return_146;
   }
-  /** @returns {"Unsupported type: Int | Null"} */
+  /** @returns {number | null} */
   get max() {
     let return_148;
     return_148 = this.#max_136;
@@ -322,7 +322,7 @@ class RegexRefs_169 {
       group_174 = t_178;
     }
     if (!(orObject_175 !== void 0)) {
-      t_179 = new Or(listify_24());
+      t_179 = new Or(listify_1());
       orObject_175 = t_179;
     }
     this.#codePoints_170 = codePoints_173;
@@ -375,7 +375,7 @@ export class CompiledRegex {
   }
   /**
    * @param {string} text_197
-   * @returns {"Unsupported type: Map\u003cString, Group\u003e | NoResult"}
+   * @returns {Map<string, Group>}
    */
   find(text_197) {
     let return_198;
@@ -431,7 +431,7 @@ class RegexFormatter_209 {
       return return_220;
     }
     let t_221 = fn_218;
-    let t_222 = listJoin_5(t_217, "", t_221);
+    let t_222 = listJoin_49(t_217, "", t_221);
     return_216 = t_222;
     return return_216;
   }
@@ -555,43 +555,43 @@ class RegexFormatter_209 {
                     this.pushSequence(t_239);
                   } else if (eqGeneric_72(regex_224, Begin)) {
                     try {
-                      listBuilderAdd_2(this.#out_213, "^");
+                      listBuilderAdd_47(this.#out_213, "^");
                     } catch {
                       break s__1211_241;
                     }
                   } else if (eqGeneric_72(regex_224, Dot)) {
                     try {
-                      listBuilderAdd_2(this.#out_213, ".");
+                      listBuilderAdd_47(this.#out_213, ".");
                     } catch {
                       break s__1211_241;
                     }
                   } else if (eqGeneric_72(regex_224, End)) {
                     try {
-                      listBuilderAdd_2(this.#out_213, "\u0024");
+                      listBuilderAdd_47(this.#out_213, "\u0024");
                     } catch {
                       break s__1211_241;
                     }
                   } else if (eqGeneric_72(regex_224, WordBoundary)) {
                     try {
-                      listBuilderAdd_2(this.#out_213, "\\b");
+                      listBuilderAdd_47(this.#out_213, "\\b");
                     } catch {
                       break s__1211_241;
                     }
                   } else if (eqGeneric_72(regex_224, Digit)) {
                     try {
-                      listBuilderAdd_2(this.#out_213, "\\d");
+                      listBuilderAdd_47(this.#out_213, "\\d");
                     } catch {
                       break s__1211_241;
                     }
                   } else if (eqGeneric_72(regex_224, Space)) {
                     try {
-                      listBuilderAdd_2(this.#out_213, "\\s");
+                      listBuilderAdd_47(this.#out_213, "\\s");
                     } catch {
                       break s__1211_241;
                     }
                   } else if (eqGeneric_72(regex_224, Word)) {
                     try {
-                      listBuilderAdd_2(this.#out_213, "\\w");
+                      listBuilderAdd_47(this.#out_213, "\\w");
                     } catch {
                       break s__1211_241;
                     }
@@ -617,13 +617,13 @@ class RegexFormatter_209 {
     let t_247;
     let t_248;
     {
-      listBuilderAdd_2(this.#out_213, "(");
+      listBuilderAdd_47(this.#out_213, "(");
       t_248 = this.#out_213;
       t_246 = capture_244.name;
       this.pushCaptureName(t_248, t_246);
       t_247 = capture_244.item;
       this.pushRegex(t_247);
-      listBuilderAdd_2(this.#out_213, ")");
+      listBuilderAdd_47(this.#out_213, ")");
       return_245 = void 0;
     }
     return return_245;
@@ -636,7 +636,7 @@ class RegexFormatter_209 {
   pushCaptureName(out_250, name_251) {
     let return_252;
     {
-      listBuilderAdd_2(out_250, strCat_4("?\u003c", name_251, "\u003e"));
+      listBuilderAdd_47(out_250, strCat_8("?\u003c", name_251, "\u003e"));
       return_252 = void 0;
     }
     return return_252;
@@ -663,7 +663,7 @@ class RegexFormatter_209 {
     let t_262;
     let t_263;
     let t_264 = codePoints_258.value;
-    let t_265 = stringCodePoints_29(t_264);
+    let t_265 = stringCodePoints_6(t_264);
     let slice_266 = t_265;
     while (true) {
       t_261 = slice_266.isEmpty;
@@ -686,9 +686,9 @@ class RegexFormatter_209 {
   pushCodeRange(codeRange_268) {
     let return_269;
     {
-      listBuilderAdd_2(this.#out_213, "[");
+      listBuilderAdd_47(this.#out_213, "[");
       this.pushCodeRangeUnwrapped(codeRange_268);
-      listBuilderAdd_2(this.#out_213, "]");
+      listBuilderAdd_47(this.#out_213, "]");
       return_269 = void 0;
     }
     return return_269;
@@ -703,7 +703,7 @@ class RegexFormatter_209 {
     let t_274 = codeRange_271.min;
     this.pushCode(t_274, true);
     {
-      listBuilderAdd_2(this.#out_213, "-");
+      listBuilderAdd_47(this.#out_213, "-");
       t_273 = codeRange_271.max;
       this.pushCode(t_273, true);
       return_272 = void 0;
@@ -738,14 +738,14 @@ class RegexFormatter_209 {
         s__1216_290: {
           try {
             t_284 = requireInstanceOf__240(adjusted_288, CodeSet);
-            listBuilderAdd_2(this.#out_213, "[");
+            listBuilderAdd_47(this.#out_213, "[");
           } catch {
             break s__1216_290;
           }
           t_282 = t_284.negated;
           if (t_282) {
             try {
-              listBuilderAdd_2(this.#out_213, "^");
+              listBuilderAdd_47(this.#out_213, "^");
             } catch {
               break s__1216_290;
             }
@@ -768,7 +768,7 @@ class RegexFormatter_209 {
             }
           }
           try {
-            listBuilderAdd_2(this.#out_213, "]");
+            listBuilderAdd_47(this.#out_213, "]");
             t_286 = void 0;
             break s__1215_289;
           } catch {
@@ -861,7 +861,7 @@ class RegexFormatter_209 {
     s__1225_313: if (! t_312) {
       s__1226_314: {
         try {
-          listBuilderAdd_2(this.#out_213, "(?:");
+          listBuilderAdd_47(this.#out_213, "(?:");
           t_308 = or_303.items;
           t_309 = listGet_76(t_308, 0);
         } catch {
@@ -874,7 +874,7 @@ class RegexFormatter_209 {
           t_307 = t_305.length;
           if (ltGeneric_75(i_315, t_307)) {
             try {
-              listBuilderAdd_2(this.#out_213, "|");
+              listBuilderAdd_47(this.#out_213, "|");
               t_306 = or_303.items;
               t_310 = listGet_76(t_306, i_315);
             } catch {
@@ -884,7 +884,7 @@ class RegexFormatter_209 {
             i_315 = i_315 + 1;
           } else {
             try {
-              listBuilderAdd_2(this.#out_213, ")");
+              listBuilderAdd_47(this.#out_213, ")");
             } catch {
               break s__1226_314;
             }
@@ -918,10 +918,10 @@ class RegexFormatter_209 {
     s__1230_331: {
       let min_332;
       try {
-        listBuilderAdd_2(this.#out_213, "(?:");
+        listBuilderAdd_47(this.#out_213, "(?:");
         t_319 = repeat_317.item;
         this.pushRegex(t_319);
-        listBuilderAdd_2(this.#out_213, ")");
+        listBuilderAdd_47(this.#out_213, ")");
         t_320 = repeat_317.min;
         min_332 = t_320;
         t_324 = repeat_317.max;
@@ -929,68 +929,68 @@ class RegexFormatter_209 {
         break s__1230_331;
       }
       const max_333 = t_324;
-      if (eqGeneric_26(min_332, 0)) {
-        t_325 = eqGeneric_26(max_333, 1);
+      if (eqGeneric_3(min_332, 0)) {
+        t_325 = eqGeneric_3(max_333, 1);
       } else {
         t_325 = false;
       }
       if (t_325) {
         try {
-          listBuilderAdd_2(this.#out_213, "?");
+          listBuilderAdd_47(this.#out_213, "?");
         } catch {
           break s__1230_331;
         }
       } else {
-        if (eqGeneric_26(min_332, 0)) {
-          t_326 = eqGeneric_26(max_333, null);
+        if (eqGeneric_3(min_332, 0)) {
+          t_326 = eqGeneric_3(max_333, null);
         } else {
           t_326 = false;
         }
         if (t_326) {
           try {
-            listBuilderAdd_2(this.#out_213, "*");
+            listBuilderAdd_47(this.#out_213, "*");
           } catch {
             break s__1230_331;
           }
         } else {
-          if (eqGeneric_26(min_332, 1)) {
-            t_327 = eqGeneric_26(max_333, null);
+          if (eqGeneric_3(min_332, 1)) {
+            t_327 = eqGeneric_3(max_333, null);
           } else {
             t_327 = false;
           }
           if (t_327) {
             try {
-              listBuilderAdd_2(this.#out_213, "+");
+              listBuilderAdd_47(this.#out_213, "+");
             } catch {
               break s__1230_331;
             }
           } else {
             t_328 = this.#out_213;
-            t_321 = intToString_28(min_332);
+            t_321 = intToString_5(min_332);
             try {
-              listBuilderAdd_2(t_328, strCat_4("{", t_321));
+              listBuilderAdd_47(t_328, strCat_8("{", t_321));
             } catch {
               break s__1230_331;
             }
-            if (neGeneric_27(min_332, max_333)) {
+            if (neGeneric_4(min_332, max_333)) {
               try {
-                listBuilderAdd_2(this.#out_213, ",");
+                listBuilderAdd_47(this.#out_213, ",");
               } catch {
                 break s__1230_331;
               }
-              if (neGeneric_27(max_333, null)) {
+              if (neGeneric_4(max_333, null)) {
                 t_330 = this.#out_213;
                 try {
                   t_329 = requireIsSafeInteger__334(max_333);
-                  t_322 = intToString_28(t_329);
-                  listBuilderAdd_2(t_330, t_322);
+                  t_322 = intToString_5(t_329);
+                  listBuilderAdd_47(t_330, t_322);
                 } catch {
                   break s__1230_331;
                 }
               }
             }
             try {
-              listBuilderAdd_2(this.#out_213, "}");
+              listBuilderAdd_47(this.#out_213, "}");
             } catch {
               break s__1230_331;
             }
@@ -1000,7 +1000,7 @@ class RegexFormatter_209 {
       t_323 = repeat_317.reluctant;
       if (t_323) {
         try {
-          listBuilderAdd_2(this.#out_213, "?");
+          listBuilderAdd_47(this.#out_213, "?");
         } catch {
           break s__1230_331;
         }
@@ -1045,7 +1045,7 @@ class RegexFormatter_209 {
   }
   /**
    * @param {CodePart} codePart_345
-   * @returns {"Unsupported type: Int | Null"}
+   * @returns {number | null}
    */
   maxCode(codePart_345) {
     let return_346;
@@ -1089,7 +1089,7 @@ class RegexFormatter_209 {
           t_363 = null;
         } else {
           let max_369 = 0;
-          t_352 = stringCodePoints_29(value_368);
+          t_352 = stringCodePoints_6(value_368);
           let slice_370 = t_352;
           while (true) {
             t_353 = slice_370.isEmpty;
@@ -1125,15 +1125,15 @@ class RegexFormatter_209 {
           t_356 = t_365.max;
           t_366 = t_356;
         } else if (eqGeneric_72(codePart_345, Digit)) {
-          t_347 = stringCodePoints_29("9");
+          t_347 = stringCodePoints_6("9");
           t_357 = t_347.read();
           t_366 = t_357;
         } else if (eqGeneric_72(codePart_345, Space)) {
-          t_348 = stringCodePoints_29(" ");
+          t_348 = stringCodePoints_6(" ");
           t_358 = t_348.read();
           t_366 = t_358;
         } else if (eqGeneric_72(codePart_345, Word)) {
-          t_349 = stringCodePoints_29("z");
+          t_349 = stringCodePoints_6("z");
           t_359 = t_349.read();
           t_366 = t_359;
         } else {
@@ -1265,7 +1265,7 @@ export const Word = t_395;
  */
 export function entire(item_396) {
   let return_397;
-  let t_398 = new Sequence(listify_24(Begin, item_396, End));
+  let t_398 = new Sequence(listify_1(Begin, item_396, End));
   return_397 = t_398;
   return return_397;
 };
@@ -1301,6 +1301,6 @@ export function optional(item_403, reluctant_404) {
 let t_407 = new RegexRefs_169();
 /** @type {RegexRefs_169} */
 const regexRefs_200 = t_407;
-/** @type {Type_66} */
+/** @type {Type_44} */
 const return_408 = "RegexFormatter__29: Type";
 export default return_408;

@@ -14,12 +14,12 @@ export class Rule {
   #regex_4;
   /** @type {TokenKind} */
   #kind_5;
-  /** @type {"Unsupported type: String | Null"} */
+  /** @type {string | null} */
   #state_6;
   /**
    * @param {string} regex_7
    * @param {TokenKind} kind_8
-   * @param {"Unsupported type: String | Null"} state_9
+   * @param {string | null} state_9
    */
   constructor(regex_7, kind_8, state_9) {
     let return_10;
@@ -44,7 +44,7 @@ export class Rule {
     return_14 = this.#kind_5;
     return return_14;
   }
-  /** @returns {"Unsupported type: String | Null"} */
+  /** @returns {string | null} */
   get state() {
     let return_16;
     return_16 = this.#state_6;

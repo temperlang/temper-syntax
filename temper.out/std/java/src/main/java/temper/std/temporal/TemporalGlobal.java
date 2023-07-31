@@ -17,17 +17,17 @@ public final class TemporalGlobal {
         int t_102;
         boolean t_103;
         boolean t_104;
-        s__1196_1197: {
+        s__1192_1193: {
             try {
                 t_100 = Core.modIntInt(year__18, 4);
             } catch (NoResult ignored$1) {
-                break s__1196_1197;
+                break s__1192_1193;
             }
             if (t_100 == 0) {
                 try {
                     t_101 = Core.modIntInt(year__18, 100);
                 } catch (NoResult ignored$2) {
-                    break s__1196_1197;
+                    break s__1192_1193;
                 }
                 if (t_101 != 0) {
                     t_103 = true;
@@ -35,7 +35,7 @@ public final class TemporalGlobal {
                     try {
                         t_102 = Core.modIntInt(year__18, 400);
                     } catch (NoResult ignored$3) {
-                        break s__1196_1197;
+                        break s__1192_1193;
                     }
                     t_103 = t_102 == 0;
                 }
