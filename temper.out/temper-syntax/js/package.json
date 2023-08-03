@@ -1,5 +1,6 @@
 {
     "name": "temper-syntax",
+    "version": "0.1.0",
     "type": "module",
     "dependencies": {
         "@temperlang/core": "0.0.5"

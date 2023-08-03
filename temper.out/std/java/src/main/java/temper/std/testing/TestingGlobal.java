@@ -9,7 +9,7 @@ import temper.core.Core.GlobalConsole;
 public final class TestingGlobal {
     private TestingGlobal() {
     }
-    public static final GlobalConsole vGlobalConsole__44_1202;
+    public static final GlobalConsole vGlobalConsole__44_1230;
     public static boolean passing__3;
     public static List<String> t_68;
     public static List<String> messages__4;
@@ -32,7 +32,7 @@ public final class TestingGlobal {
         messages__4 = t_57;
         body__6.run();
         if (passing__3) {
-            vGlobalConsole__44_1202.log(name__5 + ": Passed");
+            vGlobalConsole__44_1230.log(name__5 + ": Passed");
         } else {
             Function<String, String> fn__54 = it__8 -> {
                 String return__38;
@@ -41,11 +41,11 @@ public final class TestingGlobal {
             };
             t_61 = fn__54;
             t_62 = Core.listJoinObj(messages__4, "\n", t_61);
-            vGlobalConsole__44_1202.log(name__5 + ": Failed " + t_62);
+            vGlobalConsole__44_1230.log(name__5 + ": Failed " + t_62);
         }
     }
     static {
-        vGlobalConsole__44_1202 = Core.console(Logger.getLogger("temper.std.testing"));
+        vGlobalConsole__44_1230 = Core.console(Logger.getLogger("temper.std.testing"));
         /* (DeclarationMetadata   (MetadataKey @visibility)   (ValueReference \private)) */
         passing__3 = true;
         t_68 = new ArrayList<>();

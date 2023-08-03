@@ -9,8 +9,8 @@ packages = [{include = "temper_pygments"}]
 [tool.poetry.dependencies]
 python = "^3.8"
 pygments = "^2.12.0"
-temper-core = {path = "../temper-syntax/temper.out/temper-core/py", develop = true}
-temper-syntax = {path = "../temper-syntax/temper.out/temper-syntax/py", develop = true}
+temper-core = "0.0.5"
+temper-syntax = "0.1.0"
 
 [tool.poetry.plugins."pygments.lexers"]
 temper = "temper_pygments:TemperLexer"

@@ -1,6 +1,6 @@
 [project]
 name = "temper-syntax"
-version = "0.0.1"
+version = "0.1.0"
 description = ""
 readme = ""
 requires-python = "~=3.8"
@@ -24,7 +24,7 @@ dependencies = [
 
 [tool.poetry]
 name = "temper-syntax"
-version = "0.0.1"
+version = "0.1.0"
 license = ""
 description = ""
 authors = [  ]
