@@ -31,7 +31,7 @@ Main thing, though, is the list of rules for definition tokens.
 
 Multiline comments in Temper don't nest at present, so this should be fine.
 
-          new Rule(raw"(?s)/\*.*\*/", CommentMultiline),
+          new Rule(raw"(?s)/\*.*?\*/", CommentMultiline),
           new Rule(
             words("false", "NaN", "null", "true", "void"),
             KeywordConstant,

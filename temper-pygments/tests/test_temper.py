@@ -46,6 +46,14 @@ class TemperLexerTest(unittest.TestCase):
         ]
         self.assertEqual(expected, [*tokens])
 
+    def test_comment_excess(self):
+        lexer = TemperLexer()
+        tokens = lexer.get_tokens("/**/a;/**/b;")
+        expected = []
+        found = [*tokens]
+        print(found)
+        self.assertEqual(expected, found)
+
     def test_interp(self):
         lexer = TemperLexer()
         tokens = lexer.get_tokens(
