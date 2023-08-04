@@ -7,6 +7,6 @@ public final class ConfigGlobal {
     public static Void export;
     static {
         name = "temper-syntax";
-        version = "0.1.0";
+        version = "0.1.1";
     }
 }
