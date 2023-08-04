@@ -1,62 +1,56 @@
 import {
-  globalConsole as vGlobalConsole__44_391, listBuilderAdd as listBuilderAdd_53, strCat as strCat_8, listJoin as listJoin_51, InterfaceType as InterfaceType_46
+  listBuilderAdd as listBuilderAdd_1, globalConsole as vGlobalConsole__44_2, strCat as strCat_3, listJoin as listJoin_4
 } from "@temperlang/core";
-/**
- * @typedef {{}}
- * TestFixtureBase
- */
-export const TestFixtureBase = new InterfaceType_46("TestFixtureBase", [], [], 1);
-;
 /** @type {boolean} */
-let passing_392 = true;
+let passing_5 = true;
 /** @type {Array<string>} */
-let t_393 = [];
+let t_6 = [];
 /** @type {Array<string>} */
-let messages_394 = t_393;
+let messages_7 = t_6;
 /**
- * @param {boolean} success_395
- * @param {() => string} message_396
+ * @param {boolean} success_8
+ * @param {() => string} message_9
  * @returns {void}
  */
-export function assert(success_395, message_396) {
-  let return_397;
-  let t_398;
-  if (! success_395) {
-    passing_392 = false;
-    t_398 = message_396();
-    listBuilderAdd_53(messages_394, t_398);
+export function assert(success_8, message_9) {
+  let return_10;
+  let t_11;
+  if (! success_8) {
+    passing_5 = false;
+    t_11 = message_9();
+    listBuilderAdd_1(messages_7, t_11);
   }
-  return_397 = void 0;
-  return return_397;
+  return_10 = void 0;
+  return return_10;
 };
 /**
- * @param {string} name_399
- * @param {() => void} body_400
+ * @param {string} name_12
+ * @param {() => void} body_13
  * @returns {void}
  */
-export function test(name_399, body_400) {
-  let return_401;
-  let t_402;
-  let t_403;
-  passing_392 = true;
-  let t_404 = [];
-  messages_394 = t_404;
-  body_400();
-  if (passing_392) {
-    vGlobalConsole__44_391.log(strCat_8(name_399, ": Passed"));
+export function test(name_12, body_13) {
+  let return_14;
+  let t_15;
+  let t_16;
+  passing_5 = true;
+  let t_17 = [];
+  messages_7 = t_17;
+  body_13();
+  if (passing_5) {
+    vGlobalConsole__44_2.log(strCat_3(name_12, ": Passed"));
   } else {
-    function fn_405(it_406) {
-      let return_407;
-      return_407 = it_406;
-      return return_407;
+    function fn_18(it_19) {
+      let return_20;
+      return_20 = it_19;
+      return return_20;
     }
-    t_402 = fn_405;
-    t_403 = listJoin_51(messages_394, "\n", t_402);
-    vGlobalConsole__44_391.log(strCat_8(name_399, ": Failed ", t_403));
+    t_15 = fn_18;
+    t_16 = listJoin_4(messages_7, "\n", t_15);
+    vGlobalConsole__44_2.log(strCat_3(name_12, ": Failed ", t_16));
   }
-  return_401 = void 0;
-  return return_401;
+  return_14 = void 0;
+  return return_14;
 };
 /** @type {void} */
-const return_408 = void 0;
-export default return_408;
+const return_21 = void 0;
+export default return_21;
