@@ -12,7 +12,7 @@ class TemperLexerTest(unittest.TestCase):
                 """
                 let n = 5; // Comment
                 /* Longer /*
-                Comment here. */ let m = n + 5;
+                Comment here. */ a; */ let m = n + 5;
                 """
             )
         )
@@ -28,7 +28,13 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Whitespace, " "),
             (Token.Comment.Singleline, "// Comment"),
             (Token.Whitespace, "\n"),
-            (Token.Comment.Multiline, "/* Longer /*\nComment here. */"),
+            (Token.Comment.Multiline, "/*"),
+            (Token.Comment.Multiline, " Longer "),
+            (Token.Comment.Multiline, "/*"),
+            (Token.Comment.Multiline, "\nComment here. "),
+            (Token.Comment.Multiline, "*/"),
+            (Token.Comment.Multiline, " a; "),
+            (Token.Comment.Multiline, "*/"),
             (Token.Whitespace, " "),
             (Token.Keyword.Declaration, "let"),
             (Token.Whitespace, " "),
@@ -44,15 +50,29 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Punctuation, ";"),
             (Token.Whitespace, "\n"),
         ]
+        # print([*tokens])
         self.assertEqual(expected, [*tokens])
 
     def test_comment_excess(self):
         lexer = TemperLexer()
+        # We were accidentally being too greedy before on comments.
+        # This checks that we don't include between two comments as comment.
         tokens = lexer.get_tokens("/**/a;/**/b;")
-        expected = []
-        found = [*tokens]
-        print(found)
-        self.assertEqual(expected, found)
+        expected = [
+            (Token.Comment.Multiline, "/*"),
+            (Token.Comment.Multiline, "*/"),
+            # Not comment here!
+            (Token.Name, "a"),
+            (Token.Punctuation, ";"),
+            # Back to comment.
+            (Token.Comment.Multiline, "/*"),
+            (Token.Comment.Multiline, "*/"),
+            # And off again.
+            (Token.Name, "b"),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, "\n"),
+        ]
+        self.assertEqual(expected, [*tokens])
 
     def test_interp(self):
         lexer = TemperLexer()

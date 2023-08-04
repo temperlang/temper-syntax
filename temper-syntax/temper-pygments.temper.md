@@ -28,10 +28,7 @@ Main thing, though, is the list of rules for definition tokens.
         new Pair("root", [
           new Rule(raw"\s+", Whitespace),
           new Rule("//.*?$", CommentSingleline),
-
-Multiline comments in Temper don't nest at present, so this should be fine.
-
-          new Rule(raw"(?s)/\*.*?\*/", CommentMultiline),
+          new Rule(raw"/\*", CommentMultiline, "nestedcomment"),
           new Rule(
             words("false", "NaN", "null", "true", "void"),
             KeywordConstant,
@@ -63,6 +60,19 @@ Multiline comments in Temper don't nest at present, so this should be fine.
           new Rule(raw"\d+\.?\d*|\.\d+", Number),
           new Rule("@${nameRegex}", NameDecorator),
           new Rule(nameRegex, Name),
+        ].as<List<RuleOption>>()),
+
+#### Multiline/Nested Comments
+
+We plan to support nested comments soon, so just implement that already here.
+The technique here is based on the `nestedcomment` for the [D Language lexer for
+Pygments][dlang-nestedcomment].
+
+        new Pair("nestedcomment", [
+          new Rule(raw"[^*/]+", CommentMultiline),
+          new Rule(raw"/\*", CommentMultiline, "#push"),
+          new Rule(raw"\*/", CommentMultiline, "#pop"),
+          new Rule(raw"[*/]", CommentMultiline),
         ].as<List<RuleOption>>()),
 
 #### Strings
@@ -99,5 +109,6 @@ Be sloppy with names for now. TODO More complete Unicode support.
 
     let { ... } = import("./pygments");
 
+[dlang-nestedcomment]: https://github.com/pygments/pygments/blob/d0acfff1121f9ee3696b01a9077ebe9990216634/pygments/lexers/d.py#L242
 [issue1631]: https://github.com/temper-lang/temper/issues/1631
 [pygments-lexer-docs]: https://pygments.org/docs/lexerdevelopment/
