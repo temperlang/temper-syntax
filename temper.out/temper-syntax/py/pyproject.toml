@@ -41,7 +41,7 @@ requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-python_functions = "test_[!_]*"
+python_functions = "test___*"
 python_files = "test_*.py"
 python_classes = "Test__*"
 testpaths = ["tests"]

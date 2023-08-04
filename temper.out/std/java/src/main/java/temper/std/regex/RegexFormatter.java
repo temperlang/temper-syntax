@@ -52,12 +52,12 @@ public final class RegexFormatter {
         } catch (NoResult ignored$1) {
             t_737 = false;
         }
-        s__1206_1207: {
+        s__1201_1202: {
             if (t_737) {
                 try {
                     t_738 = Core.cast(Capture.class, regex__233);
                 } catch (NoResult ignored$2) {
-                    break s__1206_1207;
+                    break s__1201_1202;
                 }
                 this.pushCapture(t_738);
             } else {
@@ -71,7 +71,7 @@ public final class RegexFormatter {
                     try {
                         t_742 = Core.cast(CodePoints.class, regex__233);
                     } catch (NoResult ignored$4) {
-                        break s__1206_1207;
+                        break s__1201_1202;
                     }
                     this.pushCodePoints(t_742, false);
                 } else {
@@ -85,7 +85,7 @@ public final class RegexFormatter {
                         try {
                             t_746 = Core.cast(CodeRange.class, regex__233);
                         } catch (NoResult ignored$6) {
-                            break s__1206_1207;
+                            break s__1201_1202;
                         }
                         this.pushCodeRange(t_746);
                     } else {
@@ -99,7 +99,7 @@ public final class RegexFormatter {
                             try {
                                 t_750 = Core.cast(CodeSet.class, regex__233);
                             } catch (NoResult ignored$8) {
-                                break s__1206_1207;
+                                break s__1201_1202;
                             }
                             this.pushCodeSet(t_750);
                         } else {
@@ -113,7 +113,7 @@ public final class RegexFormatter {
                                 try {
                                     t_754 = Core.cast(Or.class, regex__233);
                                 } catch (NoResult ignored$10) {
-                                    break s__1206_1207;
+                                    break s__1201_1202;
                                 }
                                 this.pushOr(t_754);
                             } else {
@@ -127,7 +127,7 @@ public final class RegexFormatter {
                                     try {
                                         t_758 = Core.cast(Repeat.class, regex__233);
                                     } catch (NoResult ignored$12) {
-                                        break s__1206_1207;
+                                        break s__1201_1202;
                                     }
                                     this.pushRepeat(t_758);
                                 } else {
@@ -141,50 +141,50 @@ public final class RegexFormatter {
                                         try {
                                             t_762 = Core.cast(Sequence.class, regex__233);
                                         } catch (NoResult ignored$14) {
-                                            break s__1206_1207;
+                                            break s__1201_1202;
                                         }
                                         this.pushSequence(t_762);
                                     } else if (Objects.equals(regex__233, Begin)) {
                                         try {
                                             Core.listAdd(this.out, "^");
                                         } catch (NoResult ignored$15) {
-                                            break s__1206_1207;
+                                            break s__1201_1202;
                                         }
                                     } else if (Objects.equals(regex__233, Dot)) {
                                         try {
                                             Core.listAdd(this.out, ".");
                                         } catch (NoResult ignored$16) {
-                                            break s__1206_1207;
+                                            break s__1201_1202;
                                         }
                                     } else if (Objects.equals(regex__233, End)) {
                                         try {
                                             Core.listAdd(this.out, "$");
                                         } catch (NoResult ignored$17) {
-                                            break s__1206_1207;
+                                            break s__1201_1202;
                                         }
                                     } else if (Objects.equals(regex__233, WordBoundary)) {
                                         try {
                                             Core.listAdd(this.out, "\\b");
                                         } catch (NoResult ignored$18) {
-                                            break s__1206_1207;
+                                            break s__1201_1202;
                                         }
                                     } else if (Objects.equals(regex__233, Digit)) {
                                         try {
                                             Core.listAdd(this.out, "\\d");
                                         } catch (NoResult ignored$19) {
-                                            break s__1206_1207;
+                                            break s__1201_1202;
                                         }
                                     } else if (Objects.equals(regex__233, Space)) {
                                         try {
                                             Core.listAdd(this.out, "\\s");
                                         } catch (NoResult ignored$20) {
-                                            break s__1206_1207;
+                                            break s__1201_1202;
                                         }
                                     } else if (Objects.equals(regex__233, Word)) {
                                         try {
                                             Core.listAdd(this.out, "\\w");
                                         } catch (NoResult ignored$21) {
-                                            break s__1206_1207;
+                                            break s__1201_1202;
                                         }
                                     }
                                 }
@@ -267,21 +267,21 @@ public final class RegexFormatter {
         } catch (NoResult ignored$22) {
             t_710 = false;
         }
-        s__1210_1212: {
+        s__1206_1208: {
             if (t_710) {
-                s__1211_1213: {
+                s__1207_1209: {
                     try {
                         t_711 = Core.cast(CodeSet.class, adjusted__265);
                         Core.listAdd(this.out, "[");
                     } catch (NoResult ignored$23) {
-                        break s__1211_1213;
+                        break s__1207_1209;
                     }
                     t_1069 = t_711.isNegated();
                     if (t_1069) {
                         try {
                             Core.listAdd(this.out, "^");
                         } catch (NoResult ignored$24) {
-                            break s__1211_1213;
+                            break s__1207_1209;
                         }
                     }
                     int i__266 = 0;
@@ -293,7 +293,7 @@ public final class RegexFormatter {
                             try {
                                 t_716 = Core.listGet(t_1066, i__266);
                             } catch (NoResult ignored$25) {
-                                break s__1211_1213;
+                                break s__1207_1209;
                             }
                             this.pushCodeSetItem(t_716);
                             i__266 = i__266 + 1;
@@ -303,7 +303,7 @@ public final class RegexFormatter {
                     }
                     try {
                         Core.listAdd(this.out, "]");
-                        break s__1210_1212;
+                        break s__1206_1208;
                     } catch (NoResult ignored$26) {
                     }
                 }
@@ -330,12 +330,12 @@ public final class RegexFormatter {
         } catch (NoResult ignored$27) {
             t_697 = false;
         }
-        s__1216_1217: {
+        s__1212_1213: {
             if (t_697) {
                 try {
                     t_698 = Core.cast(CodePoints.class, codePart__272);
                 } catch (NoResult ignored$28) {
-                    break s__1216_1217;
+                    break s__1212_1213;
                 }
                 this.pushCodePoints(t_698, true);
             } else {
@@ -349,7 +349,7 @@ public final class RegexFormatter {
                     try {
                         t_702 = Core.cast(CodeRange.class, codePart__272);
                     } catch (NoResult ignored$30) {
-                        break s__1216_1217;
+                        break s__1212_1213;
                     }
                     this.pushCodeRangeUnwrapped(t_702);
                 } else {
@@ -363,7 +363,7 @@ public final class RegexFormatter {
                         try {
                             t_706 = Core.cast(SpecialSet.class, codePart__272);
                         } catch (NoResult ignored$32) {
-                            break s__1216_1217;
+                            break s__1212_1213;
                         }
                         this.pushRegex(t_706);
                     }
@@ -382,14 +382,14 @@ public final class RegexFormatter {
         Regex t_694;
         List<Regex> t_1049 = or__275.getItems();
         boolean t_1056 = t_1049.isEmpty();
-        s__1218_1221: if (!t_1056) {
-            s__1219_1222: {
+        s__1214_1217: if (!t_1056) {
+            s__1215_1218: {
                 try {
                     Core.listAdd(this.out, "(?:");
                     t_1054 = or__275.getItems();
                     t_689 = Core.listGet(t_1054, 0);
                 } catch (NoResult ignored$33) {
-                    break s__1219_1222;
+                    break s__1215_1218;
                 }
                 this.pushRegex(t_689);
                 int i__277 = 1;
@@ -410,9 +410,9 @@ public final class RegexFormatter {
                         try {
                             Core.listAdd(this.out, ")");
                         } catch (NoResult ignored$35) {
-                            break s__1219_1222;
+                            break s__1215_1218;
                         }
-                        break s__1218_1221;
+                        break s__1214_1217;
                     }
                 }
             }
@@ -432,7 +432,7 @@ public final class RegexFormatter {
         List<String> t_680;
         int t_681;
         List<String> t_683;
-        s__1223_1224: {
+        s__1219_1220: {
             int min__281;
             try {
                 Core.listAdd(this.out, "(?:");
@@ -443,7 +443,7 @@ public final class RegexFormatter {
                 min__281 = t_1044;
                 t_675 = repeat__279.getMax();
             } catch (NoResult ignored$36) {
-                break s__1223_1224;
+                break s__1219_1220;
             }
             @Nullable Integer max__282 = t_675;
             if (min__281 == 0) {
@@ -455,7 +455,7 @@ public final class RegexFormatter {
                 try {
                     Core.listAdd(this.out, "?");
                 } catch (NoResult ignored$37) {
-                    break s__1223_1224;
+                    break s__1219_1220;
                 }
             } else {
                 if (min__281 == 0) {
@@ -467,7 +467,7 @@ public final class RegexFormatter {
                     try {
                         Core.listAdd(this.out, "*");
                     } catch (NoResult ignored$38) {
-                        break s__1223_1224;
+                        break s__1219_1220;
                     }
                 } else {
                     if (min__281 == 1) {
@@ -479,7 +479,7 @@ public final class RegexFormatter {
                         try {
                             Core.listAdd(this.out, "+");
                         } catch (NoResult ignored$39) {
-                            break s__1223_1224;
+                            break s__1219_1220;
                         }
                     } else {
                         t_680 = this.out;
@@ -487,13 +487,13 @@ public final class RegexFormatter {
                         try {
                             Core.listAdd(t_680, "{" + t_1045);
                         } catch (NoResult ignored$40) {
-                            break s__1223_1224;
+                            break s__1219_1220;
                         }
                         if (!Core.boxedEqRev(min__281, max__282)) {
                             try {
                                 Core.listAdd(this.out, ",");
                             } catch (NoResult ignored$41) {
-                                break s__1223_1224;
+                                break s__1219_1220;
                             }
                             if (!Objects.equals(max__282, null)) {
                                 t_683 = this.out;
@@ -502,14 +502,14 @@ public final class RegexFormatter {
                                     t_1046 = Integer.toString(t_681);
                                     Core.listAdd(t_683, t_1046);
                                 } catch (NoResult ignored$42) {
-                                    break s__1223_1224;
+                                    break s__1219_1220;
                                 }
                             }
                         }
                         try {
                             Core.listAdd(this.out, "}");
                         } catch (NoResult ignored$43) {
-                            break s__1223_1224;
+                            break s__1219_1220;
                         }
                     }
                 }
@@ -519,7 +519,7 @@ public final class RegexFormatter {
                 try {
                     Core.listAdd(this.out, "?");
                 } catch (NoResult ignored$44) {
-                    break s__1223_1224;
+                    break s__1219_1220;
                 }
             }
             return;
@@ -532,7 +532,7 @@ public final class RegexFormatter {
         int t_1040;
         Regex t_670;
         int i__286 = 0;
-        s__1225_1226: {
+        s__1222_1223: {
             while (true) {
                 t_1037 = sequence__284.getItems();
                 t_1040 = t_1037.size();
@@ -546,7 +546,7 @@ public final class RegexFormatter {
                     this.pushRegex(t_670);
                     i__286 = i__286 + 1;
                 } else {
-                    break s__1225_1226;
+                    break s__1222_1223;
                 }
             }
             throw Core.noResult();
@@ -580,12 +580,12 @@ public final class RegexFormatter {
         } catch (NoResult ignored$46) {
             t_643 = false;
         }
-        s__1227_1228: {
+        s__1224_1225: {
             if (t_643) {
                 try {
                     t_644 = Core.cast(CodePoints.class, codePart__288);
                 } catch (NoResult ignored$47) {
-                    break s__1227_1228;
+                    break s__1224_1225;
                 }
                 t_1026 = t_644.getValue();
                 String value__290 = t_1026;
@@ -625,7 +625,7 @@ public final class RegexFormatter {
                     try {
                         t_657 = Core.cast(CodeRange.class, codePart__288);
                     } catch (NoResult ignored$49) {
-                        break s__1227_1228;
+                        break s__1224_1225;
                     }
                     t_1032 = t_657.getMax();
                     t_666 = t_1032;

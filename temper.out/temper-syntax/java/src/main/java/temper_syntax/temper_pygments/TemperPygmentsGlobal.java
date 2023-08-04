@@ -11,14 +11,14 @@ public final class TemperPygmentsGlobal {
     public static String words__6(String ...names__43$varargs) {
         List<String> names__43 = Arrays.asList(names__43$varargs);
         String return__5;
-        Function<String, String> fn__218 = x__45 -> {
-            String return__143;
-            return__143 = x__45;
-            return return__143;
+        Function<String, String> fn__240 = x__45 -> {
+            String return__155;
+            return__155 = x__45;
+            return return__155;
         };
-        Function<String, String> t_220 = fn__218;
-        String t_221 = Core.listJoinObj(names__43, "|", t_220);
-        return__5 = "\\b(?:" + t_221 + ")\\b";
+        Function<String, String> t_242 = fn__240;
+        String t_243 = Core.listJoinObj(names__43, "|", t_242);
+        return__5 = "\\b(?:" + t_243 + ")\\b";
         return return__5;
     }
     static {

@@ -5,5 +5,5 @@ export const name = "temper-syntax";
 export const version = "0.1.0";
 ;
 /** @type {void} */
-const return_206 = void 0;
-export default return_206;
+const return_212 = void 0;
+export default return_212;
