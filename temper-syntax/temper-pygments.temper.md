@@ -48,9 +48,9 @@ Main thing, though, is the list of rules for definition tokens.
           ),
           new Rule(
             words(
-              "AnyValue", "Boolean", "Float64", "Function", "Int", "List",
-              "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped",
-              "NoResult", "Null", "String", "StringSlice", "Void",
+              "AnyValue", "Boolean", "Bubble", "Float64", "Function", "Int",
+              "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey",
+              "Mapped", "Null", "String", "StringSlice", "Void",
             ),
             NameBuiltin,
           ),
