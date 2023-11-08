@@ -4,7 +4,7 @@
 
 Use a marker interface for various kinds of rules.
 
-    export /*sealed*/ class RuleOption {}
+    export /*sealed*/ interface RuleOption {}
 
 ### Rule
 
@@ -30,7 +30,7 @@ You can also include other states into a state.
 
 Or inherit from other base class rules.
 
-    export class Inherit extends Rule {}
+    export class Inherit extends RuleOption {}
     export let inherit = new Inherit();
 
 ## Token Kinds
