@@ -56,7 +56,8 @@ enough to do with strings.
       public static number: Kind = new Kind("Number");
       public static operator: Kind = new Kind("Operator");
       public static punctuation: Kind = new Kind("Punctuation");
-      public static stringKind: Kind = new Kind("String");
+      public static stringPlain: Kind = new Kind("String");
+      public static stringRegex: Kind = new Kind("String.Regex");
       public static stringInterpol: Kind = new Kind("String.Interpol");
       public static whitespace: Kind = new Kind("Whitespace");
     }

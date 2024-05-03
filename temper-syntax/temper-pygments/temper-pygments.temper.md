@@ -54,7 +54,7 @@ Main thing, though, is the list of rules for definition tokens.
             ),
             Kind.nameBuiltin,
           ),
-          new Rule("\"", Kind.stringKind, "string"),
+          new Rule("\"", Kind.stringPlain, "string"),
           new Rule("[-=+*&|<>]+|/=?", Kind.operator),
           new Rule("[{}();:.,]", Kind.punctuation),
           new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
@@ -86,9 +86,9 @@ I'm not sure if order matters here. Seems simpler, but if I don't exclude `${`
 from core string chars, I don't get interp.
 
         new Pair("string", [
-          new Rule("\"", Kind.stringKind, "#pop"),
+          new Rule("\"", Kind.stringPlain, "#pop"),
           new Rule(raw"\$\{", Kind.stringInterpol, "interpolation"),
-          new Rule("(?:[^\"$]|\\$[^{])+", Kind.stringKind),
+          new Rule("(?:[^\"$]|\\$[^{])+", Kind.stringPlain),
         ].as<List<RuleOption>>()),
 
       ]);
