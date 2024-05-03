@@ -59,7 +59,7 @@ Main thing, though, is the list of rules for definition tokens.
           new Rule("[{}();:.,]", Kind.punctuation),
           new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
           new Rule("@${nameRegex}", Kind.nameDecorator),
-          new Rule(nameRegex, Kind.name),
+          new Rule(nameRegex, Kind.nameKind),
         ].as<List<RuleOption>>()),
 
 #### Multiline/Nested Comments
@@ -107,7 +107,7 @@ Be sloppy with names for now. TODO More complete Unicode support.
 
 ## Imports and links
 
-    let { ... } = import("./pygments");
+    let { ... } = import("../pygments");
 
 [dlang-nestedcomment]: https://github.com/pygments/pygments/blob/d0acfff1121f9ee3696b01a9077ebe9990216634/pygments/lexers/d.py#L242
 [issue1631]: https://github.com/temper-lang/temper/issues/1631

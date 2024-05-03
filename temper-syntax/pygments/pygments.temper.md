@@ -16,6 +16,8 @@ The most common case is a basic rule.
       public state: String | Null = null;
     }
 
+    export /*sealed*/ interface TokenKind {}
+
 ### Includes
 
 You can also include other states into a state.
@@ -35,8 +37,6 @@ Or marker to inherit from other base class rules.
 
 ## Token Kinds
 
-    export /*sealed*/ interface TokenKind {}
-
 ### Simple Kinds
 
 The token kinds need to map to pygments token kind objects, which should be easy
@@ -50,7 +50,7 @@ enough to do with strings.
       public static keyword: Kind = new Kind("Keyword");
       public static keywordConstant: Kind = new Kind("Keyword.Constant");
       public static keywordDeclaration: Kind = new Kind("Keyword.Declaration");
-      public static name: Kind = new Kind("Name");
+      public static nameKind: Kind = new Kind("Name");
       public static nameBuiltin: Kind = new Kind("Name.Builtin");
       public static nameDecorator: Kind = new Kind("Name.Decorator");
       public static number: Kind = new Kind("Number");

@@ -34,5 +34,3 @@ to 4-space indentation from line start for now.
         ].as<List<RuleOption>>()),
       ]);
     }
-
-    let { ... } = import("./pygments");
