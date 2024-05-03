@@ -26,25 +26,25 @@ Main thing, though, is the list of rules for definition tokens.
 #### Root
 
         new Pair("root", [
-          new Rule(raw"\s+", Whitespace),
-          new Rule("//.*?$", CommentSingleline),
-          new Rule(raw"/\*", CommentMultiline, "nestedcomment"),
+          new Rule(raw"\s+", Kind.whitespace),
+          new Rule("//.*?$", Kind.commentSingleline),
+          new Rule(raw"/\*", Kind.commentMultiline, "nestedcomment"),
           new Rule(
             words("false", "NaN", "null", "true", "void"),
-            KeywordConstant,
+            Kind.keywordConstant,
           ),
           new Rule(
             words(
               "class", "interface", "let", "private", "public", "sealed", "var",
             ),
-            KeywordDeclaration,
+            Kind.keywordDeclaration,
           ),
           new Rule(
             words(
               "do", "else", "export", "extends", "fn", "if", "import", "is",
               "match", "new", "orelse",
             ),
-            Keyword,
+            Kind.keyword,
           ),
           new Rule(
             words(
@@ -52,14 +52,14 @@ Main thing, though, is the list of rules for definition tokens.
               "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey", "Mapped",
               "NoResult", "Null", "String", "StringSlice", "Void",
             ),
-            NameBuiltin,
+            Kind.nameBuiltin,
           ),
-          new Rule("\"", StringKind, "string"),
-          new Rule("[-=+*&|<>]+|/=?", Operator),
-          new Rule("[{}();:.,]", Punctuation),
-          new Rule(raw"\d+\.?\d*|\.\d+", Number),
-          new Rule("@${nameRegex}", NameDecorator),
-          new Rule(nameRegex, Name),
+          new Rule("\"", Kind.stringKind, "string"),
+          new Rule("[-=+*&|<>]+|/=?", Kind.operator),
+          new Rule("[{}();:.,]", Kind.punctuation),
+          new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
+          new Rule("@${nameRegex}", Kind.nameDecorator),
+          new Rule(nameRegex, Kind.name),
         ].as<List<RuleOption>>()),
 
 #### Multiline/Nested Comments
@@ -69,16 +69,16 @@ The technique here is based on the `nestedcomment` for the [D Language lexer for
 Pygments][dlang-nestedcomment].
 
         new Pair("nestedcomment", [
-          new Rule(raw"[^*/]+", CommentMultiline),
-          new Rule(raw"/\*", CommentMultiline, "#push"),
-          new Rule(raw"\*/", CommentMultiline, "#pop"),
-          new Rule(raw"[*/]", CommentMultiline),
+          new Rule(raw"[^*/]+", Kind.commentMultiline),
+          new Rule(raw"/\*", Kind.commentMultiline, "#push"),
+          new Rule(raw"\*/", Kind.commentMultiline, "#pop"),
+          new Rule(raw"[*/]", Kind.commentMultiline),
         ].as<List<RuleOption>>()),
 
 #### Strings
 
         new Pair("interpolation", [
-          new Rule("}", StringInterpol, "#pop"),
+          new Rule("}", Kind.stringInterpol, "#pop"),
           include("root"),
         ].as<List<RuleOption>>()),
 
@@ -86,9 +86,9 @@ I'm not sure if order matters here. Seems simpler, but if I don't exclude `${`
 from core string chars, I don't get interp.
 
         new Pair("string", [
-          new Rule("\"", StringKind, "#pop"),
-          new Rule(raw"\$\{", StringInterpol, "interpolation"),
-          new Rule("(?:[^\"$]|\\$[^{])+", StringKind),
+          new Rule("\"", Kind.stringKind, "#pop"),
+          new Rule(raw"\$\{", Kind.stringInterpol, "interpolation"),
+          new Rule("(?:[^\"$]|\\$[^{])+", Kind.stringKind),
         ].as<List<RuleOption>>()),
 
       ]);

@@ -44,25 +44,22 @@ enough to do with strings.
 
     export class Kind extends TokenKind {
       public name: builtins.String;
+
+      public static commentMultiline: Kind = new Kind("Comment.Multiline");
+      public static commentSingleline: Kind = new Kind("Comment.Singleline");
+      public static keyword: Kind = new Kind("Keyword");
+      public static keywordConstant: Kind = new Kind("Keyword.Constant");
+      public static keywordDeclaration: Kind = new Kind("Keyword.Declaration");
+      public static name: Kind = new Kind("Name");
+      public static nameBuiltin: Kind = new Kind("Name.Builtin");
+      public static nameDecorator: Kind = new Kind("Name.Decorator");
+      public static number: Kind = new Kind("Number");
+      public static operator: Kind = new Kind("Operator");
+      public static punctuation: Kind = new Kind("Punctuation");
+      public static stringKind: Kind = new Kind("String");
+      public static stringInterpol: Kind = new Kind("String.Interpol");
+      public static whitespace: Kind = new Kind("Whitespace");
     }
-
-And I'd like to make these static members of `Kind`, but we have a
-[codegen bug][temp-after-static] with that right now.
-
-    export let CommentMultiline: Kind = new Kind("Comment.Multiline");
-    export let CommentSingleline: Kind = new Kind("Comment.Singleline");
-    export let Keyword: Kind = new Kind("Keyword");
-    export let KeywordConstant: Kind = new Kind("Keyword.Constant");
-    export let KeywordDeclaration: Kind = new Kind("Keyword.Declaration");
-    export let Name: Kind = new Kind("Name");
-    export let NameBuiltin: Kind = new Kind("Name.Builtin");
-    export let NameDecorator: Kind = new Kind("Name.Decorator");
-    export let Number: Kind = new Kind("Number");
-    export let Operator: Kind = new Kind("Operator");
-    export let Punctuation: Kind = new Kind("Punctuation");
-    export let StringKind: Kind = new Kind("String");
-    export let StringInterpol: Kind = new Kind("String.Interpol");
-    export let Whitespace: Kind = new Kind("Whitespace");
 
 ### Kind By Group
 
