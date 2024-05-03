@@ -1,7 +1,14 @@
 import pygments.unistring as uni
 from pygments.lexer import Lexer, bygroups, include, inherit, using
 from pygments.token import Token
-from temper_syntax.pygments import ByGroups, Kind, Include, Inherit, Rule, Using
+from temper_syntax.pygments import (
+    ByGroups,
+    Kind,
+    Include,
+    inherit as inherit_rule,
+    Rule,
+    Using,
+)
 
 
 def adapt_kind(kind):
@@ -21,7 +28,7 @@ def adapt_regex(regex: str):
 def adapt_rule(rule):
     if isinstance(rule, Include):
         return include(rule.state)
-    elif isinstance(rule, Inherit):
+    elif rule == inherit_rule:
         return inherit
     elif isinstance(rule, Rule):
         result = (adapt_regex(rule.regex), adapt_kind(rule.kind))
