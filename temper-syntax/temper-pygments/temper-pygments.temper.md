@@ -26,9 +26,7 @@ Main thing, though, is the list of rules for definition tokens.
 #### Root
 
         new Pair("root", [
-          new Rule(raw"\s+", Kind.whitespace),
-          new Rule("//.*?$", Kind.commentSingleline),
-          new Rule(raw"/\*", Kind.commentMultiline, "nestedcomment"),
+          include("commentsandwhitespace"),
           new Rule(
             words("false", "NaN", "null", "true", "void"),
             Kind.keywordConstant,
@@ -46,6 +44,7 @@ Main thing, though, is the list of rules for definition tokens.
             ),
             Kind.keyword,
           ),
+          new Rule(words("return", "yield"), Kind.keyword, "slashstartsregex"),
           new Rule(
             words(
               "AnyValue", "Boolean", "Float64", "Function", "Int", "List",
@@ -55,11 +54,19 @@ Main thing, though, is the list of rules for definition tokens.
             Kind.nameBuiltin,
           ),
           new Rule("\"", Kind.stringPlain, "string"),
-          new Rule("[-=+*&|<>]+|/=?", Kind.operator),
-          new Rule("[{}();:.,]", Kind.punctuation),
+          new Rule("[-=+*&|<>]+|/=?", Kind.operator, "slashstartsregex"),
+          new Rule("[{}();:.,]", Kind.punctuation, "slashstartsregex"),
           new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
           new Rule("@${nameRegex}", Kind.nameDecorator),
           new Rule(nameRegex, Kind.nameKind),
+        ].as<List<RuleOption>>()),
+
+#### Comments and Whitespace
+
+        new Pair("commentsandwhitespace", [
+          new Rule(raw"\s+", Kind.whitespace),
+          new Rule("//.*?$", Kind.commentSingleline),
+          new Rule(raw"/\*", Kind.commentMultiline, "nestedcomment"),
         ].as<List<RuleOption>>()),
 
 #### Multiline/Nested Comments
@@ -73,6 +80,19 @@ Pygments][dlang-nestedcomment].
           new Rule(raw"/\*", Kind.commentMultiline, "#push"),
           new Rule(raw"\*/", Kind.commentMultiline, "#pop"),
           new Rule(raw"[*/]", Kind.commentMultiline),
+        ].as<List<RuleOption>>()),
+
+#### Regex Literals
+
+        new Pair("slashstartsregex", [
+          include("commentsandwhitespace"),
+          new Rule(
+            // Copied from pygments js lexer.
+            raw"/(\\.|[^[/\\\n]|\[(\\.|[^\]\\\n])*])+/([gimuysd]+\b|\B)",
+            Kind.stringRegex,
+            "#pop",
+          ),
+          default("#pop"),
         ].as<List<RuleOption>>()),
 
 #### Strings

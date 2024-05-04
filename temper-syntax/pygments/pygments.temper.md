@@ -18,6 +18,16 @@ The most common case is a basic rule.
 
     export /*sealed*/ interface TokenKind {}
 
+### Default
+
+Default state transition if nothing else matches.
+
+    export class Default extends RuleOption {
+      public state: String;
+    }
+
+    export let default(state: String): Default { new Default(state) }
+
 ### Includes
 
 You can also include other states into a state.
@@ -32,8 +42,8 @@ You can also include other states into a state.
 
 Or marker to inherit from other base class rules.
 
-    export class InheritKind extends TokenKind {}
-    export let inherit = new Rule("", new InheritKind());
+    export class Inherit extends RuleOption {}
+    export let inherit = new Inherit();
 
 ## Token Kinds
 
