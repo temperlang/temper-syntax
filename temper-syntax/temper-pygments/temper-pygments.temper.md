@@ -53,6 +53,8 @@ Main thing, though, is the list of rules for definition tokens.
             ),
             Kind.nameBuiltin,
           ),
+          // rgx
+          new Rule(raw"(?<=\brgx)${"\""}", Kind.stringRegex, "stringregex"),
           new Rule("\"", Kind.stringPlain, "string"),
           new Rule("[-=+*&|<>]+|/=?", Kind.operator, "slashstartsregex"),
           new Rule("[{}();:.,]", Kind.punctuation, "slashstartsregex"),
@@ -101,15 +103,8 @@ Pygments][dlang-nestedcomment].
           new Rule("}", Kind.stringInterpol, "#pop"),
           include("root"),
         ].as<List<RuleOption>>()),
-
-I'm not sure if order matters here. Seems simpler, but if I don't exclude `${`
-from core string chars, I don't get interp.
-
-        new Pair("string", [
-          new Rule("\"", Kind.stringPlain, "#pop"),
-          new Rule(raw"\$\{", Kind.stringInterpol, "interpolation"),
-          new Rule("(?:[^\"$]|\\$[^{])+", Kind.stringPlain),
-        ].as<List<RuleOption>>()),
+        stringish("string", Kind.stringPlain),
+        stringish("stringregex", Kind.stringRegex),
 
       ]);
 
@@ -117,9 +112,32 @@ from core string chars, I don't get interp.
 
 ## Helper functions and values
 
+### Names
+
 Be sloppy with names for now. TODO More complete Unicode support.
 
     let nameRegex = "[_<<Lu>><<Ll>>][_<<Lu>><<Ll>>0-9]*";
+
+### String support
+
+And use a support function to customise the token kind for `rgx` strings.
+
+    let stringish(
+      key: String,
+      kind: TokenKind,
+    ): Pair<String, List<RuleOption>> {
+
+I'm not sure if order matters here. Seems simpler, but if I don't exclude `${`
+from core string chars, I don't get interp.
+
+      new Pair(key, [
+        new Rule("\"", kind, "#pop"),
+        new Rule(raw"\$\{", Kind.stringInterpol, "interpolation"),
+        new Rule("(?:[^\"$]|\\$[^{])+", kind),
+      ].as<List<RuleOption>>())
+    }
+
+### Word lists
 
     let words(...names: List<String>): String {
       "\\b(?:${names.join("|") { (x);; x }})\\b"
