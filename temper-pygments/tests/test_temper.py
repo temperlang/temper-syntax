@@ -112,3 +112,25 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Whitespace, "\n"),
         ]
         self.assertEqual(expected, [*tokens])
+
+    def test_regex(self):
+        lexer = TemperLexer()
+        tokens = lexer.get_tokens(
+            dedent(
+                r"""
+                let name = /\s/;
+                """
+            )
+        )
+        expected = [
+            (Token.Keyword.Declaration, "let"),
+            (Token.Whitespace, " "),
+            (Token.Name, "name"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "="),
+            (Token.Whitespace, " "),
+            (Token.Literal.String.Regex, '/\\s/'),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, "\n"),
+        ]
+        self.assertEqual(expected, [*tokens])
