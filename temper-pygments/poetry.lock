@@ -38,13 +38,13 @@ files = [
 
 [[package]]
 name = "temper-syntax"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "temper_syntax-0.2.0-py3-none-any.whl", hash = "sha256:7ae96990e3f788bb67c90e0b970ae15250d2ddcea9264fba099ddbed69cc98e7"},
-    {file = "temper_syntax-0.2.0.tar.gz", hash = "sha256:8bc0e388adc5d954e496ef1c9907c7bfd86370bd490cfb4fefc0f27e5e49347d"},
+    {file = "temper_syntax-0.2.1-py3-none-any.whl", hash = "sha256:03364221de77aadcd2e68fa1296119129024f9b548c0e931781c7ba9e56cdf3a"},
+    {file = "temper_syntax-0.2.1.tar.gz", hash = "sha256:ca1942d23556f865e33fb43de0a6dc660da303c6d20d88612471d6b0297bd19e"},
 ]
 
 [package.dependencies]
@@ -53,4 +53,4 @@ temper-core = "0.2.1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "c8ff0c034971eed831421dddcf93bd372eb8493ba3eb1f5c6d4acd7a271113bc"
+content-hash = "a0f9cea56e0ed997295dfbed10394f221a499723d579fef3354df035d971e928"

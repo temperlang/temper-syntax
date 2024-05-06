@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "temper-pygments"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["Tom <tom@temper.systems>"]
 readme = "README.md"
@@ -10,7 +10,7 @@ packages = [{include = "temper_pygments"}]
 python = "^3.8"
 pygments = "^2.12.0"
 temper-core = "0.2.1"
-temper-syntax = "0.2.0"
+temper-syntax = "0.2.1"
 
 [tool.poetry.plugins."pygments.lexers"]
 temper = "temper_pygments:TemperLexer"
