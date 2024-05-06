@@ -53,7 +53,6 @@ Main thing, though, is the list of rules for definition tokens.
             ),
             Kind.nameBuiltin,
           ),
-          // rgx
           new Rule(raw"(?<=\brgx)${"\""}", Kind.stringRegex, "stringregex"),
           new Rule("\"", Kind.stringPlain, "string"),
           new Rule("[-=+*&|<>]+|/=?", Kind.operator, "slashstartsregex"),
