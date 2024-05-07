@@ -17,7 +17,7 @@ now, so we get it to ourselves.
 
 TODO Recognize indentation relative to previous, such as outlines.
 
-          new Rule(raw"^\s*\n {4}", Whitespace, "indented"),
+          new Rule(raw"^\s*\n {4}", Kind.whitespace, "indented"),
           inherit,
         ].as<List<RuleOption>>()),
 
@@ -34,5 +34,3 @@ to 4-space indentation from line start for now.
         ].as<List<RuleOption>>()),
       ]);
     }
-
-    let { ... } = import("./pygments");

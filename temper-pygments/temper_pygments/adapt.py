@@ -1,15 +1,15 @@
 import pygments.unistring as uni
-from pygments.lexer import Lexer, bygroups, include, inherit, using
+import temper_syntax.pygments as tsp
+from pygments.lexer import Lexer, bygroups, default, include, inherit, using
 from pygments.token import Token
-from temper_syntax.pygments import ByGroups, Kind, Include, Inherit, Rule, Using
 
 
 def adapt_kind(kind):
-    if isinstance(kind, ByGroups):
+    if isinstance(kind, tsp.ByGroups):
         return bygroups(*[adapt_kind(sub) for sub in kind.kinds])
-    elif isinstance(kind, Kind):
+    elif isinstance(kind, tsp.Kind):
         return kinds[kind.name]
-    elif isinstance(kind, Using):
+    elif isinstance(kind, tsp.Using):
         return using(lexers[kind.lexer])
     raise ValueError(f"unknown kind: {kind}")
 
@@ -19,11 +19,13 @@ def adapt_regex(regex: str):
 
 
 def adapt_rule(rule):
-    if isinstance(rule, Include):
+    if isinstance(rule, tsp.Default):
+        return default(rule.state)
+    elif isinstance(rule, tsp.Include):
         return include(rule.state)
-    elif isinstance(rule, Inherit):
+    elif isinstance(rule, tsp.Inherit):
         return inherit
-    elif isinstance(rule, Rule):
+    elif isinstance(rule, tsp.Rule):
         result = (adapt_regex(rule.regex), adapt_kind(rule.kind))
         if rule.state is not None:
             result = (*result, rule.state)
@@ -53,6 +55,7 @@ kinds = {
     "Punctuation": Token.Punctuation,
     "String": Token.String,
     "String.Interpol": Token.String.Interpol,
+    "String.Regex": Token.String.Regex,
     "Whitespace": Token.Whitespace,
 }
 
