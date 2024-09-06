@@ -40,7 +40,7 @@ Main thing, though, is the list of rules for definition tokens.
           new Rule(
             words(
               "do", "else", "export", "extends", "fn", "if", "import", "is",
-              "match", "new", "orelse",
+              "when", "new", "orelse",
             ),
             Kind.keyword,
           ),
@@ -49,7 +49,7 @@ Main thing, though, is the list of rules for definition tokens.
             words(
               "AnyValue", "Boolean", "Bubble", "Float64", "Function", "Int",
               "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey",
-              "Mapped", "Null", "String", "StringSlice", "Void",
+              "Mapped", "Null", "String", "StringIndex", "Void",
             ),
             Kind.nameBuiltin,
           ),
