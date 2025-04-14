@@ -60,7 +60,7 @@ Main thing, though, is the list of rules for definition tokens.
           new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
           new Rule("@${nameRegex}", Kind.nameDecorator),
           new Rule(nameRegex, Kind.nameKind),
-        ].as<List<RuleOption>>()),
+        ].as<List<RuleOption>>() orelse panic()),
 
 #### Comments and Whitespace
 
@@ -68,7 +68,7 @@ Main thing, though, is the list of rules for definition tokens.
           new Rule(raw"\s+", Kind.whitespace),
           new Rule("//.*?$", Kind.commentSingleline),
           new Rule(raw"/\*", Kind.commentMultiline, "nestedcomment"),
-        ].as<List<RuleOption>>()),
+        ].as<List<RuleOption>>() orelse panic()),
 
 #### Multiline/Nested Comments
 
@@ -81,7 +81,7 @@ Pygments][dlang-nestedcomment].
           new Rule(raw"/\*", Kind.commentMultiline, "#push"),
           new Rule(raw"\*/", Kind.commentMultiline, "#pop"),
           new Rule(raw"[*/]", Kind.commentMultiline),
-        ].as<List<RuleOption>>()),
+        ].as<List<RuleOption>>() orelse panic()),
 
 #### Regex Literals
 
@@ -94,14 +94,14 @@ Pygments][dlang-nestedcomment].
             "#pop",
           ),
           default("#pop"),
-        ].as<List<RuleOption>>()),
+        ].as<List<RuleOption>>() orelse panic()),
 
 #### Strings
 
         new Pair("interpolation", [
           new Rule("}", Kind.stringInterpol, "#pop"),
           include("root"),
-        ].as<List<RuleOption>>()),
+        ].as<List<RuleOption>>() orelse panic()),
         stringish("string", Kind.stringPlain),
         stringish("stringregex", Kind.stringRegex),
 
@@ -133,7 +133,7 @@ from core string chars, I don't get interp.
         new Rule("\"", kind, "#pop"),
         new Rule(raw"\$\{", Kind.stringInterpol, "interpolation"),
         new Rule("(?:[^\"$]|\\$[^{])+", kind),
-      ].as<List<RuleOption>>())
+      ].as<List<RuleOption>>() orelse panic())
     }
 
 ### Word lists

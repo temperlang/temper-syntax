@@ -10,11 +10,11 @@ Use a marker interface for various kinds of rules.
 
 The most common case is a basic rule.
 
-    export class Rule extends RuleOption {
-      public regex: String;
-      public kind: TokenKind;
-      public state: String | Null = null;
-    }
+    export class Rule(
+      public regex: String,
+      public kind: TokenKind,
+      public state: String | Null = null,
+    ) extends RuleOption {}
 
     export /*sealed*/ interface TokenKind {}
 
@@ -22,9 +22,9 @@ The most common case is a basic rule.
 
 Default state transition if nothing else matches.
 
-    export class Default extends RuleOption {
-      public state: String;
-    }
+    export class Default(
+      public state: String,
+    ) extends RuleOption {}
 
     export let default(state: String): Default { new Default(state) }
 
@@ -32,9 +32,9 @@ Default state transition if nothing else matches.
 
 You can also include other states into a state.
 
-    export class Include extends RuleOption {
-      public state: String;
-    }
+    export class Include(
+      public state: String,
+    ) extends RuleOption {}
 
     export let include(state: String): Include { new Include(state) }
 
@@ -52,9 +52,9 @@ Or marker to inherit from other base class rules.
 The token kinds need to map to pygments token kind objects, which should be easy
 enough to do with strings.
 
-    export class Kind extends TokenKind {
-      public name: builtins.String;
-
+    export class Kind(
+      public name: builtins.String,
+    ) extends TokenKind {
       public static commentMultiline: Kind = new Kind("Comment.Multiline");
       public static commentSingleline: Kind = new Kind("Comment.Singleline");
       public static keyword: Kind = new Kind("Keyword");
@@ -74,9 +74,9 @@ enough to do with strings.
 
 ### Kind By Group
 
-    export class ByGroups extends TokenKind {
-      public kinds: List<TokenKind>;
-    }
+    export class ByGroups(
+      public kinds: List<TokenKind>,
+    ) extends TokenKind {}
 
     export let bygroups(kinds: List<TokenKind>): ByGroups {
       new ByGroups(kinds)
@@ -87,9 +87,9 @@ enough to do with strings.
 You can [use token rules from another lexer][using-multiple-lexers] instead of
 a simple token kind.
 
-    export class Using extends TokenKind {
-      public lexer: String;
-    }
+    export class Using(
+      public lexer: String,
+    ) extends TokenKind {}
 
     export let using(lexer: String): Using { new Using(lexer) }
 

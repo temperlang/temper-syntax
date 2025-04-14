@@ -19,7 +19,7 @@ TODO Recognize indentation relative to previous, such as outlines.
 
           new Rule(raw"^\s*\n {4}", Kind.whitespace, "indented"),
           inherit,
-        ].as<List<RuleOption>>()),
+        ].as<List<RuleOption>>() orelse panic()),
 
         new Pair("indented", [
           new Rule(
@@ -31,6 +31,6 @@ to 4-space indentation from line start for now.
             bygroups([using("Temper")]),
             "#pop",
           ),
-        ].as<List<RuleOption>>()),
+        ].as<List<RuleOption>>() orelse panic()),
       ]);
     }

@@ -59,4 +59,4 @@ kinds = {
     "Whitespace": Token.Whitespace,
 }
 
-lexers: dict[str, Lexer] = {}
+lexers: dict[str, type[Lexer]] = {}
