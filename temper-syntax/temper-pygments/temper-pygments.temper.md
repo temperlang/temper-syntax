@@ -25,7 +25,7 @@ Main thing, though, is the list of rules for definition tokens.
 
 #### Root
 
-        new Pair("root", [
+        new Pair("root", List.of<RuleOption>(
           include("commentsandwhitespace"),
           new Rule(
             words("false", "NaN", "null", "true", "void"),
@@ -60,15 +60,15 @@ Main thing, though, is the list of rules for definition tokens.
           new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
           new Rule("@${nameRegex}", Kind.nameDecorator),
           new Rule(nameRegex, Kind.nameKind),
-        ].as<List<RuleOption>>() orelse panic()),
+        )),
 
 #### Comments and Whitespace
 
-        new Pair("commentsandwhitespace", [
+        new Pair("commentsandwhitespace", List.of<RuleOption>(
           new Rule(raw"\s+", Kind.whitespace),
           new Rule("//.*?$", Kind.commentSingleline),
           new Rule(raw"/\*", Kind.commentMultiline, "nestedcomment"),
-        ].as<List<RuleOption>>() orelse panic()),
+        )),
 
 #### Multiline/Nested Comments
 
@@ -76,16 +76,16 @@ We plan to support nested comments soon, so just implement that already here.
 The technique here is based on the `nestedcomment` for the [D Language lexer for
 Pygments][dlang-nestedcomment].
 
-        new Pair("nestedcomment", [
+        new Pair("nestedcomment", List.of<RuleOption>(
           new Rule(raw"[^*/]+", Kind.commentMultiline),
           new Rule(raw"/\*", Kind.commentMultiline, "#push"),
           new Rule(raw"\*/", Kind.commentMultiline, "#pop"),
           new Rule(raw"[*/]", Kind.commentMultiline),
-        ].as<List<RuleOption>>() orelse panic()),
+        )),
 
 #### Regex Literals
 
-        new Pair("slashstartsregex", [
+        new Pair("slashstartsregex", List.of<RuleOption>(
           include("commentsandwhitespace"),
           new Rule(
             // Copied from pygments js lexer.
@@ -94,14 +94,14 @@ Pygments][dlang-nestedcomment].
             "#pop",
           ),
           default("#pop"),
-        ].as<List<RuleOption>>() orelse panic()),
+        )),
 
 #### Strings
 
-        new Pair("interpolation", [
+        new Pair("interpolation", List.of<RuleOption>(
           new Rule("}", Kind.stringInterpol, "#pop"),
           include("root"),
-        ].as<List<RuleOption>>() orelse panic()),
+        )),
         stringish("string", Kind.stringPlain),
         stringish("stringregex", Kind.stringRegex),
 
@@ -129,11 +129,11 @@ And use a support function to customise the token kind for `rgx` strings.
 I'm not sure if order matters here. Seems simpler, but if I don't exclude `${`
 from core string chars, I don't get interp.
 
-      new Pair(key, [
+      new Pair(key, List.of<RuleOption>(
         new Rule("\"", kind, "#pop"),
         new Rule(raw"\$\{", Kind.stringInterpol, "interpolation"),
         new Rule("(?:[^\"$]|\\$[^{])+", kind),
-      ].as<List<RuleOption>>() orelse panic())
+      ))
     }
 
 ### Word lists
