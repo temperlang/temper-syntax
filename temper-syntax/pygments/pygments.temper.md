@@ -13,7 +13,7 @@ The most common case is a basic rule.
     export class Rule(
       public regex: String,
       public kind: TokenKind,
-      public state: String | Null = null,
+      public state: String? = null,
     ) extends RuleOption {}
 
     export /*sealed*/ interface TokenKind {}

@@ -113,6 +113,72 @@ class TemperLexerTest(unittest.TestCase):
         ]
         self.assertEqual(expected, [*tokens])
 
+    def test_stringmulti(self):
+        lexer = TemperLexer()
+        tokens = lexer.get_tokens(
+            dedent(
+                """
+                let text = ""\"
+                    ""hi
+                    "there
+                    // to
+                    "${
+                    "you"
+                    },"
+                    /* i */ "say!
+                    "("kthxbye")
+                ;
+                """
+            )
+        )
+        expected = [
+            (Token.Keyword.Declaration, "let"),
+            (Token.Whitespace, " "),
+            (Token.Name, "text"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "="),
+            (Token.Whitespace, " "),
+            (Token.Literal.String, '"""'),
+            (Token.Whitespace, "\n    "),
+            (Token.Literal.String, '"'),
+            (Token.Literal.String, '"hi'),
+            (Token.Literal.String, ""),
+            (Token.Whitespace, "\n    "),
+            (Token.Literal.String, '"'),
+            (Token.Literal.String, "there"),
+            (Token.Literal.String, ""),
+            (Token.Whitespace, "\n    "),
+            (Token.Comment.Singleline, "// to"),
+            (Token.Whitespace, "\n    "),
+            (Token.Literal.String, '"'),
+            (Token.Literal.String.Interpol, "${"),
+            (Token.Whitespace, "\n    "),
+            (Token.Literal.String, '"'),
+            (Token.Literal.String, "you"),
+            (Token.Literal.String, '"'),
+            (Token.Whitespace, "\n    "),
+            (Token.Literal.String.Interpol, "}"),
+            (Token.Literal.String, ',"'),
+            (Token.Literal.String, ""),
+            (Token.Whitespace, "\n    "),
+            (Token.Comment.Multiline, "/*"),
+            (Token.Comment.Multiline, " i "),
+            (Token.Comment.Multiline, "*/"),
+            (Token.Whitespace, " "),
+            (Token.Literal.String, '"'),
+            (Token.Literal.String, "say!"),
+            (Token.Literal.String, ""),
+            (Token.Whitespace, "\n    "),
+            (Token.Literal.String, '"'),
+            (Token.Literal.String, '("kthxbye")'),
+            (Token.Literal.String, ""),
+            (Token.Whitespace, "\n"),
+            (Token.Literal.String, ""),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, "\n"),
+        ]
+        self.assertEqual(expected, [*tokens])
+
     def test_regex(self):
         lexer = TemperLexer()
         tokens = lexer.get_tokens(
@@ -129,7 +195,7 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Whitespace, " "),
             (Token.Operator, "="),
             (Token.Whitespace, " "),
-            (Token.Literal.String.Regex, '/\\s/'),
+            (Token.Literal.String.Regex, "/\\s/"),
             (Token.Punctuation, ";"),
             (Token.Whitespace, "\n"),
         ]

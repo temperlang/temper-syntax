@@ -54,6 +54,7 @@ Main thing, though, is the list of rules for definition tokens.
             Kind.nameBuiltin,
           ),
           new Rule(raw"(?<=\brgx)${"\""}", Kind.stringRegex, "stringregex"),
+          new Rule("\"\"\"", Kind.stringPlain, "stringmulti"),
           new Rule("\"", Kind.stringPlain, "string"),
           new Rule("[-=+*&|<>]+|/=?", Kind.operator, "slashstartsregex"),
           new Rule("[{}();:.,]", Kind.punctuation, "slashstartsregex"),
@@ -103,6 +104,16 @@ Pygments][dlang-nestedcomment].
           include("root"),
         )),
         stringish("string", Kind.stringPlain),
+        new Pair("stringline", List.of<RuleOption>(
+          new Rule(raw"\$\{", Kind.stringInterpol, "interpolation"),
+          new Rule(".+", Kind.stringPlain),
+          new Rule("$", Kind.stringPlain, "#pop"),
+        )),
+        new Pair("stringmulti", List.of<RuleOption>(
+          include("commentsandwhitespace"),
+          new Rule("\"", Kind.stringPlain, "stringline"),
+          new Rule("(?=.)", Kind.stringPlain, "#pop"),
+        )),
         stringish("stringregex", Kind.stringRegex),
 
       ]);
@@ -139,7 +150,7 @@ from core string chars, I don't get interp.
 ### Word lists
 
     let words(...names: List<String>): String {
-      "\\b(?:${names.join("|") { (x);; x }})\\b"
+      "\\b(?:${names.join("|") { x => x }})\\b"
     }
 
 ## Imports and links
