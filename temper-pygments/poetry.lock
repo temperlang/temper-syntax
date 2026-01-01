@@ -41,22 +41,20 @@ files = [
 
 [[package]]
 name = "temper-syntax"
-version = "0.2.4"
+version = "0.6.0"
 description = ""
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
-files = []
-develop = true
+files = [
+    {file = "temper_syntax-0.6.0-py3-none-any.whl", hash = "sha256:a21bcd94517f6a7c4665459187797838a7ff63c279860a0653298077d0b2fd71"},
+    {file = "temper_syntax-0.6.0.tar.gz", hash = "sha256:a4b2941ecf6f3c61f5e383883a5af73e3b8ac1663e03806e30743fa120368f11"},
+]
 
 [package.dependencies]
 temper-core = "0.6.0"
 
-[package.source]
-type = "directory"
-url = "../temper.out/py/temper-syntax"
-
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "c096bbdb64a50a6ce4e45c6472afd10e3dcb996635d3308cadeb11b7155e1a4d"
+content-hash = "80a48648e4b9302a9254f5d4f4979bb200a9292ef74b9f49435d765bf6e9660a"
