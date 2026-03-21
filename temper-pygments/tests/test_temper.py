@@ -120,13 +120,15 @@ class TemperLexerTest(unittest.TestCase):
                 """
                 let text = ""\"
                     ""hi
-                    "there
+                    :if (true) {
+                      "there //
+                    :}
                     // to
                     "${
                     "you"
                     },"
                     /* i */ "say!
-                    "("kthxbye")
+                    ~("kthxbye")
                 ;
                 """
             )
@@ -144,8 +146,22 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Literal.String, '"hi'),
             (Token.Literal.String, ""),
             (Token.Whitespace, "\n    "),
+            (Token.Punctuation, ":"),
+            (Token.Keyword, "if"),
+            (Token.Whitespace, " "),
+            (Token.Punctuation, "("),
+            (Token.Keyword.Constant, "true"),
+            (Token.Punctuation, ")"),
+            (Token.Whitespace, " "),
+            (Token.Punctuation, "{"),
+            (Token.Literal.String, ""),
+            (Token.Whitespace, "\n      "),
             (Token.Literal.String, '"'),
-            (Token.Literal.String, "there"),
+            (Token.Literal.String, "there //"),
+            (Token.Literal.String, ""),
+            (Token.Whitespace, "\n    "),
+            (Token.Punctuation, ":"),
+            (Token.Punctuation, "}"),
             (Token.Literal.String, ""),
             (Token.Whitespace, "\n    "),
             (Token.Comment.Singleline, "// to"),
@@ -169,7 +185,7 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Literal.String, "say!"),
             (Token.Literal.String, ""),
             (Token.Whitespace, "\n    "),
-            (Token.Literal.String, '"'),
+            (Token.Literal.String, "~"),
             (Token.Literal.String, '("kthxbye")'),
             (Token.Literal.String, ""),
             (Token.Whitespace, "\n"),

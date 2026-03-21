@@ -27,46 +27,30 @@ Main thing, though, is the list of rules for definition tokens.
 
         new Pair("root", List.of<RuleOption>(
           include("commentsandwhitespace"),
-          new Rule(
-            words("false", "NaN", "null", "true", "void"),
-            Kind.keywordConstant,
-          ),
-          new Rule(
-            words(
-              "class", "interface", "let", "private", "public", "sealed", "var",
-            ),
-            Kind.keywordDeclaration,
-          ),
-          new Rule(
-            words(
-              "do", "else", "export", "extends", "fn", "if", "import", "is",
-              "when", "new", "orelse",
-            ),
-            Kind.keyword,
-          ),
-          new Rule(words("return", "yield"), Kind.keyword, "slashstartsregex"),
-          new Rule(
-            words(
-              "AnyValue", "Boolean", "Bubble", "Float64", "Function", "Int",
-              "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey",
-              "Mapped", "Null", "String", "StringIndex", "Void",
-            ),
-            Kind.nameBuiltin,
-          ),
-          new Rule(raw"(?<=\brgx)${"\""}", Kind.stringRegex, "stringregex"),
-          new Rule("\"\"\"", Kind.stringPlain, "stringmulti"),
-          new Rule("\"", Kind.stringPlain, "string"),
-          new Rule("[-=+*&|<>]+|/=?", Kind.operator, "slashstartsregex"),
-          new Rule("[{}();:.,]", Kind.punctuation, "slashstartsregex"),
-          new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
-          new Rule("@${nameRegex}", Kind.nameDecorator),
-          new Rule(nameRegex, Kind.nameKind),
+          include("nonignored"),
         )),
+
+        new Pair("rootinline", List.of<RuleOption>(
+          include("commentsandwhitespaceinline"),
+          include("nonignoredinline"),
+        )),
+
+        makeExpressions("nonignored", "slashstartsregex"),
+        makeExpressions("nonignoredinline", "slashstartsregexinline"),
 
 #### Comments and Whitespace
 
         new Pair("commentsandwhitespace", List.of<RuleOption>(
           new Rule(raw"\s+", Kind.whitespace),
+          include("comments"),
+        )),
+
+        new Pair("commentsandwhitespaceinline", List.of<RuleOption>(
+          new Rule(raw"[ \t]+", Kind.whitespace),
+          include("comments"),
+        )),
+
+        new Pair("comments", List.of<RuleOption>(
           new Rule("//.*?$", Kind.commentSingleline),
           new Rule(raw"/\*", Kind.commentMultiline, "nestedcomment"),
         )),
@@ -88,6 +72,15 @@ Pygments][dlang-nestedcomment].
 
         new Pair("slashstartsregex", List.of<RuleOption>(
           include("commentsandwhitespace"),
+          include("slashstartsregexcontent"),
+        )),
+
+        new Pair("slashstartsregexinline", List.of<RuleOption>(
+          include("commentsandwhitespaceinline"),
+          include("slashstartsregexcontent"),
+        )),
+
+        new Pair("slashstartsregexcontent", List.of<RuleOption>(
           new Rule(
             // Copied from pygments js lexer.
             raw"/(\\.|[^[/\\\n]|\[(\\.|[^\]\\\n])*])+/([gimuysd]+\b|\B)",
@@ -99,6 +92,10 @@ Pygments][dlang-nestedcomment].
 
 #### Strings
 
+        new Pair("codeline", List.of<RuleOption>(
+          new Rule("$", Kind.stringPlain, "#pop"),
+          include("rootinline"),
+        )),
         new Pair("interpolation", List.of<RuleOption>(
           new Rule("}", Kind.stringInterpol, "#pop"),
           include("root"),
@@ -112,6 +109,8 @@ Pygments][dlang-nestedcomment].
         new Pair("stringmulti", List.of<RuleOption>(
           include("commentsandwhitespace"),
           new Rule("\"", Kind.stringPlain, "stringline"),
+          new Rule("~", Kind.stringPlain, "stringline"),
+          new Rule(":", Kind.punctuation, "codeline"),
           new Rule("(?=.)", Kind.stringPlain, "#pop"),
         )),
         stringish("stringregex", Kind.stringRegex),
@@ -121,6 +120,50 @@ Pygments][dlang-nestedcomment].
     }
 
 ## Helper functions and values
+
+### Expressions
+
+    let makeExpressions(
+      name: String,
+      regexOption: String,
+    ): Pair<String, List<RuleOption>> {
+      new Pair(name, List.of<RuleOption>(
+        new Rule(
+          words("false", "NaN", "null", "true", "void"),
+          Kind.keywordConstant,
+        ),
+        new Rule(
+          words(
+            "class", "interface", "let", "private", "public", "sealed", "var",
+          ),
+          Kind.keywordDeclaration,
+        ),
+        new Rule(
+          words(
+            "do", "else", "export", "extends", "fn", "if", "import", "is",
+            "when", "new", "orelse",
+          ),
+          Kind.keyword,
+        ),
+        new Rule(words("return", "yield"), Kind.keyword, regexOption),
+        new Rule(
+          words(
+            "AnyValue", "Boolean", "Bubble", "Float64", "Function", "Int",
+            "List", "ListBuilder", "Listed", "Map", "MapBuilder", "MapKey",
+            "Mapped", "Null", "String", "StringIndex", "Void",
+          ),
+          Kind.nameBuiltin,
+        ),
+        new Rule(raw"(?<=\brgx)${"\""}", Kind.stringRegex, "stringregex"),
+        new Rule("\"\"\"", Kind.stringPlain, "stringmulti"),
+        new Rule("\"", Kind.stringPlain, "string"),
+        new Rule("[-=+*&|<>]+|/=?", Kind.operator, regexOption),
+        new Rule("[{}();:.,]", Kind.punctuation, regexOption),
+        new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
+        new Rule("@${nameRegex}", Kind.nameDecorator),
+        new Rule(nameRegex, Kind.nameKind),
+      ))      
+    }
 
 ### Names
 
