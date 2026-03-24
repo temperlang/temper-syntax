@@ -1,7 +1,7 @@
 # Temper Syntax
 
     export let name = "temper-syntax";
-    export let version = "0.6.0";
+    export let version = "0.6.1";
 
 This temper library supports syntax highlighting for multiple backends and
 frameworks. The intent is that some shared definitions can be used despite the
