@@ -100,7 +100,7 @@ class TemperLexerTest(unittest.TestCase):
             dedent(
                 """
                 let name = "world";
-                console.log("Hello ${name} for $5.");
+                console.log("Hello ${[name].join(", ") { x => x }} for $5.");
                 """
             )
         )
@@ -123,7 +123,26 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Literal.String, '"'),
             (Token.Literal.String, "Hello "),
             (Token.Literal.String.Interpol, "${"),
+            (Token.Punctuation, "["),
             (Token.Name, "name"),
+            (Token.Punctuation, "]"),
+            (Token.Punctuation, "."),
+            (Token.Name, "join"),
+            (Token.Punctuation, "("),
+            (Token.Literal.String, '"'),
+            (Token.Literal.String, ", "),
+            (Token.Literal.String, '"'),
+            (Token.Punctuation, ")"),
+            (Token.Whitespace, " "),
+            (Token.Punctuation, "{"),
+            (Token.Whitespace, " "),
+            (Token.Name, "x"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "=>"),
+            (Token.Whitespace, " "),
+            (Token.Name, "x"),
+            (Token.Whitespace, " "),
+            (Token.Punctuation, "}"),
             (Token.Literal.String.Interpol, "}"),
             (Token.Literal.String, " for $5."),
             (Token.Literal.String, '"'),
