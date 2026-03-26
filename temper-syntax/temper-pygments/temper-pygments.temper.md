@@ -159,7 +159,14 @@ Pygments][dlang-nestedcomment].
         new Rule("\"", Kind.stringPlain, "string"),
         new Rule("[-=+*&|<>]+|/=?", Kind.operator, regexOption),
         new Rule("[{}();:.,]", Kind.punctuation, regexOption),
-        new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
+        new Rule(
+
+Digit followed by word chars supports `i64`-style suffices and also hex. It's
+overly accepting, but that's ok here.
+
+          raw"(?:\d[_\d]*\.?[_\d]*|\.\d[_\d]*)(?:e[+-]?\d+)?\w*",
+          Kind.number,
+        ),
         new Rule("@${nameRegex}", Kind.nameDecorator),
         new Rule(nameRegex, Kind.nameKind),
       ))      
