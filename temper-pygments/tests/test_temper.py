@@ -10,9 +10,12 @@ class TemperLexerTest(unittest.TestCase):
         tokens = lexer.get_tokens(
             dedent(
                 """
-                let n = 5; // Comment
+                let n = 5_000i32; // Comment
                 /* Longer /*
                 Comment here. */ a; */ let m = n + 5;
+                let p = 0xA_BC12;
+                let q = 1.5e-34;
+                let r = 1.toString();
                 """
             )
         )
@@ -23,7 +26,7 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Whitespace, " "),
             (Token.Operator, "="),
             (Token.Whitespace, " "),
-            (Token.Literal.Number, "5"),
+            (Token.Literal.Number, "5_000i32"),
             (Token.Punctuation, ";"),
             (Token.Whitespace, " "),
             (Token.Comment.Singleline, "// Comment"),
@@ -49,8 +52,39 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Literal.Number, "5"),
             (Token.Punctuation, ";"),
             (Token.Whitespace, "\n"),
+            (Token.Keyword.Declaration, "let"),
+            (Token.Whitespace, " "),
+            (Token.Name, "p"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "="),
+            (Token.Whitespace, " "),
+            (Token.Literal.Number, "0xA_BC12"),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, "\n"),
+            (Token.Keyword.Declaration, "let"),
+            (Token.Whitespace, " "),
+            (Token.Name, "q"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "="),
+            (Token.Whitespace, " "),
+            (Token.Literal.Number, "1.5e-34"),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, "\n"),
+            (Token.Keyword.Declaration, "let"),
+            (Token.Whitespace, " "),
+            (Token.Name, "r"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "="),
+            (Token.Whitespace, " "),
+            (Token.Literal.Number, "1"),
+            (Token.Punctuation, "."),
+            (Token.Name, "toString"),
+            (Token.Punctuation, "("),
+            (Token.Punctuation, ")"),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, "\n"),
         ]
-        # print([*tokens])
+        # import pprint; pprint.pprint([*tokens])
         self.assertEqual(expected, [*tokens])
 
     def test_comment_excess(self):
@@ -80,7 +114,7 @@ class TemperLexerTest(unittest.TestCase):
             dedent(
                 """
                 let name = "world";
-                console.log("Hello ${name} for $5.");
+                console.log("Hello ${[name].join(", ") { x => x }} for $5.");
                 """
             )
         )
@@ -103,7 +137,26 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Literal.String, '"'),
             (Token.Literal.String, "Hello "),
             (Token.Literal.String.Interpol, "${"),
+            (Token.Punctuation, "["),
             (Token.Name, "name"),
+            (Token.Punctuation, "]"),
+            (Token.Punctuation, "."),
+            (Token.Name, "join"),
+            (Token.Punctuation, "("),
+            (Token.Literal.String, '"'),
+            (Token.Literal.String, ", "),
+            (Token.Literal.String, '"'),
+            (Token.Punctuation, ")"),
+            (Token.Whitespace, " "),
+            (Token.Punctuation, "{"),
+            (Token.Whitespace, " "),
+            (Token.Name, "x"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "=>"),
+            (Token.Whitespace, " "),
+            (Token.Name, "x"),
+            (Token.Whitespace, " "),
+            (Token.Punctuation, "}"),
             (Token.Literal.String.Interpol, "}"),
             (Token.Literal.String, " for $5."),
             (Token.Literal.String, '"'),

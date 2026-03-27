@@ -97,7 +97,13 @@ Pygments][dlang-nestedcomment].
           include("rootinline"),
         )),
         new Pair("interpolation", List.of<RuleOption>(
+          new Rule(raw"\{", Kind.punctuation, "interpolationdepth"),
           new Rule("}", Kind.stringInterpol, "#pop"),
+          include("root"),
+        )),
+        new Pair("interpolationdepth", List.of<RuleOption>(
+          new Rule(raw"\{", Kind.punctuation, "#push"),
+          new Rule("}", Kind.punctuation, "#pop"),
           include("root"),
         )),
         stringish("string", Kind.stringPlain),
@@ -158,8 +164,15 @@ Pygments][dlang-nestedcomment].
         new Rule("\"\"\"", Kind.stringPlain, "stringmulti"),
         new Rule("\"", Kind.stringPlain, "string"),
         new Rule("[-=+*&|<>]+|/=?", Kind.operator, regexOption),
-        new Rule("[{}();:.,]", Kind.punctuation, regexOption),
-        new Rule(raw"\d+\.?\d*|\.\d+", Kind.number),
+        new Rule(raw"[\[\]{}();:.,]", Kind.punctuation, regexOption),
+        new Rule(
+
+Digit followed by word chars supports `i64`-style suffices and also hex. It's
+overly accepting, but that's ok here.
+
+          raw"(?:\d[_\d]*(:?\.?\d[_\d]*)?|\.\d[_\d]*)(?:e[+-]?\d+)?\w*",
+          Kind.number,
+        ),
         new Rule("@${nameRegex}", Kind.nameDecorator),
         new Rule(nameRegex, Kind.nameKind),
       ))      
