@@ -170,7 +170,7 @@ Pygments][dlang-nestedcomment].
 Digit followed by word chars supports `i64`-style suffices and also hex. It's
 overly accepting, but that's ok here.
 
-          raw"(?:\d[_\d]*\.?[_\d]*|\.\d[_\d]*)(?:e[+-]?\d+)?\w*",
+          raw"(?:\d[_\d]*(:?\.?\d[_\d]*)?|\.\d[_\d]*)(?:e[+-]?\d+)?\w*",
           Kind.number,
         ),
         new Rule("@${nameRegex}", Kind.nameDecorator),

@@ -15,6 +15,7 @@ class TemperLexerTest(unittest.TestCase):
                 Comment here. */ a; */ let m = n + 5;
                 let p = 0xA_BC12;
                 let q = 1.5e-34;
+                let r = 1.toString();
                 """
             )
         )
@@ -67,6 +68,19 @@ class TemperLexerTest(unittest.TestCase):
             (Token.Operator, "="),
             (Token.Whitespace, " "),
             (Token.Literal.Number, "1.5e-34"),
+            (Token.Punctuation, ";"),
+            (Token.Whitespace, "\n"),
+            (Token.Keyword.Declaration, "let"),
+            (Token.Whitespace, " "),
+            (Token.Name, "r"),
+            (Token.Whitespace, " "),
+            (Token.Operator, "="),
+            (Token.Whitespace, " "),
+            (Token.Literal.Number, "1"),
+            (Token.Punctuation, "."),
+            (Token.Name, "toString"),
+            (Token.Punctuation, "("),
+            (Token.Punctuation, ")"),
             (Token.Punctuation, ";"),
             (Token.Whitespace, "\n"),
         ]
